@@ -11,41 +11,56 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
+
         $validateData = $request->validate([
+            'ci' => 'required|string|max:10',
             'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+            'sexo' => 'required|string|max:1',
+            'celular' => 'required|numeric',
+            'tipo' => 'required|string|max:1',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8'
+            'password' => 'required|confirmed|string|min:8'
         ]);
-        $user=User::create([
+        $user = User::create([
+            'ci'=>$validateData['ci'],
             'name' => $validateData['name'],
+            'lastname'=>$validateData['lastname'],
+            'fecha_nacimiento'=>$validateData['fecha_nacimiento'],
+            'sexo'=>$validateData['sexo'],
+            'celular'=>$validateData['celular'],
+            'tipo'=>$validateData['tipo'],
             'email' => $validateData['email'],
             'password' => bcrypt($validateData['password'])
         ]);
 
-        $token=$user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-           'access_token'=>$token,
-           'token_type'=>'Bearer'
+            'access_token' => $token,
+            'token_type' => 'Bearer'
         ]);
     }
-    public function login(Request $request){
-        
-        if(!Auth::attempt($request->only('email','password'))){
-            return response()->json([
-               'message'=>'Email o contraseña incorrecto'
-            ],401);
-        }
-        $user=User::where('email',$request['email'])->firstOrFail();
+    public function login(Request $request)
+    {
 
-        $token=$user->createToken('auth_token')->plainTextToken;
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'message' => 'Email o contraseña incorrecto'
+            ], 401);
+        }
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
-            'access_token'=>$token,
-            'token_type'=>'Bearer'
-         ]);
+            'access_token' => $token,
+            'token_type' => 'Bearer'
+        ]);
     }
 
-    public function profile(Request $request){
+    public function profile(Request $request)
+    {
         return $request->user();
     }
     public function logout(Request $request)
