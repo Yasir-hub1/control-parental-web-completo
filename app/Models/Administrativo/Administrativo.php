@@ -4,7 +4,7 @@ namespace App\Models\Administrativo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+//use App\Models\User;
 
 class Administrativo extends Model
 {
@@ -12,13 +12,11 @@ class Administrativo extends Model
 
     protected $table = 'administrativos';
 
-    protected $fillable = [
-        'user_id',
-    ];
+    protected $guarded=['id','created_at','updated_at'];
 
 
-    public function usuario(){
-        return $this->hasOne(User::class,'id','user_id');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 
 }

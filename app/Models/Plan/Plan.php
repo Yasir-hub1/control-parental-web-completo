@@ -13,19 +13,13 @@ class Plan extends Model
     protected $table = 'planes';
     
 
-    protected $fillable = [
-        'dispositivos',
-        'estado',
-        'nombre',
-        'precio',
-        'tiempo_plan',
-    ];
+    protected $guarded=['id','created_at','updated_at'];
 
 
 
     public function tutores(){
         //LA TABLA PLAN TUTOR ES LA MISMA QUE SUSCRIPCION
-        return this->belongsToMany(Tutor::class,'plan_tutor');  
+        return $this->belongsToMany(Tutor::class,'plan_tutor');  
 
     }
 }

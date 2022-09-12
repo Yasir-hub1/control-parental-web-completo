@@ -14,10 +14,11 @@ class Categoria extends Model
     protected $table = 'categorias';
 
     protected $fillable = [
-       'contenido_id',
-       'nombre',
-       'parent_name',
+        'nombre',
+        'parent_name',
     ];
-
-    
+    public function contenidos()
+    {
+        return $this->hasMany('App\Models\Contenido\Contenido', 'categoria_id', 'id');
+    }
 }
