@@ -13,13 +13,7 @@ class Plan extends Model
     protected $table = 'planes';
     
 
-    protected $fillable = [
-        'dispositivos',
-        'estado',
-        'nombre',
-        'precio',
-        'tiempo_plan',
-    ];
+    protected $guarded=['id','created_at','updated_at'];
 
 
 

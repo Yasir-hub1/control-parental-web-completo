@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plan\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -16,7 +17,11 @@ class PlanController extends Controller
      */
     public function index()
     {
-        //
+        $planes=Plan::all();
+        return response()->json([
+          'message'=>'Lista de Planes',
+          'data'=>$planes
+        ]);
     }
 
     /**
@@ -36,8 +41,8 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-       // return $request->user()->tipo;
-       $user=User::findOrFail($request->user()->id);
+        // return $request->user()->tipo;
+        $user = User::findOrFail($request->user()->id);
         if ($user->tipo == "A") {
             $validateData = $request->validate([
                 'dispositivos' => 'required|numeric|max:20',
@@ -47,20 +52,14 @@ class PlanController extends Controller
                 'tiempo_plan' => 'required|string|max:40',
             ]);
 
-            $plan = Plan::create([
-                'dispositivos' => $validateData['dispositivos'],
-                'estado' => $validateData['estado'],
-                'nombre' => $validateData['nombre'],
-                'precio' => $validateData['precio'],
-                'tiempo_plan' => $validateData['tiempo_plan'],
-            ]);
+            $plan = Plan::create($request->all());
             return response()->json([
                 'message' => '¡Plan creado exitosamente!',
-                'plan' => $plan
+                'data' => $plan
             ], 404);
         } else {
             return response()->json([
-                'message' => 'Debe ser un Administrador para colocar un nuevo Plan'
+                'message' => 'Usuario no autorizado'
             ]);
         }
     }
@@ -73,7 +72,18 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::all()->find(Auth::user()->id);
+        if ($user->tipo == "A") {
+            $plan = Plan::findOrFail($id);
+            return response()->json([
+               'message'=>'¡Plan encontrado exitosamente!',
+               'data'=>$plan
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Debe ser un Administrador para colocar un nuevo Plan'
+            ]);
+        }
     }
 
     /**
@@ -84,7 +94,6 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
-       
     }
 
     /**
@@ -96,7 +105,7 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail($request->user()->id);
+        $user = User::findOrFail($request->user()->id);
         if ($user->tipo == "A") {
             $plan = Plan::findOrFail($id);
             $request->validate([
@@ -110,11 +119,11 @@ class PlanController extends Controller
             $plan->update($request->all());
             return response()->json([
                 'message' => '¡Plan actualizado exitosamente!',
-                'plan' => $plan
+                'data' => $plan
             ], 404);
         } else {
             return response()->json([
-                'message' => 'Debe ser un Administrador para colocar un nuevo Plan'
+                'message' => 'Usuario no autorizado'
             ]);
         }
     }
@@ -127,6 +136,17 @@ class PlanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::all()->find(Auth::user()->id);
+        if ($user->tipo == "A") {
+            $plan = Plan::findOrFail($id);
+            $plan->delete();
+            return response()->json([
+                'message' => '¡Se eliminó el Plan exitosamente!'
+            ], 401);
+        }else{
+            return response()->json([
+                'message' => 'Debe ser un Administrador para eliminar un Plan'
+            ]);
+        }
     }
 }

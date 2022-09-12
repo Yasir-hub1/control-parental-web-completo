@@ -15,13 +15,10 @@ class Archivo extends Model
         'fecha',
         'nombre_archivo',
         'carpeta_id',
-        
     ];
 
 
     public function carpeta(){
-
-        return $this->hasOne(Carpeta::class,'id','carpeta_id');
-
+          return $this->belongsTo('App\Models\Carpeta\Carpeta');
     }
 }

@@ -16,8 +16,14 @@ class Carpeta extends Model
         'path',
         'hijo_id',
     ];
-
-    public function hijo(){
-        return $this->hasOne(Hijo::class,'id','hijo_id');
+    //relacion de 1 a muchos
+    public function archivos()
+    {
+        return $this->hasMany('App\Models\Archivo\Archivo', 'carpeta_id', 'id');
+    }
+    //relacion inversa de 1 a muchos
+    public function hijo()
+    {
+        return $this->belongsTo('App\Models\Hijo\Hijo');
     }
 }

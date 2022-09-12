@@ -15,7 +15,7 @@ class CreateContenidosTable extends Migration
     {
         Schema::create('contenidos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->datetime('fecha');
             $table->String('nombre');
             $table->String('path');
             $table->String('url');
