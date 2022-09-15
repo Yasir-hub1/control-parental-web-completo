@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\HijoController;
 use App\Http\Controllers\Api\LlamadaController;
 use App\Http\Controllers\Api\LocalizacionController;
 use App\Http\Controllers\Api\PlanController;
+use App\Http\Controllers\Api\PlanTutorController;
 use App\Http\Controllers\Api\TutorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -61,7 +62,9 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('/contacto', [ContactoController::class, 'store']);
     Route::put('/contacto/{id}', [ContactoController::class, 'update']);
     Route::delete('/contacto/{id}', [ContactoController::class, 'destroy']);
-
+    //Crud PlanTutor
+    Route::get('planes-tutor', [PlanTutorController::class, 'planTutor']);
+    Route::get('plan-activo-tutor', [PlanTutorController::class, 'planActivo']);
     //Crud Archivo
     Route::post('/archivo', [ArchivoController::class, 'store']);
     Route::put('/archivo/{id}', [ArchivoController::class, 'update']);

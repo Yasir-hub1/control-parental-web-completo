@@ -17,10 +17,9 @@ class Tutor extends Model
     protected $guarded=['id','created_at','updated_at'];
 
     
-    public function planes(){
-        // LA TABLA PLAN TUTOR ES LA MISMA TABLE QUE SUSCRIPCION
-        return $this->belongsToMany(Plan::class,'plan_tutor');
-
+    public function planesTutor()
+    {
+        return $this->hasMany('App\Models\PlanTutor\PlanTutor','tutor_id','id');
     }
     //relación inversa de 1 a muchos
     public function user(){
