@@ -16,8 +16,8 @@ class CreateArchivosTable extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->String('nombre_archivo');
-            $table->foreignId('carpeta_id');
+            $table->String('path');
+            $table->foreignId('hijo_id');
             $table->timestamps();
         });
     }

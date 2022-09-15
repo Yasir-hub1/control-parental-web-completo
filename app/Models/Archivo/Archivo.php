@@ -4,7 +4,7 @@ namespace App\Models\Archivo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Carpeta\Carpeta;
+
 class Archivo extends Model
 {
     use HasFactory;
@@ -13,12 +13,12 @@ class Archivo extends Model
 
     protected $fillable = [
         'fecha',
-        'nombre_archivo',
-        'carpeta_id',
+        'path',
+        'hijo_id',
     ];
 
 
-    public function carpeta(){
-          return $this->belongsTo('App\Models\Carpeta\Carpeta');
+    public function hijo(){
+          return $this->belongsTo('App\Models\Hijo\Hijo');
     }
 }

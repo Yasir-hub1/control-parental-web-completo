@@ -98,15 +98,22 @@ class ContenidoController extends Controller
     }
     public function show($id)
     {
-        $contenido = Contenido::findOrFail($id);
-        if (isset($contenido)) {
-            return response()->json([
-                'message' => '¡Contenido encontrado exitosamente!',
-                'data' => $contenido
-            ]);
+        $user = Auth::user();
+        if ($user->tipo == "T") {
+            $contenido = Contenido::findOrFail($id);
+            if (isset($contenido)) {
+                return response()->json([
+                    'message' => '¡Contenido encontrado exitosamente!',
+                    'data' => $contenido
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Error contenido no existe'
+                ], 403);
+            }
         } else {
             return response()->json([
-                'message' => 'Error contenido no existe'
+                'message' => 'Usuario no autorizado'
             ], 403);
         }
     }

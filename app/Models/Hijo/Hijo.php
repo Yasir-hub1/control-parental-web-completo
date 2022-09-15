@@ -25,9 +25,12 @@ class Hijo extends Model
     {
         return $this->hasMany('App\Models\Contenido\Contenido', 'hijo_id', 'id');
     }
-    public function carpetas()
+    public function archivos()
     {
-        return $this->hasMany('App\Models\Carpeta\Carpeta', 'hijo_id', 'id');
+        return $this->hasMany('App\Models\Archivo\Archivo', 'hijo_id', 'id');
+    }
+    public function contactos(){
+        return $this->hasMany('App\Models\Contacto\Contacto','hijo_id','id');
     }
     //relación inversa de 1 a muchos
     public function user()

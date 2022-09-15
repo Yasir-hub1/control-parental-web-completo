@@ -4,27 +4,35 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
-use App\Models\Carpeta\Carpeta;
+use App\Models\Hijo\Hijo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArchivoController extends Controller
 {
-    public function archivoCarpeta($id)
+    public function archivosHijo($id)
     {
-        $carpeta = Carpeta::findOrFail($id);
-        $archivos = $carpeta->archivos;
-        return response()->json([
-            'message' => 'Lista de Archivos de la carpeta',
-            'data' => $archivos
-        ]);
+        $user = Auth::user();
+        if ($user->tipo == "T") {
+            $hijo = Hijo::findOrFail($id);
+            $archivos = $hijo->archivos;
+            return response()->json([
+                'message' => 'Lista de Archivos de la carpeta',
+                'data' => $archivos
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Usuario no autorizado'
+            ], 403);
+        }
     }
-   
+
     public function store(Request $request)
     {
         $request->validate([
-            'fecha'=>'required|date',
-            'nombre_archivo'=>'required|string',
-            'carpeta_id'=>'required|exists:carpetas,id',
+            'fecha' => 'required|date',
+            'path' => 'required|string',
+            'hijo_id' => 'required|exists:hijos,id',
         ]);
         $archivo = Archivo::create($request->all());
         return response()->json([
@@ -35,9 +43,9 @@ class ArchivoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'fecha'=>'required|date',
-            'nombre_archivo'=>'required|string',
-            'carpeta_id'=>'required|exists:carpetas,id',
+            'fecha' => 'required|date',
+            'path' => 'required|string',
+            'hijo_id' => 'required|exists:hijos,id',
         ]);
         $archivo = Archivo::findOrFail($id);
         if (isset($archivo)) {
@@ -68,16 +76,23 @@ class ArchivoController extends Controller
     }
     public function destroy($id)
     {
-        $archivo = Archivo::findOrFail($id);
-        if (isset($archivo)) {
-            $archivo->delete();
-            return response()->json([
-                'message' => '¡Archivo eliminado exitosamente!',
-                'data' => $archivo
-            ]);
+        $user = Auth::user();
+        if (isset($user)) {
+            $archivo = Archivo::findOrFail($id);
+            if (isset($archivo)) {
+                $archivo->delete();
+                return response()->json([
+                    'message' => '¡Archivo eliminado exitosamente!',
+                    'data' => $archivo
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Error archivo no existe'
+                ], 403);
+            }
         } else {
             return response()->json([
-                'message' => 'Error archivo no existe'
+                'message' => 'Usuario no autorizado'
             ], 403);
         }
     }

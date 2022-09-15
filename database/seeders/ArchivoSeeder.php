@@ -17,23 +17,23 @@ class ArchivoSeeder extends Seeder
         $archivos = [
             [
                 'fecha' => '2015-11-01 10:10:00',
-                'nombre_archivo' => 'picture.png',
-                'carpeta_id' => 1,
+                'path' => 'image/picture.png',
+                'hijo_id' => 1,
             ],
             [
                 'fecha' => '2015-11-01 12:10:00',
-                'nombre_archivo' => 'peli.jpg',
-                'carpeta_id' => 2,
+                'path' => 'fotos/peli.jpg',
+                'hijo_id' => 2,
             ],
             [
                 'fecha' => '2015-11-01 14:10:00',
-                'nombre_archivo' => 'foto.jpg',
-                'carpeta_id' => 1,
+                'path' => 'image/foto.jpg',
+                'hijo_id' => 1,
             ],
             [
                 'fecha' => '2015-11-01 16:10:00',
-                'nombre_archivo' => 'image.jpg',
-                'carpeta_id' => 2,
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 2,
             ],
         ];
         foreach ($archivos as $archivo) {

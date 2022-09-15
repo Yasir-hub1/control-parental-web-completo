@@ -15,8 +15,8 @@ class CreateLlamadasTable extends Migration
     {
         Schema::create('llamadas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('aceptada');
-            $table->date('fecha');
+            $table->boolean('aceptada');
+            $table->dateTime('fecha');
             $table->String('tiempo');
             $table->foreignId('contacto_id');
             $table->timestamps();

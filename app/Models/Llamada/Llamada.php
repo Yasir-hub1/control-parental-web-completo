@@ -23,6 +23,6 @@ class Llamada extends Model
 
     public function contacto(){
 
-        return $this->hasOne(Contacto::class,'id','contacto_id');
+        return $this->belongsTo('App\Models\Contacto\Contacto');
     }
 }
