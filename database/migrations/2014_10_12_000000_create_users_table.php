@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->String('celular');
             $table->date('fecha_nacimiento');
             $table->char('sexo');
-            $table->String('foto');
+            $table->String('foto')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -16,14 +16,13 @@ class Hijo extends Model
     protected $fillable = [
         'alias',
         'edad',
-        'user_id',
     ];
 
 
 
     public function user(){
 
-        return $this->hasOne(User::class,'id','user_id');
+     
 
     }
 }

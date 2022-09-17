@@ -21,7 +21,7 @@ class Tutor extends Model
     
     public function planes(){
         // LA TABLA PLAN TUTOR ES LA MISMA TABLE QUE SUSCRIPCION
-        return this->belongsToMany(Plan::class,'plan_tutor');
+        //return this->belongsToMany(Plan::class,'plan_tutor');
 
     }
 

@@ -15,9 +15,12 @@ class CreateHijosTable extends Migration
     {
         Schema::create('hijos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->String('apellido');
+            $table->String('celular');
+            $table->char('sexo');
             $table->String('alias');
             $table->unsignedSmallInteger('edad');
-            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
