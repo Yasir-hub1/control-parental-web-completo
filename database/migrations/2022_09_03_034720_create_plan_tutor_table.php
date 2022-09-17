@@ -17,7 +17,7 @@ class CreatePlanTutorTable extends Migration
             $table->id();
             $table->foreignId('plan_id');
             $table->foreignId('tutor_id');
-            $table->unsignedSmallInteger('activo');
+            $table->boolean('activo');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->timestamps();

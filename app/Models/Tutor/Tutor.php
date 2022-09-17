@@ -2,6 +2,7 @@
 
 namespace App\Models\Tutor;
 
+use App\Models\Hijo\Hijo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Plan\Plan;
@@ -13,22 +14,25 @@ class Tutor extends Model
 
     protected $table = 'tutores';
 
-    protected $fillable = [
-        'user_id',
-        'estado',
-    ];
+    protected $guarded=['id','created_at','updated_at'];
 
     
-    public function planes(){
+    /*public function planes(){
         // LA TABLA PLAN TUTOR ES LA MISMA TABLE QUE SUSCRIPCION
         //return this->belongsToMany(Plan::class,'plan_tutor');
-
+*/
+    public function planesTutor()
+    {
+        return $this->hasMany('App\Models\PlanTutor\PlanTutor','tutor_id','id');
     }
-
-
+    //relación inversa de 1 a muchos
     public function user(){
-
-        return $this->hasOne(User::class,'id','user_id');
-
+        return $this->belongsTo(User::class);
     }
+    //relación de 1 a muchos
+    public function hijos(){
+        return $this->hasMany(Hijo::class,'tutor_id','id');
+    }
+
+
 }

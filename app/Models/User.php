@@ -17,17 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'apellido',
-        'celular',
-        'fecha_nacimiento',
-        'sexo',
-        'foto',
-        
-    ];
+    protected $guarded=['id','created_at','updated_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,4 +38,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function tutor(){
+        return $this->hasOne('App\Models\Tutor\Tutor','user_id','id');
+    }
+    public function hijo(){
+        return $this->hasOne('App\Models\Hijo\Hijo','user_id','id');
+    }
+    public function admin(){
+        return $this->hasOne('App\Models\Administrativo\Administrativo','user_id','id');
+    }
 }

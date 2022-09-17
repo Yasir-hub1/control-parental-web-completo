@@ -11,21 +11,13 @@ class Plan extends Model
     use HasFactory;
 
     protected $table = 'planes';
-    
-
-    protected $fillable = [
-        'dispositivos',
-        'estado',
-        'nombre',
-        'precio',
-        'tiempo_plan',
-    ];
 
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function tutores(){
-        //LA TABLA PLAN TUTOR ES LA MISMA QUE SUSCRIPCION
-        return this->belongsToMany(Tutor::class,'plan_tutor');  
 
+    public function planesTutor()
+    {
+        return $this->hasMany('App\Models\PlanTutor\PlanTutor','plan_id','id');
     }
 }
