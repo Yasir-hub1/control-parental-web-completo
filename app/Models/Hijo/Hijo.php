@@ -14,7 +14,11 @@ class Hijo extends Model
 
     protected $table = 'hijos';
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'alias',
+        'edad',
+    ];
+
 
     //relacion de 1 a muchos
     public function localizaciones()

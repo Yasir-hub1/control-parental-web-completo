@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\User;
+use App\Models\Tutor\Tutor;
+
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -45,7 +48,16 @@ class RegisteredUserController extends Controller
             'apellido' => $request->apellido,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'apellido' => $request->apellido,
+            'celular' => $request->celular,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'sexo' => $request->sexo,
         ]);
+
+        $tutor=new Tutor;
+        $tutor->user_id=$user->id;
+        $tutor->estado=1;
+        $tutor->save();
 
         event(new Registered($user));
 
