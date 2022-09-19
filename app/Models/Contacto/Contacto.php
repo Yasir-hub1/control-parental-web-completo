@@ -15,13 +15,12 @@ class Contacto extends Model
         'nombre',
         'numero',
         'hijo_id',
-        
-
     ];
 
     public function hijo(){
-
-        return $this->hasOne(Hijo::class,'id','hijo_id');
-
+return $this->belongsTo('App\Models\Hijo\Hijo');
+    }
+    public function llamadas(){
+        return $this->hasMany('App\Models\Llamada\Llamada','contacto_id','id');
     }
 }

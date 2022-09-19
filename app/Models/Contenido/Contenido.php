@@ -25,12 +25,13 @@ class Contenido extends Model
     ];
 
 
-    public function categoria(){
-        return $this->hasOne(Categoria::class,'id','categoria_id');
+    public function categoria()
+    {
+        return $this->belongsTo('App\Models\Categoria\Categoria');
     }
 
-    public function hijo(){
-
-        return $this->hasOne(Hijo::class,'id','hijo_id');
+    public function hijo()
+    {
+        return $this->belongsTo('App\Models\Hijo\Hijo');
     }
 }

@@ -19,9 +19,10 @@ class Localizacion extends Model
     ];
 
 
-    public function hijo(){
+    public function hijo()
+    {
 
-        return $this->hasOne(Hijo::class,'id','hijo_id');
-
+        //return $this->hasOne(Hijo::class,'id','hijo_id');
+        return $this->belongsTo('App\Models\Hijo\Hijo');
     }
 }
