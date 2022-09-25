@@ -54,7 +54,9 @@ class RegisteredUserController extends Controller
 
         $tutor=new Tutor;
         $tutor->user_id=$user->id;
-        $tutor->estado=1;
+        //$tutor->estado=1;
+        $tutor->habilitado=1;
+
         $tutor->save();
 
         event(new Registered($user));
