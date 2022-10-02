@@ -8,8 +8,9 @@
         <a href="" class="btn btn-dark" style="height: 3%; margin: 5px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir hijo.</a>
 
 
-        <div class="card-header">
-            DISPOSITIVOS DE HIJOS
+        <div class="card-header mt-3">
+          <h4 class="d-flex justify-content-center"><u><strong>DISPOSITIVOS DE HIJOS</strong></u></h4>
+            
         </div>
         <div class="card-body">
             <div class="accordion" id="accordionExample">
@@ -36,7 +37,7 @@
                         <label for="" class="form-label">Celular: <strong>{{$hijo->celular}}</strong> </label><br>
                         <label for="" class="form-label">Sexo: <strong>{{$hijo->sexo}}</strong> </label><br>
                         <label for="" class="form-label">Edad: <strong>{{$hijo->edad}}</strong> </label><br>
-
+                        <div class="d-flex justify-content-center"><button class="btn btn-primary">Contactos</button></div>
                     </div>
                   </div>
                 </div>
