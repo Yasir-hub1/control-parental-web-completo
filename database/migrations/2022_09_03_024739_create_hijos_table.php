@@ -15,11 +15,13 @@ class CreateHijosTable extends Migration
     {
         Schema::create('hijos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->String('apellido');
+            $table->String('celular');
+            $table->char('sexo');
             $table->String('alias');
             $table->unsignedSmallInteger('edad');
-            $table->unsignedBigInteger('tutor_id');
-            $table->foreignId('user_id');
-            $table->foreign('tutor_id')->references('id')->on('tutores')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

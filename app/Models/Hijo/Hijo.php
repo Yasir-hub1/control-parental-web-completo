@@ -14,6 +14,12 @@ class Hijo extends Model
 
     protected $table = 'hijos';
 
+    protected $fillable = [
+        'alias',
+        'edad',
+    ];
+
+     
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     //relacion de 1 a muchos
