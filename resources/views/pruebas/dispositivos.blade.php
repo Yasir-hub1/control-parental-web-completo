@@ -37,11 +37,30 @@
                         <label for="" class="form-label">Celular: <strong>{{$hijo->celular}}</strong> </label><br>
                         <label for="" class="form-label">Sexo: <strong>{{$hijo->sexo}}</strong> </label><br>
                         <label for="" class="form-label">Edad: <strong>{{$hijo->edad}}</strong> </label><br>
-                        <div class="d-flex justify-content-center">
-                          <button class="btn btn-primary mr-3">Contactos</button>
-                          <button class="btn btn-primary mx-3">Llamadas </button>
-                          <button class="btn btn-primary ml-3">Galeria</button>
-                        </div>
+                        
+                          <div class="d-flex container justify-content-center">
+                            <div class="row">
+                              <div class="col m-1">
+                                <form action="{{ route('hijoContactos', ['id'=>$hijo->id]) }}">
+                                  <button class="btn btn-primary">Contactos</button>
+                                </form>
+                              </div>
+                              <div class="col m-1">
+                                <form action="{{ route('hijoLlamadas', ['id'=>$hijo->id]) }}">
+                                  <button class="btn btn-primary">Llamadas </button>
+                                </form>
+                              </div>
+                              <div class="col m-1">
+                                <form action="{{ route('hijoGaleria', ['id'=>$hijo->id]) }}">
+                                  <button class="btn btn-primary">Galeria</button>
+                                </form>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                          
+                       
                     </div>
                   </div>
                 </div>

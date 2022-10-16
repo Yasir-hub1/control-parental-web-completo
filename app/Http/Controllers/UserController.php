@@ -64,4 +64,16 @@ class UserController extends Controller
 
         return redirect()->route('dispositivos');
     }
+
+    public function hijoContactos($id){
+
+    }
+
+    public function hijoLlamadas($id){
+
+    }
+
+    public function hijoGaleria($id){
+
+    }
 }
