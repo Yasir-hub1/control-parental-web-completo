@@ -19,6 +19,8 @@ class Hijo extends Model
         'edad',
     ];
 
+     
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     //relacion de 1 a muchos
     public function localizaciones()

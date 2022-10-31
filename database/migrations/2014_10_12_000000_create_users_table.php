@@ -22,6 +22,10 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nacimiento');
             $table->char('sexo');
             $table->String('foto')->nullable();
+            //$table->String('foto')->nullable();
+           // $table->String('sexo',1);
+            $table->String('foto')->nullable();
+            $table->String('tipo',1);//A,T,H
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

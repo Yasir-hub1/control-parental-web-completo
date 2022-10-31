@@ -58,26 +58,7 @@ class UserSeeder extends Seeder
                 'tipo' => "T",
                 'password' => bcrypt("12345678")
             ],
-            [
-                'name' => "Sara",
-                'email' => "sara@gmail.com",
-                'apellido' => "campos",
-                'celular' => "73283232",
-                'fecha_nacimiento' => "2003/05/27",
-                'sexo' => "F",
-                'tipo' => "H",
-                'password' => bcrypt("12345678")
-            ],
-            [
-                'name' => "Jose",
-                'email' => "jose@gmail.com",
-                'apellido' => "Soto",
-                'celular' => "67233232",
-                'fecha_nacimiento' => "2010/03/17",
-                'sexo' => "M",
-                'tipo' => "H",
-                'password' => bcrypt("12345678")
-            ]
+         
         ];
         foreach ($users as $user) {
             User::create($user);
@@ -85,7 +66,7 @@ class UserSeeder extends Seeder
         $users = User::all();
         $admins = $users->where('tipo', 'A');
         $tutors = $users->where('tipo', 'T');
-        $hijos = $users->where('tipo', 'H');
+        //$hijos = $users->where('tipo', 'H');
         $c = 0;
         foreach ($admins as $admin) {
             Administrativo::create(['user_id' => $admin->id]);
@@ -95,7 +76,7 @@ class UserSeeder extends Seeder
             'user_id' => $tutors->first()->id,
         ]);
 
-        Hijo::create([
+        /*Hijo::create([
             'alias' => 'sarita',
             'edad' => 18,
             'user_id' => $hijos->first()->id,
@@ -106,6 +87,6 @@ class UserSeeder extends Seeder
             'edad' => 18,
             'user_id' => $hijos->last()->id,
             'tutor_id' => 1
-        ]);
+        ]);*/
     }
 }
