@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <h1>Bienvenido</h1>
+        <h1>HELLOOOOOOOOO</h1>
   </div>
     {{--<div class="navbar1">
 
