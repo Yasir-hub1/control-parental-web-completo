@@ -19,6 +19,7 @@ class CreateLlamadasTable extends Migration
             $table->dateTime('fecha');
             $table->String('tiempo');
             $table->foreignId('contacto_id');
+            $table->foreignId('hijo_id');
             $table->timestamps();
         });
     }

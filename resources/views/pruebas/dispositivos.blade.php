@@ -35,7 +35,6 @@
                         <label for="" class="form-label">Nombre y apellido: <strong>{{$hijo->name}} {{$hijo->apellido}}</strong> </label><br>
                         <label for="" class="form-label">Alias: <strong>{{$hijo->alias}}</strong> </label><br>
                         <label for="" class="form-label">Celular: <strong>{{$hijo->celular}}</strong> </label><br>
-                        <label for="" class="form-label">Sexo: <strong>{{$hijo->sexo}}</strong> </label><br>
                         <label for="" class="form-label">Edad: <strong>{{$hijo->edad}}</strong> </label><br>
                         
                           <div class="d-flex container justify-content-center">
@@ -53,6 +52,17 @@
                               <div class="col m-1">
                                 <form action="{{ route('hijoGaleria', ['id'=>$hijo->id]) }}">
                                   <button class="btn btn-primary">Galeria</button>
+                                </form>
+                              </div>
+                              <div class="col m-1">
+                                <form action="{{ route('hijoContenido', ['id'=>$hijo->id]) }}">
+                                  <button class="btn btn-primary">Contenido</button>
+                                </form>
+                              </div>
+                            
+                              <div class="col m-1">
+                                <form action="{{ route('hijoUbicacion', ['id'=>$hijo->id]) }}">
+                                  <button class="btn btn-primary">Ubicacion</button>
                                 </form>
                               </div>
                             </div>
@@ -101,15 +111,6 @@
                 <div class="mb-3">
                   <label for="celular" class="form-label">Celular</label>
                   <input type="text" name="celular" class="form-control" id="celular">
-                </div>
-                <div class="mb-3">
-                    <label for="sexo" class="form-label">sexo</label>
-                    <input type="text" name="sexo" class="form-control" id="sexo">
-                </div>
-
-                <div class="mb-3">
-                    <label for="edad" class="form-label">Edad</label>
-                    <input type="text" name="edad" class="form-control" id="edad">
                 </div>
                 
                 <button type="submit" class="btn btn-dark">Guardar dispositivo</button>

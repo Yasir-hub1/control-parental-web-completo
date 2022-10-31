@@ -8,11 +8,12 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
   @yield('css')
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
-  <script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script>
+  {{--  <script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script>
+  --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
 </head>
-<body>  
+<body class="">  
   
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">

@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tutor\Tutor;
+use App\Models\Contacto\Contacto;
+use App\Models\Llamada\Llamada;
+use App\Models\Archivo\Archivo;
+use App\Models\Contenido\Contenido;
+
+
+
+
 use App\Models\Hijo\Hijo;
 use App\Models\Token;
 
@@ -66,14 +74,33 @@ class UserController extends Controller
     }
 
     public function hijoContactos($id){
-
+        $data=Hijo::where('id',$id)->first();
+        $contactos=Contacto::where('hijo_id',$id)->get();
+        return view('pruebas.contactos', ['contactos' => $contactos, 'info' => $data]);
+       
     }
 
     public function hijoLlamadas($id){
-
+        $data=Hijo::where('id',$id)->first();
+        $llamadas=Llamada::where('hijo_id',$id)->get();
+        return view('pruebas.llamadas', ['llamadas' => $llamadas, 'info' => $data]);
     }
 
     public function hijoGaleria($id){
+        $data=Hijo::where('id',$id)->first();
+        $archivos=Archivo::where('hijo_id',$id)->get();
+        return view('pruebas.archivos', ['archivos' => $archivos, 'info' => $data]);
+    }
 
+    public function hijoContenido($id){
+        $data=Hijo::where('id',$id)->first();
+        $archivos=Contenido::where('hijo_id',$id)->get();
+        return view('pruebas.contenido', ['contenidos' => $archivos, 'info' => $data]);
+    }
+
+    public function hijoUbicacion($id){
+        $data=Hijo::where('id',$id)->first();
+        //$archivos=Contenido::where('hijo_id',$id)->get();
+        return view('pruebas.ubicacion', ['info' => $data]);
     }
 }

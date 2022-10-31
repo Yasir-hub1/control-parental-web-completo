@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Mamani",
                 'celular' => "77348732",
                 'fecha_nacimiento' => "2000/01/04",
+                'sexo' => "M",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Cuellar",
                 'celular' => "78237322",
                 'fecha_nacimiento' => "2000/08/01",
+                'sexo' => "M",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Llanos",
                 'celular' => "67236323",
                 'fecha_nacimiento' => "2000/12/14",
+                'sexo' => "M",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -48,6 +51,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Marmol",
                 'celular' => "66637322",
                 'fecha_nacimiento' => "1997/01/04",
+                'sexo' => "M",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -56,6 +60,7 @@ class UserSeeder extends Seeder
                 'apellido' => "campos",
                 'celular' => "73283232",
                 'fecha_nacimiento' => "2003/05/27",
+                'sexo' => "F",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -64,6 +69,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Soto",
                 'celular' => "67233232",
                 'fecha_nacimiento' => "2010/03/17",
+                'sexo' => "M",
                 'password' => bcrypt("12345678")
             ]
         ];
@@ -73,30 +79,6 @@ class UserSeeder extends Seeder
             $tutor->user_id=$data->id;
             $tutor->save();
         }
-        /*$users = User::all();
-        $admins = $users->where('tipo', 'A');
-        $tutors = $users->where('tipo', 'T');
-        $hijos = $users->where('tipo', 'H');
-        $c = 0;
-        foreach ($admins as $admin) {
-            Administrativo::create(['user_id' => $admin->id]);
-        }
-
-        Tutor::create([
-            'user_id' => $tutors->first()->id,
-        ]);
-
-        Hijo::create([
-            'alias' => 'sarita',
-            'edad' => 18,
-            'user_id' => $hijos->first()->id,
-            'tutor_id' => 1
-        ]);
-        Hijo::create([
-            'alias' => 'joss',
-            'edad' => 18,
-            'user_id' => $hijos->last()->id,
-            'tutor_id' => 1
-        ]);*/
+        
     }
 }

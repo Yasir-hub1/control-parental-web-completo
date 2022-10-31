@@ -18,7 +18,7 @@ class CreateHijosTable extends Migration
             $table->string('name');
             $table->String('apellido');
             $table->String('celular');
-            $table->char('sexo');
+            //$table->char('sexo');
             $table->String('alias');
             $table->unsignedSmallInteger('edad');
             

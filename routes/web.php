@@ -30,8 +30,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/crear_hijo', [App\Http\Controllers\UserController::class,'crear_hijo'])->name('crear_hijo');
     Route::get('/hijoContactos/{id}', [App\Http\Controllers\UserController::class,'hijoContactos'])->name('hijoContactos');
-    Route::post('/hijoLlamadas/{id}', [App\Http\Controllers\UserController::class,'hijoLlamadas'])->name('hijoLlamadas');
-    Route::post('/hijoGaleria/{id}', [App\Http\Controllers\UserController::class,'hijoGaleria'])->name('hijoGaleria');
+    Route::get('/hijoLlamadas/{id}', [App\Http\Controllers\UserController::class,'hijoLlamadas'])->name('hijoLlamadas');
+    Route::get('/hijoGaleria/{id}', [App\Http\Controllers\UserController::class,'hijoGaleria'])->name('hijoGaleria');
+    Route::get('/hijoContenido/{id}', [App\Http\Controllers\UserController::class,'hijoContenido'])->name('hijoContenido');
+    Route::get('/hijoUbicacion/{id}', [App\Http\Controllers\UserController::class,'hijoUbicacion'])->name('hijoUbicacion');
 }
 );
 
