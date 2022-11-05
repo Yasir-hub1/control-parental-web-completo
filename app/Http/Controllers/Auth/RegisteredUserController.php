@@ -61,6 +61,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        $stripeCustomer = $user->createAsStripeCustomer();
+
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

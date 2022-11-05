@@ -29,6 +29,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('dispositivos')}}">Dispositivos</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('plan')}}">Plan</a>
+          </li>
       </ul>
     </div>
     <a class="btn btn-danger navbar-btn" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
