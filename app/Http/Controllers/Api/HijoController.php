@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Aws\Rekognition\RekognitionClient;
 class HijoController extends Controller
 {
     public function index()
@@ -151,4 +151,42 @@ class HijoController extends Controller
             ]);
         }
     }
+
+
+     //TODO: Funcion para el reconocimiento de imagenes inadecuadas
+
+     public function controlImagen(Request $request){
+
+        if ($request->hasFile('fotos')) {
+
+            $client = new RekognitionClient([
+                'region' => 'us-east-1',
+                'version' => 'latest'
+            ]);
+
+            /* OBTENIENDO LA IMG */
+            $image = fopen($request->file('fotos')->getPathName(), 'r');
+            $bytes = fread($image, $request->file('fotos')->getSize());
+
+
+            /* CONSULTANDO EL SERVICIO DE AWS */
+
+            $result = $client->detectModerationLabels([
+
+                'Image' => ['Bytes' => $bytes],
+                'MinConfidence' => 51
+
+            ]);
+
+            $resultLabels=$result->get('ModerationLabels');
+
+           
+            return response()->json([
+                'message' => "Imagen subida",
+                'data'=>$resultLabels,
+            ]);
+
+        }
+
+     }
 }

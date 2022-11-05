@@ -33,7 +33,7 @@ Route::post('/registerTutor', [AuthController::class, 'registerTutor']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/users', [AuthController::class, 'index']);
 Route::get('/user-hijos', [HijoController::class, 'index']);
-Route::resource('infante',InfanteController::class)->names('infante');
+Route::post('/control',[HijoController::class,'controlImagen']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
