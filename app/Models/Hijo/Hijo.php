@@ -17,10 +17,14 @@ class Hijo extends Model
     protected $fillable = [
         'alias',
         'edad',
+        'name',
+        'apellido',
+        'celular',
+        'sexo'
     ];
 
      
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+   // protected $guarded = ['id', 'created_at', 'updated_at'];
 
     //relacion de 1 a muchos
     public function localizaciones()
@@ -45,6 +49,6 @@ class Hijo extends Model
     }
     public function tutor()
     {
-        return $this->belongsTo('App\Models\Tutor\Tutor');
+        return $this->belongsTo(Tutor::class,'tutore_id','id');
     }
 }
