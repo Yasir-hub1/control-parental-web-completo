@@ -72,9 +72,41 @@ class UserSeeder extends Seeder
             Administrativo::create(['user_id' => $admin->id]);
         }
 
-        Tutor::create([
+        $t=Tutor::create([
             'user_id' => $tutors->first()->id,
         ]);
+        $hijos=[
+            [
+                'name'=>'Joselito',
+                'apellido'=>'Vaca',
+                'celular'=>'77656344',
+                'sexo'=>'M',
+                'alias'=>'josesiño',
+                'edad'=>8,
+                'tutore_id'=>$t->id
+            ],
+            [
+                'name'=>'Mariana',
+                'apellido'=>'Ipi',
+                'celular'=>'65633214',
+                'sexo'=>'F',
+                'alias'=>'mary',
+                'edad'=>6,
+                'tutore_id'=>$t->id
+            ],
+            [
+                'name'=>'Carlos',
+                'apellido'=>'Perez',
+                'celular'=>'74412243',
+                'sexo'=>'M',
+                'alias'=>'carliño',
+                'edad'=>5,
+                'tutore_id'=>$t->id
+            ],
+        ];
+        foreach ($hijos as $hijo) {
+            Hijo::create($hijo);   
+        }
 
         /*Hijo::create([
             'alias' => 'sarita',

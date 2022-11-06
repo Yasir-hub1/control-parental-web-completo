@@ -18,10 +18,10 @@ class CreateHijosTable extends Migration
             $table->string('name');
             $table->String('apellido');
             $table->String('celular');
-            $table->char('sexo');
+            $table->String('sexo',1);
             $table->String('alias');
             $table->unsignedSmallInteger('edad');
-            
+            $table->foreignId('tutore_id')->references('id')->on('tutores')->nullable();
             $table->timestamps();
         });
     }
