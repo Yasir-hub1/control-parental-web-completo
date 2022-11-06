@@ -10,6 +10,7 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
@@ -27,10 +28,25 @@ class AuthController extends Controller
                 'message' => 'Debe ser un usuario administrador para ver todos los usuarios'
             ]);
         }*/
-      
+        $users = User::all();
+        $u = new Collection();
+        foreach ($users as $user) {
+            $u->push([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'apellido' => $user->apellido,
+                'celular' => $user->celular,
+                'fecha_nacimiento' => $user->fecha_nacimiento,
+                'sexo' => $user->sexo,
+                'foto' => $user->foto,
+                'tipo' => $user->tipo,
+                'password' => bcrypt($user->password),
+            ]);
+        }
         return response()->json([
             'message' => 'Lista de Usuarios',
-            'data' => User::all()
+            'data' => $u,//User::all()
         ]);
     }
     public function registerAdmin(Request $request)
@@ -61,7 +77,7 @@ class AuthController extends Controller
             'celular' => $validateData['celular'],
             'tipo' => "A",
             'email' => $validateData['email'],
-            'password' => bcrypt($validateData['password']),
+            'password' => Hash::make($validateData['password']),
             'foto' => $url
         ]);
 
@@ -209,7 +225,7 @@ class AuthController extends Controller
             ], 404);
         }
     }
-    
+
     public function tutorHijo(Request $request)
     {
         $user = User::findOrFail($request->user()->id);
