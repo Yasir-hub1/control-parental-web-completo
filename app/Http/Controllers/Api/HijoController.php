@@ -141,7 +141,7 @@ class HijoController extends Controller
             if (isset($hijo)) {
                 return response()->json([
                     'message' => 'Localizaciones del hijo',
-                    'data'=>$hijo->localizaciones
+                    'data' => $hijo->localizaciones
                 ]);
             } else {
                 return response()->json([
@@ -156,9 +156,10 @@ class HijoController extends Controller
     }
 
 
-     //TODO: Funcion para el reconocimiento de imagenes inadecuadas DE LA CAMARA
+    //TODO: Funcion para el reconocimiento de imagenes inadecuadas DE LA CAMARA
 
-     public function controlImagen(Request $request){
+    public function controlImagen(Request $request)
+    {
 
         if ($request->hasFile('fotos')) {
 
@@ -180,56 +181,52 @@ class HijoController extends Controller
                 'MinConfidence' => 51
 
             ]);
-            $resultLabels=$result->get('ModerationLabels');
+            $resultLabels = $result->get('ModerationLabels');
 
 
 
-            if ($resultLabels!==[]) {
+            if ($resultLabels !== []) {
 
                 try {
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
-                     $folder = "infante";
-                     $guardarFoto = new Contenido;
+                    $folder = "infante";
+                    $guardarFoto = new Contenido;
 
-                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                     $guardarFoto->fecha = Carbon::now() ;
-                     $guardarFoto->path = 'DCIM/Camera/'.$nombre;
+                    $guardarFoto->fecha = Carbon::now();
+                    $guardarFoto->path = 'DCIM/Camera/' . $nombre;
 
-                     //Onteniendo datos del tipo de contenido
+                    //Onteniendo datos del tipo de contenido
                     //  dd($resultLabels[1]);
 
-                     //  dd($resultLabels[1]["ParentName"]);
-                    if ($resultLabels[1]["ParentName"]=="Explicit Nudity" || $resultLabels[1]["ParentName"]=="Suggestive" ) {
-                        $parentName=$resultLabels[1]["ParentName"];
-                        $name=$resultLabels[1]["Name"];
-                    }else{
-                        $parentName=$resultLabels[0]["ParentName"];
-                        $name=$resultLabels[0]["Name"];
+                    //  dd($resultLabels[1]["ParentName"]);
+                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                        $parentName = $resultLabels[1]["ParentName"];
+                        $name = $resultLabels[1]["Name"];
+                    } else {
+                        $parentName = $resultLabels[0]["ParentName"];
+                        $name = $resultLabels[0]["Name"];
                     }
                     $guardarFoto->url = $imageRuta;
-                     $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
-                     $guardarFoto->contenido =$name ;  // NAME DE AWS
-                     $guardarFoto->hijo_id = 1;
+                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                    $guardarFoto->contenido = $name;  // NAME DE AWS
+                    $guardarFoto->hijo_id = 1;
 
 
 
-                     $guardarFoto->save();
-
-
-                 } catch (\Exception $e) {
-                     dd($e);
-                 }
+                    $guardarFoto->save();
+                } catch (\Exception $e) {
+                    dd($e);
+                }
             }
 
 
             return response()->json([
                 'message' => "Imagen subida",
-                'data'=>$resultLabels,
+                'data' => $resultLabels,
             ]);
-
         }
-
-     }
+    }
 }
