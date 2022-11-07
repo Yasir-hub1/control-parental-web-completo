@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Hijo\Hijo;
+use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Hijo\Hijo;
 use Illuminate\Http\Request;
+use App\Models\Contenido\Contenido;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Aws\Rekognition\RekognitionClient;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection;
+
 class HijoController extends Controller
 {
     public function index()
@@ -153,7 +156,7 @@ class HijoController extends Controller
     }
 
 
-     //TODO: Funcion para el reconocimiento de imagenes inadecuadas
+     //TODO: Funcion para el reconocimiento de imagenes inadecuadas DE LA CAMARA
 
      public function controlImagen(Request $request){
 
@@ -177,10 +180,50 @@ class HijoController extends Controller
                 'MinConfidence' => 51
 
             ]);
-
             $resultLabels=$result->get('ModerationLabels');
 
-           
+
+
+            if ($resultLabels!==[]) {
+
+                try {
+                    $nombre = $request->file('fotos')->getClientOriginalName();
+                    // guardando foto inadecuada del infante en BD y S3
+                     $folder = "infante";
+                     $guardarFoto = new Contenido;
+
+                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+
+                     $guardarFoto->fecha = Carbon::now() ;
+                     $guardarFoto->path = 'DCIM/Camera/'.$nombre;
+
+                     //Onteniendo datos del tipo de contenido
+                    //  dd($resultLabels[1]);
+
+                     //  dd($resultLabels[1]["ParentName"]);
+                    if ($resultLabels[1]["ParentName"]=="Explicit Nudity" || $resultLabels[1]["ParentName"]=="Suggestive" ) {
+                        $parentName=$resultLabels[1]["ParentName"];
+                        $name=$resultLabels[1]["Name"];
+                    }else{
+                        $parentName=$resultLabels[0]["ParentName"];
+                        $name=$resultLabels[0]["Name"];
+                    }
+                    $guardarFoto->url = $imageRuta;
+                     $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                     $guardarFoto->contenido =$name ;  // NAME DE AWS
+                     $guardarFoto->hijo_id = 1;
+
+
+
+                     $guardarFoto->save();
+
+
+                 } catch (\Exception $e) {
+                     dd($e);
+                 }
+            }
+
+
             return response()->json([
                 'message' => "Imagen subida",
                 'data'=>$resultLabels,
