@@ -27,7 +27,6 @@ class AuthController extends Controller
                 'message' => 'Debe ser un usuario administrador para ver todos los usuarios'
             ]);
         }*/
-      
         return response()->json([
             'message' => 'Lista de Usuarios',
             'data' => User::all()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Contenido\Contenido;
 use App\Models\Hijo\Hijo;
+use App\Models\Tutor\Tutor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -17,6 +18,20 @@ class ContenidoController extends Controller
         return response()->json([
             'message' => 'Lista de Contenido',
             'data' => Contenido::all()
+        ]);
+    }
+    public function quantity_of_content(Request $request)
+    {
+        // return $request;
+        $user = User::findOrFail($request->user()->id);
+        $tutor_id = Tutor::where('user_id', $user->id)->pluck('id');
+        $hijos_id= Hijo::whereIn('tutore_id', $tutor_id)->pluck('id');
+        $contenidos = Contenido::whereIn('hijo_id', $hijos_id)->get('url');
+        $cant = $contenidos->count('url');
+        return response()->json([
+            'message' => 'Lista de Contenido',
+            'contenido' => $contenidos,
+            'cantidad' => $cant
         ]);
     }
     public function contenidoHijo($id)

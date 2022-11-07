@@ -103,4 +103,23 @@ class TutorController extends Controller
             ]);
         }
     }
+    public function update_perfil(Request $request)
+    {
+            // return $request;
+            
+        $user = User::findOrFail($request->user()->id);
+        // return $user;
+            $user->name = $request['name'];
+            $user->apellido = $request['lastName'];
+            $user->celular = $request['cellPhone'];
+            $user->email = $request['email'];
+            $user->save();
+
+            //return $t;
+            //token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'Datos de usuario actualizado exitosamente',
+                'data' => ['user' => $user]
+            ]);
+    }
 }
