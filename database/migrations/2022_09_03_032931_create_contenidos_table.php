@@ -16,10 +16,11 @@ class CreateContenidosTable extends Migration
         Schema::create('contenidos', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha');
-            $table->String('nombre');
             $table->String('path');
             $table->String('url');
-            $table->foreignId('categoria_id');
+            $table->String('tipo_contenido'); //PAREN NAME De AWS
+            $table->String('contenido'); // NAME de AWS
+            // $table->foreignId('categoria_id');
             $table->foreignId('hijo_id');
             $table->timestamps();
         });
