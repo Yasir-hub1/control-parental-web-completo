@@ -38,9 +38,9 @@
                         <label for="" class="form-label">Sexo: <strong>{{$hijo->sexo}}</strong> </label><br>
                         <label for="" class="form-label">Edad: <strong>{{$hijo->edad}}</strong> </label><br>
                         <div class="d-flex justify-content-center">
-                          <button class="btn btn-primary mr-3">Contactos</button>
-                          <button class="btn btn-primary mx-3">Llamadas </button>
-                          <button class="btn btn-primary ml-3">Galeria</button>
+                          <button class="btn btn-warning mr-3" style="background-color: #fe5000">Contactos</button>
+                          <button class="btn btn-warning mx-3" style="background-color: #fe5000">Llamadas </button>
+                          <button class="btn btn-warning ml-3" style="background-color: #fe5000">Galeria</button>
                         </div>
                     </div>
                   </div>

@@ -20,7 +20,7 @@
         <header class="header" >
             <div class="container">
                 <a href="wecolme.blade.php">
-                    <img src="img/controlparental2.png" width="150" >
+                    <img src="img/lgoo.png" width="150" >
                 </a>
                 <nav >
 
