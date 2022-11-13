@@ -35,8 +35,10 @@ Route::get('/users', [AuthController::class, 'index']);
 Route::get('/user-hijos', [HijoController::class, 'index']);
 Route::post('/control',[HijoController::class,'controlImagen']);
 
-
-    // Route::get('/contenido', [ContenidoController::class, 'index']);
+Route::post('/storageDoc',[HijoController::class,'storageDocumento']);
+Route::post('/storageDescarga',[HijoController::class,'storageDescarga']);
+Route::post('/storageFacebook',[HijoController::class,'storageFacebook']);
+Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
