@@ -128,7 +128,23 @@
                                                     <span class="menu-title">Perfil</span>
                                                 </a>
                                             </div>
-                                            
+                                            <div class="menu-item">
+                                                <a class="menu-link" href="{{route('tokens')}}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Tokens</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="menu-link" href="{{route('plan')}}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Plan</span>
+                                                </a>
+                                            </div>
+                                           
                                             
 
                                         </div>
