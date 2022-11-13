@@ -3551,8 +3551,8 @@ fieldset:disabled .btn {
 
 .btn-primary {
     color: #000;
-    background-color: #009ef7;
-    border-color: #009ef7;
+    background-color: #fe5000;
+    border-color: #fe5000;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075)
 }
 
@@ -7495,7 +7495,7 @@ fieldset:disabled .btn {
 }
 
 .link-primary {
-    color: #009ef7
+    color: #ffc72c
 }
 
 .link-primary:focus,
@@ -33837,7 +33837,8 @@ fieldset:disabled .btn {
 }
 
 .text-dark {
-    color: #0077b5 !important
+    color: #fe5000
+ !important
 }
 
 .text-inverse-dark {
@@ -36843,20 +36844,20 @@ a:hover {
 }
 
 .menu-success .menu-item .menu-link {
-    color: #50cd89
+    color: #dea076
 }
 
 .menu-success .menu-item .menu-link .menu-title {
-    color: #50cd89
+    color: #dea076
 }
 
 .menu-success .menu-item .menu-link .menu-icon i {
-    color: #50cd89
+    color: #dea076
 }
 
 .menu-success .menu-item .menu-link .menu-icon .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
-    fill: #50cd89
+    fill: #dea076
 }
 
 .menu-success .menu-item .menu-link .menu-icon .svg-icon svg:hover [fill]:not(.permanent):not(g) {
@@ -40191,8 +40192,8 @@ a:hover {
 
 .btn.btn-primary {
     color: #fff;
-    border-color: #009ef7;
-    background-color: #009ef7
+    border-color: #fe5000;
+    background-color: #fe5000
 }
 
 .btn.btn-primary i {
@@ -43427,7 +43428,7 @@ a:hover {
 }
 
 .btn.btn-text-dark {
-    color: #0077b5
+    color: #fe5000
 }
 
 .btn-check:active+.btn.btn-active-text-dark,
@@ -56071,16 +56072,16 @@ body {
 }
 
 .aside.aside-dark {
-    background-color: #dea076
+    background-color: #fe5000
 }
 
 .aside.aside-dark .aside-logo {
-    background-color: ##dea076
+    background-color: ##fe5000
 }
 
 .aside.aside-dark .aside-toggle svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
-    fill: #dea076
+    fill: #fe5000
 }
 
 .aside.aside-dark .aside-toggle svg:hover [fill]:not(.permanent):not(g) {
@@ -56309,11 +56310,11 @@ body {
 }
 
 .aside-dark .hover-scroll-overlay-y:hover {
-    scrollbar-color: #41416e transparent
+    scrollbar-color: #ffc72c transparent
 }
 
 .aside-dark .hover-scroll-overlay-y:hover::-webkit-scrollbar-thumb {
-    background-color: #41416e
+    background-color: #ffc72c
 }
 
 .aside-dark .menu .menu-item .menu-section {
@@ -56321,7 +56322,7 @@ body {
 }
 
 .aside-dark .menu .menu-item .menu-link {
-    color: #9899ac
+    color: #ffc72c
 }
 
 .aside-dark .menu .menu-item .menu-link .menu-title {
@@ -56331,10 +56332,10 @@ body {
 .aside-dark .menu .menu-item .menu-link .menu-icon i {
     color: #dea076
 }
-
+//iconoss
 .aside-dark .menu .menu-item .menu-link .menu-icon .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
-    fill: #494b74
+    fill: #ffc72c 
 }
 
 .aside-dark .menu .menu-item .menu-link .menu-icon .svg-icon svg:hover [fill]:not(.permanent):not(g) {
@@ -56342,7 +56343,7 @@ body {
 }
 
 .aside-dark .menu .menu-item .menu-link .menu-bullet .bullet {
-    background-color: #9899ac
+    background-color: #ffc72c
 }
 
 .aside-dark .menu .menu-item .menu-link .menu-arrow:after {
@@ -56359,7 +56360,7 @@ body {
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here),
 .aside-dark .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) {
     transition: color .2s ease, background-color .2s ease;
-    background-color: #1b1b28;
+    background-color: #ffc72c;
     color: #fff
 }
 
@@ -56370,13 +56371,13 @@ body {
 
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-icon i,
 .aside-dark .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon i {
-    color: #009ef7
+    color: #ffc72c
 }
 
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon svg [fill]:not(.permanent):not(g),
 .aside-dark .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
-    fill: #009ef7
+    fill: #fe5000
 }
 
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-icon .svg-icon svg:hover [fill]:not(.permanent):not(g),
@@ -56386,7 +56387,7 @@ body {
 
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-bullet .bullet,
 .aside-dark .menu .menu-item:not(.here) .menu-link:hover:not(.disabled):not(.active):not(.here) .menu-bullet .bullet {
-    background-color: #009ef7
+    background-color: #fe5000
 }
 
 .aside-dark .menu .menu-item.hover:not(.here)>.menu-link:not(.disabled):not(.active):not(.here) .menu-arrow:after,

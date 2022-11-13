@@ -5,10 +5,10 @@
 
 <head>
     <base href="">
-    <title>CLINICA MIRANDA</title>
+    <title>PROTECTING YOU</title>
 
    
-    <link rel="shortcut icon" href="../../img/CLINICA.png" />
+    <link rel="shortcut icon" href="../../img/logowhite.png" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -44,7 +44,7 @@
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="#">
-                        <img alt="Logo" src="img/logowhite.png" class="h-80px logo" />
+                        <img alt="Logo" src="img/logowhite.png" class="h-70px logo" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Aside toggler-->
