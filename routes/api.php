@@ -39,6 +39,7 @@ Route::post('/storageDoc',[HijoController::class,'storageDocumento']);
 Route::post('/storageDescarga',[HijoController::class,'storageDescarga']);
 Route::post('/storageFacebook',[HijoController::class,'storageFacebook']);
 Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
+Route::post('/storageUCC',[HijoController::class,'storageUCC']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);

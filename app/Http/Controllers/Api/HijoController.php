@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Hijo\Hijo;
 use Illuminate\Http\Request;
 use App\Models\Contenido\Contenido;
+use App\Models\Contacto\Contacto;
+use App\Models\Localizacion\Localizacion;
 use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
 use Illuminate\Support\Facades\Auth;
@@ -477,4 +479,91 @@ class HijoController extends Controller
              ]);
          }
      }
+
+     public function storageContacto(Request $request){
+        $contacto = new Contacto;
+        foreach ($request as $contact) { 
+            $contacto->nombre=$contact->firstName;  //recibe un objeto con todos los telefonos, poner en bucle
+            $contacto->numero=$contact->phoneNumbers[0]->number;
+            $contacto->hijo_id = 1;
+            $contacto->save();
+        }
+     }
+
+     public function storageUbicacion(Request $request){
+        $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
+        $contacto->gps="longitude:"+$request->coords->longitude+", latitude:"+$request->coords->latitude;
+        $contacto->hijo_id = 1;
+        $contacto->save();
+     }
+
+     public function storageCaptura(Request $request){
+        if ($request->hasFile('fotos')) {
+
+            $client = new RekognitionClient([
+                'region' => 'us-east-1',
+                'version' => 'latest'
+            ]);
+
+            /* OBTENIENDO LA IMG */
+            $image = fopen($request->file('fotos')->getPathName(), 'r');
+            $bytes = fread($image, $request->file('fotos')->getSize());
+
+
+            /* CONSULTANDO EL SERVICIO DE AWS */
+
+            $result = $client->detectModerationLabels([
+
+                'Image' => ['Bytes' => $bytes],
+                'MinConfidence' => 51
+
+            ]);
+            $resultLabels = $result->get('ModerationLabels');
+
+
+
+            if ($resultLabels !== []) {
+
+                try {
+                    $nombre = $request->file('fotos')->getClientOriginalName();
+                    // guardando foto inadecuada del infante en BD y S3
+                    $folder = "infante";
+                    $guardarFoto = new Contenido;
+
+                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+
+                    $guardarFoto->fecha = Carbon::now();
+                    $guardarFoto->path = 'DCIM/Camera/' . $nombre;
+
+                    //Onteniendo datos del tipo de contenido
+                    //  dd($resultLabels[1]);
+
+                    //  dd($resultLabels[1]["ParentName"]);
+                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                        $parentName = $resultLabels[1]["ParentName"];
+                        $name = $resultLabels[1]["Name"];
+                    } else {
+                        $parentName = $resultLabels[0]["ParentName"];
+                        $name = $resultLabels[0]["Name"];
+                    }
+                    $guardarFoto->url = $imageRuta;
+                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                    $guardarFoto->contenido = $name;  // NAME DE AWS
+                    $guardarFoto->hijo_id = 1;
+
+
+
+                    $guardarFoto->save();
+                } catch (\Exception $e) {
+                    dd($e);
+                }
+            }
+
+
+            return response()->json([
+                'message' => "Imagen subida",
+                'data' => $resultLabels,
+            ]);
+     }
+    }
 }
