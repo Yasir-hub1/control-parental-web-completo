@@ -44,6 +44,8 @@ Route::post('/storageContacto',[HijoController::class,'storageContacto']);
 Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
 Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
 
+    // Route::get('/contenido', [ContenidoController::class, 'index']);
+
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/localizacion', [LocalizacionController::class, 'index']); //Para ver todas las localizaciones, sólo usuarios loggueados que sean administrador
@@ -61,6 +63,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy']);
     //Crud Contenido
     Route::get('/contenido', [ContenidoController::class, 'index']);
+    Route::post('/quantity_of_content', [ContenidoController::class, 'quantity_of_content']);
     Route::post('/contenido', [ContenidoController::class, 'store']);
     Route::put('/contenido/{id}', [ContenidoController::class, 'update']);
     Route::get('/contenido/{id}', [ContenidoController::class, 'show']);
@@ -104,4 +107,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('/localizacion', [LocalizacionController::class, 'store']); //Para agregar localización al hijo
     /****PLAN *****/
     Route::apiResource('plan', PlanController::class);
+
+
+    Route::put('update_perfil', [TutorController::class, 'update_perfil']); //Para actualizar los datos del tutor loggueado
 });

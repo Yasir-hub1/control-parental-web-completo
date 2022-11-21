@@ -27,7 +27,6 @@ class AuthController extends Controller
                 'message' => 'Debe ser un usuario administrador para ver todos los usuarios'
             ]);
         }*/
-      
         return response()->json([
             'message' => 'Lista de Usuarios',
             'data' => User::all()
@@ -179,7 +178,8 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'Bearer'
+            'token_type' => 'Bearer',
+            'user' =>$user
         ]);
     }
 

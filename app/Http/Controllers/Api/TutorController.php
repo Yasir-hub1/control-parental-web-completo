@@ -103,4 +103,38 @@ class TutorController extends Controller
             ]);
         }
     }
+    public function update_perfil(Request $request)
+    {
+        // return $request;
+        $rules = [
+            'name'=>'required',
+            'lastName' => 'required',
+            'cellPhone' => 'required|numeric',
+            'email'=> 'required|email',
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'lastName.required' => 'El apellido es requerido.',
+            'cellPhone.required' =>'El celular es requerida.',
+            'cellPhone.numeric' =>'El celular debe ser numerico.',
+            'email.required' => 'El email es requerido.',
+            'email.email' => 'Se requiere un Correo Electronico.',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $user = User::findOrFail($request->user()->id);
+        // return $user;
+            $user->name = $request['name'];
+            $user->apellido = $request['lastName'];
+            $user->celular = $request['cellPhone'];
+            $user->email = $request['email'];
+            $user->save();
+
+            //return $t;
+            //token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'Datos de usuario actualizado exitosamente',
+                'data' => ['user' => $user]
+            ]);
+    }
 }
