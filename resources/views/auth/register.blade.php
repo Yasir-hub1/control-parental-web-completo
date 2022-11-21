@@ -37,30 +37,9 @@
             <!-- Fecha Nacimiento -->
             <div>
                 <x-label for="fecha_nacimiento" :value="__('Fecha Nacimiento')" />
-
                 <x-input id="fecha_nacimiento" class="block mt-1 w-full" type="date" name="fecha_nacimiento" :value="old('fecha_nacimiento')" required autofocus />
             </div>
-
-            <!-- Sexo -->
-            <div class="row mb-3">
-                <label for="sexo" class="col-md-4 col-form-label text-md-end">{{ __('sexo') }}</label>
-
-                <div class="col-md-6">
-                    <select name="sexo" id="sexo" class="form-control">
-                        <option value="" disabled>Sexo</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                    </select>
-
-                    @error('sexo')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-
+            
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('Email')" />

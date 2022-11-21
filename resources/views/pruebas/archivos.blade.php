@@ -6,7 +6,7 @@
 <div class="container-fluid d-flex justify-content-center aling-items-center">
     <div class="card" style="width: 40%;">
         <div class="card-header">
-          <h4 class="d-flex justify-content-center text-uppercase"><u><strong>Contactos de {{$info->name}} </strong></u></h4>
+          <h4 class="d-flex justify-content-center text-uppercase"><u><strong>archivos de {{$info->name}} </strong></u></h4>
             
         </div>
         <div class="card-body">
@@ -14,8 +14,8 @@
                 <thead class="thead-dark">
                   <tr >
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Numero</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Path</th>
                     
                   </tr>
                 </thead>
@@ -23,14 +23,14 @@
                       @php
                           $a=0;
                       @endphp
-                      @foreach ($contactos as $contacto)
+                      @foreach ($archivos as $archivo)
                       @php
                           $a=$a+1;
                       @endphp
                           <tr>
                             <th scope="row">{{$a}}</th>
-                            <td>{{$contacto->nombre}}</td>
-                            <td>{{$contacto->numero}}</td>
+                            <td>{{$archivo->fecha}}</td>
+                            <td>{{$archivo->path}}</td>
                             
                           </tr>
                           

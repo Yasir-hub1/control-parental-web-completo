@@ -32,8 +32,78 @@ class ArchivoSeeder extends Seeder
             ],
             [
                 'fecha' => '2015-11-01 16:10:00',
-                'path' => 'https://pbs.twimg.com/media/D6uc2kBX4AAv3xV.jpg',
-                'hijo_id' => 2,
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 10:10:00',
+                'path' => 'image/picture.png',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 12:10:00',
+                'path' => 'fotos/peli.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 14:10:00',
+                'path' => 'image/foto.jpg',
+                'hijo_id' => 7,
+            ],
+            [
+                'fecha' => '2015-11-01 16:10:00',
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 7,
+            ],
+            [
+                'fecha' => '2015-11-01 16:10:00',
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 10:10:00',
+                'path' => 'image/picture.png',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 12:10:00',
+                'path' => 'fotos/peli.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 14:10:00',
+                'path' => 'image/foto.jpg',
+                'hijo_id' => 7,
+            ],
+            [
+                'fecha' => '2015-11-01 16:10:00',
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 7,
+            ],
+            [
+                'fecha' => '2015-11-01 16:10:00',
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 10:10:00',
+                'path' => 'image/picture.png',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 12:10:00',
+                'path' => 'fotos/peli.jpg',
+                'hijo_id' => 6,
+            ],
+            [
+                'fecha' => '2015-11-01 14:10:00',
+                'path' => 'image/foto.jpg',
+                'hijo_id' => 7,
+            ],
+            [
+                'fecha' => '2015-11-01 16:10:00',
+                'path' => 'fotos/image.jpg',
+                'hijo_id' => 7,
             ],
 
             [

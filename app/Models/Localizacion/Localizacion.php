@@ -15,7 +15,8 @@ class Localizacion extends Model
 
     protected $fillable = [
         'hijo_id',
-        'gps',
+        'latitude',
+        'longitud',
     ];
 
 
