@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tokens', [App\Http\Controllers\UserController::class,'tokens'])->name('tokens');
     Route::post('/crearToken', [App\Http\Controllers\UserController::class, 'generarToken'])->name('crearToken');
     Route::get('/dispositivos', [App\Http\Controllers\UserController::class,'dispositivos'])->name('dispositivos');
+    Route::get('/plan', [App\Http\Controllers\UserController::class,'plan'])->name('plan');
+    Route::get('/success', [App\Http\Controllers\UserController::class,'success'])->name('success');
 
 
 
@@ -34,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hijoGaleria/{id}', [App\Http\Controllers\UserController::class,'hijoGaleria'])->name('hijoGaleria');
     Route::get('/hijoContenido/{id}', [App\Http\Controllers\UserController::class,'hijoContenido'])->name('hijoContenido');
     Route::get('/hijoUbicacion/{id}', [App\Http\Controllers\UserController::class,'hijoUbicacion'])->name('hijoUbicacion');
+    Route::post('/plan', [App\Http\Controllers\UserController::class,'checkout'])->name('checkout');
 }
 );
 

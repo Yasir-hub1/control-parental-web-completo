@@ -23,7 +23,7 @@ class Tutor extends Model
 */
     public function planesTutor()
     {
-        return $this->hasMany('App\Models\PlanTutor\PlanTutor','tutor_id','id');
+        return $this->hasMany('App\Models\PlanTutor\PlanTutor','tutore_id','id');
     }
     //relación inversa de 1 a muchos
     public function user(){
@@ -31,7 +31,7 @@ class Tutor extends Model
     }
     //relación de 1 a muchos
     public function hijos(){
-        return $this->hasMany(Hijo::class,'tutor_id','id');
+        return $this->hasMany(Hijo::class,'tutore_id','id');
     }
 
 

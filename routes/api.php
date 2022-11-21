@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\ContactoController;
 use App\Http\Controllers\Api\ContenidoController;
 use App\Http\Controllers\Api\HijoController;
+use App\Http\Controllers\Api\InfanteController;
 use App\Http\Controllers\Api\LlamadaController;
 use App\Http\Controllers\Api\LocalizacionController;
 use App\Http\Controllers\Api\PlanController;
@@ -32,6 +33,16 @@ Route::post('/registerTutor', [AuthController::class, 'registerTutor']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/users', [AuthController::class, 'index']);
 Route::get('/user-hijos', [HijoController::class, 'index']);
+Route::post('/control',[HijoController::class,'controlImagen']);
+
+Route::post('/storageDoc',[HijoController::class,'storageDocumento']);
+Route::post('/storageDescarga',[HijoController::class,'storageDescarga']);
+Route::post('/storageFacebook',[HijoController::class,'storageFacebook']);
+Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
+Route::post('/storageUCC',[HijoController::class,'storageUCC']);
+Route::post('/storageContacto',[HijoController::class,'storageContacto']);
+Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
+Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);

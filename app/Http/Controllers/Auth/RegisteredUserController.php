@@ -38,12 +38,14 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'apellido' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'apellido' => $request->apellido,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'apellido' => $request->apellido,
@@ -59,6 +61,8 @@ class RegisteredUserController extends Controller
         $tutor->save();
 
         event(new Registered($user));
+
+        $stripeCustomer = $user->createAsStripeCustomer();
 
         Auth::login($user);
 
