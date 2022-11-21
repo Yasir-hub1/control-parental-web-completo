@@ -15,10 +15,8 @@
                   <tr >
                     <th scope="col">#</th>
                     <th class="text-center" scope="col">Fecha</th>
-                    <th class="text-center" scope="col">Nombre</th>
                     <th class="text-center" scope="col">Path</th>
                     <th class="text-center" scope="col">URL</th>
-                    <th class="text-center" scope="col">Categoria</th>
                     <th class="text-center" scope="col">Imagen</th>
                     
                   </tr>
@@ -34,14 +32,10 @@
                           <tr>
                             <th scope="row">{{$a}}</th>
                             <td>{{$contenido->fecha}}</td>
-                            <td>{{$contenido->nombre}}</td>
                             <td>{{$contenido->path}}</td>
                             <td>{{$contenido->url}}</td>
-                            @php
-                                $var= App\Models\Categoria\Categoria::where('id',$contenido->categoria_id)->first();
-                            @endphp
-                            <td uppercase >{{$var->nombre}}</td>
-                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="{{$contenido->nombre}}" style="width:50%;max-width:300px" onclick="getImage({{$contenido->id}})"></td>
+                          
+                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="imagen" style="width:50%;max-width:300px" onclick="getImage({{$contenido->id}})"></td>
                             
                             
                           </tr>
