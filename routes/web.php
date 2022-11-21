@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu', [App\Http\Controllers\UserController::class,'menu'])->name('menu');
     Route::get('/perfil', [App\Http\Controllers\UserController::class,'perfil'])->name('perfil');
     Route::get('/tokens', [App\Http\Controllers\UserController::class,'tokens'])->name('tokens');
-    Route::get('/crearToken', [App\Http\Controllers\UserController::class, 'generarToken'])->name('crearToken');
+    Route::post('/crearToken', [App\Http\Controllers\UserController::class, 'generarToken'])->name('crearToken');
     Route::get('/dispositivos', [App\Http\Controllers\UserController::class,'dispositivos'])->name('dispositivos');
 
 
@@ -43,9 +43,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
+Route::view('/a', 'maps');
 
 
-
+Route::post('/modLoc',[App\Http\Controllers\ApiController::class,'apiModify']);
+Route::get('/modLoc/{id}',[App\Http\Controllers\ApiController::class,'apiShow']);
 
 
 

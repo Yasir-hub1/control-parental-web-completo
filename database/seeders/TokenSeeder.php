@@ -26,7 +26,7 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "22222",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "2",
                 'id_tutor' => "1"
@@ -34,7 +34,7 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "333333",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "3",
                 'id_tutor' => "1"
@@ -42,7 +42,7 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "444444",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "4",
                 'id_tutor' => "1"
@@ -58,7 +58,7 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "111100000",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "6",
                 'id_tutor' => "6"
@@ -66,7 +66,7 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "66666",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "7",
                 'id_tutor' => "6"
@@ -74,27 +74,13 @@ class TokenSeeder extends Seeder
             [
                 'codigo' => "7777",
                 'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
+                'estado' => "0",
                 'fecha_registro' =>"2000/01/04",
                 'id_hijo' => "8",
                 'id_tutor' => "6"
             ],
-            [
-                'codigo' => "888888",
-                'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
-                'fecha_registro' =>"2000/01/04",
-                'id_hijo' => "9",
-                'id_tutor' => "6"
-            ],
-            [
-                'codigo' => "9999999",
-                'fecha_creacion' => "2000/01/04",
-                'estado' => "1",
-                'fecha_registro' =>"2000/01/04",
-                'id_hijo' => "1",
-                'id_tutor' => "6"
-            ]
+           
+           
         ];
         foreach ($tokens as $token) {
             Token::create($token);

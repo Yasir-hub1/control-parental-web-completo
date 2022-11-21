@@ -20,8 +20,9 @@ class CreateHijosTable extends Migration
             $table->String('celular');
             //$table->char('sexo');
             $table->String('alias');
-            $table->unsignedSmallInteger('edad');
-            
+            //$table->unsignedSmallInteger('edad');
+            $table->unsignedInteger('id_tutor');
+
             $table->timestamps();
         });
     }

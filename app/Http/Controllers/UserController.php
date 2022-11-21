@@ -7,6 +7,8 @@ use App\Models\Contacto\Contacto;
 use App\Models\Llamada\Llamada;
 use App\Models\Archivo\Archivo;
 use App\Models\Contenido\Contenido;
+use App\Models\Localizacion\Localizacion;
+
 
 
 
@@ -37,7 +39,7 @@ class UserController extends Controller
     public function dispositivos(){
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
+        $tokens=Token::where('id_tutor',$tutor->id)->where('estado',1)->get();;
         return view('pruebas.dispositivos')->with('tokens',$tokens);
     }
 
@@ -50,24 +52,28 @@ class UserController extends Controller
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
         $tokens = DB::table('tokens')->where('id_tutor',$tutor->id)->get();
-        return view('pruebas.tokens', ['tokens' => $tokens]);
+        $hijos = Hijo::where('id_tutor',$tutor->id)->get();
+        return view('pruebas.tokens', ['tokens' => $tokens,'hijos'=>$hijos]);
     }
 
-    public function generarToken(){
+    public function generarToken(Request $request){
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        DB::insert('insert into tokens (codigo,fecha_creacion,estado,id_tutor) values (?,?,?,?)', [rand(10000,99999),Carbon::now()->setTimezone('America/La_Paz'),1,$tutor->id]);
+        DB::insert('insert into tokens (codigo,fecha_creacion,estado,id_hijo,id_tutor) values (?,?,?,?,?)', [rand(10000,99999),Carbon::now()->setTimezone('America/La_Paz'),0,$request->id_hijo,$tutor->id]);
         return redirect()->route('tokens');
     }
 
     public function crear_hijo(Request $request){
+        $usuario = auth()->user();
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
         $hijo=new Hijo;
         $hijo->name=$request->nombre;
         $hijo->apellido=$request->apellido;
         $hijo->celular=$request->celular;
-        $hijo->sexo=$request->sexo;
+        //$hijo->sexo=$request->sexo;
         $hijo->alias=$request->alias;
-        $hijo->edad=$request->edad;
+        //$hijo->edad=$request->edad;
+        $hijo->id_tutor=$tutor->id;
         $hijo->save();
 
         return redirect()->route('dispositivos');
@@ -100,7 +106,9 @@ class UserController extends Controller
 
     public function hijoUbicacion($id){
         $data=Hijo::where('id',$id)->first();
+        $ubicacion=Localizacion::where('hijo_id',$id)->first();
+        
         //$archivos=Contenido::where('hijo_id',$id)->get();
-        return view('pruebas.ubicacion', ['info' => $data]);
+        return view('pruebas.ubicacion', ['localizacion'=>$ubicacion,'info' => $data]);
     }
 }

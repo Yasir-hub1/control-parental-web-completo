@@ -41,7 +41,7 @@
                                 $var= App\Models\Categoria\Categoria::where('id',$contenido->categoria_id)->first();
                             @endphp
                             <td uppercase >{{$var->nombre}}</td>
-                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg" src="{{$contenido->url}}" alt="{{$contenido->nombre}}" style="width:50%;max-width:300px" onclick="getImage({{$contenido->id}})"></td>
+                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="{{$contenido->nombre}}" style="width:50%;max-width:300px" onclick="getImage({{$contenido->id}})"></td>
                             
                             
                           </tr>

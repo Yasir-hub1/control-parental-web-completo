@@ -2,12 +2,14 @@
 
 
 @section('content')
-
-                <div id="map"> </div> 
-    
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8DaopxOLYwyY0gJV2fUky4_X99ZFwJY&callback=initMap" async defer></script>
-
-
+<div class="card">
+  <div class="card-header">
+    <h3>Ubicacion de {{$info->name}}</h3>
+  </div>
+  <div class="card-body">
+    <div id="map" style="height: 800px; "> </div> 
+  </div>
+</div>
   
 @stop
 
@@ -22,18 +24,21 @@
 
 
 <script>
-        var map;
+    
   	 function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-		  center: {lat: 43.5293, lng: -5.6773},
+      const  map = new google.maps.Map(document.getElementById('map'), {
+		  center: {lat: {!! $localizacion->latitud !!}, lng: {!! $localizacion->longitud !!}},
           zoom: 13,
         });
-        var marker = new google.maps.Marker({
-          position: {lat: 43.542194, lng: -5.676875},
+      new google.maps.Marker({
+          position: {lat: {!! $localizacion->latitud !!}, lng: {!! $localizacion->longitud !!}},
           map: map,
-	  title: 'Acuario de Gijón'
+	  title: 'Ubicacion de Mercado el Quior'
         });
       }
-
+      window.initMap=initMap;
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8DaopxOLYwyY0gJV2fUky4_X99ZFwJY&callback=initMap" async defer></script>
+
 @stop
