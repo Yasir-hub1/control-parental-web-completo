@@ -16,8 +16,8 @@ class CreateLocalizacionesTable extends Migration
         Schema::create('localizaciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hijo_id');
-            $table->double('latitud',3,18);
-            $table->double('longitud',3,18);
+            $table->double('latitud');
+            $table->double('longitud');
             $table->timestamps();
         });
     }
