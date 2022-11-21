@@ -42,7 +42,7 @@ Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
 Route::post('/storageUCC',[HijoController::class,'storageUCC']);
 Route::post('/storageContacto',[HijoController::class,'storageContacto']);
 Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
-Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
+Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
