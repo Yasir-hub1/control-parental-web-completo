@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Auth;
 class ContactoController extends Controller
 {
 
-    public function hijoContactos($id)
+    public function hijoContactos(Request $request)
     {
+        // return $request->id;
         $user = Auth::user();
         if ($user->tipo == "T") {
-            $hijo = Hijo::findOrFail($id);
+            $hijo = Hijo::findOrFail($request->id);
             return response()->json([
                 'message' => 'Lista de Contactos del hijo',
                 'data' => $hijo->contactos
