@@ -510,15 +510,18 @@ class HijoController extends Controller
 
     public function storageUbicacion(Request $request)
     {
-        $coord = $request->coordenadas;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+
         $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
-        $contacto->gps =  $coord;
+        $contacto->latitud =  $latitude;
+        $contacto->longitud =   $longitude;
         $contacto->hijo_id = 1;
         $contacto->save();
 
         return response()->json([
             'message' => "coord subida",
-            'data' =>   $coord,
+            'data' =>  [$latitude,$longitude],
         ]);
     }
 
