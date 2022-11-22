@@ -135,10 +135,10 @@ class HijoController extends Controller
             ]);
         }
     }
-    public function localizacionesHijo($id)
+    public function localizacionesHijo(request $request)
     { //id del hijo
         if (Auth::user()->tipo == "T") {
-            $hijo = Hijo::findOrFail($id);
+            $hijo = Hijo::findOrFail($request->hijo_id);
             if (isset($hijo)) {
                 return response()->json([
                     'message' => 'Localizaciones del hijo',

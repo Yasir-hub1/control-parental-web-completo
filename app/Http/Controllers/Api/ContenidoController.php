@@ -34,10 +34,23 @@ class ContenidoController extends Controller
             'cantidad' => $cant
         ]);
     }
-    public function contenidoHijo($id)
+    public function contenidoHijo(Request $request)
     {
-        $hijo = Hijo::findOrFail($id);
-        $contenidos = $hijo->contenidos;
+        // return $request;
+        // $hijo = Hijo::findOrFail($request->hijo_id);
+        // $contenidos = $hijo->contenidos;
+        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', false)->get();
+        return response()->json([
+            'message' => 'Lista de Contenido del hijo',
+            'data' => $contenidos
+        ]);
+    }
+    public function contentBoyCapture(Request $request)
+    {
+        // return $request;
+        // $hijo = Hijo::findOrFail($request->hijo_id);
+        // $contenidos = $hijo->contenidos;
+        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', true)->get();
         return response()->json([
             'message' => 'Lista de Contenido del hijo',
             'data' => $contenidos
