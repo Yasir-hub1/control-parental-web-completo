@@ -91,7 +91,7 @@ class TutorController extends Controller
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->first()->id;
         // return $tutor_id;
-        $hijos= Hijo::where('tutore_id', $tutor_id)->get();
+        $hijos= Hijo::where('id_tutor', $tutor_id)->get();
         $CantBoys = $hijos->count();
         foreach($hijos as $hijo){
             $hijo->image= 'https://picsum.photos/200';
