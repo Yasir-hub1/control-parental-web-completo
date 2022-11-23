@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\NotificationContenidoEvent;
+use App\Events\PushNotificationEvent;
+use App\Listeners\NotificationContenidoListener;
+use App\Listeners\PushNotificationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,8 +22,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        PushNotificationEvent::class=>[
+            PushNotificationListener::class,
+        ],
+        NotificationContenidoEvent::class=>[
+            NotificationContenidoListener::class,
+        ]
     ];
-
+  
     /**
      * Register any events for your application.
      *
