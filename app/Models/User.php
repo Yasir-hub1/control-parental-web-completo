@@ -48,4 +48,10 @@ class User extends Authenticatable
     public function admin(){
         return $this->hasOne('App\Models\Administrativo\Administrativo','user_id','id');
     }
+    public function contenidoprueba(){
+        return $this->hasMany(ContenidoPrueba::class);
+    }
+    public function expotokens(){
+        return $this->hasMany(RegistrarToken::class);
+    }
 }
