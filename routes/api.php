@@ -39,6 +39,12 @@ Route::post('/storageDoc',[HijoController::class,'storageDocumento']);
 Route::post('/storageDescarga',[HijoController::class,'storageDescarga']);
 Route::post('/storageFacebook',[HijoController::class,'storageFacebook']);
 Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
+Route::post('/storageUCC',[HijoController::class,'storageUCC']);
+Route::post('/storageContacto',[HijoController::class,'storageContacto']);
+Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
+Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
+
+    // Route::get('/contenido', [ContenidoController::class, 'index']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
@@ -64,7 +70,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/contenido/{id}', [ContenidoController::class, 'show']);
     Route::delete('/contenido/{id}', [ContenidoController::class, 'destroy']);
     Route::post('/contenido-hijo', [ContenidoController::class, 'contenidoHijo']); //id del hijo, para ver el contenido que tiene un hijo en especifico, contenido que no es captura
-    
+
     Route::post('/content_boy_capture', [ContenidoController::class, 'contentBoyCapture']); //id del hijo, para ver el contenido que tiene un hijo en especifico, contenido que es captura
 
     Route::get('/contenido-hijos', [ContenidoController::class, 'contenidoHijos']); //Muestra el contenido de cada hijo
@@ -107,6 +113,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     /****PLAN *****/
     Route::apiResource('plan', PlanController::class);
 
-    
+
     Route::put('update_perfil', [TutorController::class, 'update_perfil']); //Para actualizar los datos del tutor loggueado
 });
