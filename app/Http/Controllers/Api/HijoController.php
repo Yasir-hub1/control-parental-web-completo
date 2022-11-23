@@ -139,6 +139,16 @@ class HijoController extends Controller
     { //id del hijo
         if (Auth::user()->tipo == "T") {
             $hijo = Hijo::findOrFail($request->hijo_id);
+            // return 'a';
+            foreach($hijo->localizaciones as $location){
+                
+                $loc = explode(", ", $location->gps);
+                $longitud= explode(":", $loc[0]);
+                $latitud= explode(":", $loc[1]);
+                $location->longitude= $longitud[1];
+                $location->latitude= $latitud[1];
+                // return ['data' => $location];
+            }
             if (isset($hijo)) {
                 return response()->json([
                     'message' => 'Localizaciones del hijo',
