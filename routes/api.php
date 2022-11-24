@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CarpetaController;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\ContactoController;
 use App\Http\Controllers\Api\ContenidoController;
+use App\Http\Controllers\Api\ExpoTokenController;
 use App\Http\Controllers\Api\HijoController;
 use App\Http\Controllers\Api\InfanteController;
 use App\Http\Controllers\Api\LlamadaController;
@@ -44,6 +45,7 @@ Route::post('/storageContacto',[HijoController::class,'storageContacto']);
 Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
 Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
 
+Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
     // Route::get('/contenido', [ContenidoController::class, 'index']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {

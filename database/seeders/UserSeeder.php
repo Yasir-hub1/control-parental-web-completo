@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'apellido' => "Mamani",
                 'celular' => "77348732",
                 'fecha_nacimiento' => "2000/01/04",
-                'sexo' => "M",
+                // 'sexo' => "M",
                 'foto' => "https://w7.pngwing.com/pngs/327/57/png-transparent-cartoon-business-man-people-illustration-character-cartoon-characters.png",
                 'tipo' => "T",
                 'password' => bcrypt("12345678")

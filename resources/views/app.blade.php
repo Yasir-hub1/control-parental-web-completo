@@ -29,42 +29,113 @@
     {{-- <script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script> --}}
 
 
-  @yield('css')
-  {{--  <script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script>
-  --}}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
 </head>
-<body class="">  
-  
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="">   <img src="{{URL::asset('img/controlparental2.png')}}" width="150" > </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('perfil')}}">Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('tokens')}}">Tokens de Usuario</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('dispositivos')}}">Dispositivos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{route('plan')}}">Plan</a>
-          </li>
-      </ul>
-    </div>
-    <a class="btn btn-danger navbar-btn" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-      <i class="fa fa-fw fa-power-off text-red"></i>
-      
-    </a>
-    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
-        @csrf
-        <a href="{{route('logout')}}"
-        onclick="event.preventDefault();
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style=""> <img src="img/controlparental2.png" width="150">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('perfil') }}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('tokens') }}">Tokens de
+                            Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"
+                            href="{{ route('dispositivos') }}">Dispositivos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('plan') }}">Plan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"
+                            href="{{ route('notification.index') }}">Notificaciones</a>
+                    </li>
+
+                </ul>
+            </div>
+            <ul class="navbar-nav float-end">
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <!--  <div class="dropdown ml-auto">-->
+                    <a class="me-3 mr-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-bell"></i>
+                        @if (count(auth()->user()->unreadNotifications))
+                            <span
+                                class="badge rounded-pill badge-notification bg-danger">{{ count(auth()->user()->unreadNotifications) }}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
+                        aria-labelledby="navbarDropdownMenuLink">
+                        <span class="dropdown-header border-bottom"
+                            style="background: rgb(226, 223, 223)">NOTIFICACIONES SIN LEER</span>
+                        @forelse (auth()->user()->unreadNotifications as $notification)
+                            <a href="#" class="dropdown-item border-bottom me-1">
+                                <div class="row">
+                                    <div class="col-12"><i class="fas fa-envelope mr-2"></i>
+                                        {{ $notification->data['nombre'] }}</div>
+                                    <div class="col-12"><small class="ml-2 float-end text-muted text-sm"
+                                            style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                                    </div>
+                                </div>
+                            </a>
+
+                        @empty
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="float-end text-muted text-sm">Sin notificaciones por leer </span>
+                                </div>
+                            </div>
+                        @endforelse
+                        <span class="dropdown-header border-bottom"
+                            style="background: rgb(226, 223, 223)">NOTIFICACIONES LEÍDAS</span>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @forelse (auth()->user()->readNotifications->take(3) as $notification)
+                            @if ($i < 4)
+                                <a href="#" class="dropdown-item mb-0">
+                                    <div class="row">
+                                        <div class="col-12"><i class="fas fa-users mr-2"></i>
+                                            {{ $notification->data['descripcion'] }}</div>
+                                        <div class="col-12"><small class="ml-3 float-end text-muted text-sm"
+                                                style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                @php
+                                    $i++;
+                                @endphp
+                            @endif
+                        @empty
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class=" float-end text-muted text-sm">Sin notificaciones leidas </span>
+                                </div>
+                            </div>
+                        @endforelse
+                        <a href="{{ route('markAsRead') }}" class="dropdown-item dropdown-footer border-top">Marcar
+                            todas como leídas</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="btn btn-danger navbar-btn" href="#"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-fw fa-power-off text-red"></i>
+
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
                     this.closest('form').submit();">Log Out</a>
             </form>
         </div>
