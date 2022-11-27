@@ -28,10 +28,23 @@ class PushNotificationListener
      */
     public function handle($event)
     {
+
         User::all()
-        ->except($event->contenido->user_id)
-        ->each(function(User $user) use($event){
-           Notification::send($user,new PushNotification($event->contenido));
-        });
+            ->except($event->contenido->user_id)
+            ->each(function (User $user) use ($event) {
+                Notification::send($user, new PushNotification($event->contenido));
+                if (count($user->expotokens) > 0) {
+                    $recipient = $user->expotokens[0]->expo_token;
+                    // You can quickly bootup an expo instance
+                    $expo = \ExponentPhpSDK\Expo::normalSetup();
+                    // Subscribe the recipient to the server
+                    $expo->subscribe('canal', $recipient);
+                    // Build the notification data
+
+                    $notification = ['body' => $event->contenido->nombre];
+                    // Notify an interest with a notification
+                    $expo->notify(['canal'], $notification);
+                }
+            });
     }
 }

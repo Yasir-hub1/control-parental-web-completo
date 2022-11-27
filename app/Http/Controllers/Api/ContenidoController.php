@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\MyEvent;
 use App\Events\NotificationContenidoEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Contenido\Contenido;
@@ -69,22 +70,10 @@ class ContenidoController extends Controller
 
         ]);
         $contenido = Contenido::create($request->all());
+      
         event(new NotificationContenidoEvent($contenido));
-        if (count(Auth::user()->expotokens)>0) {
-            
-            $channelName = 'news';
-            $recipient = Auth::user()->expotokens[0]->expo_token;
-            
-            // You can quickly bootup an expo instance
-            $expo = \ExponentPhpSDK\Expo::normalSetup();
-            // Subscribe the recipient to the server
-            $expo->subscribe($channelName, $recipient);
-            // Build the notification data
-            $notification = ['body' => $contenido->nombre];
-            // Notify an interest with a notification
-            $expo->notify([$channelName], $notification);
-        }
         
+        event(new MyEvent());
         return response()->json([
             'message' => '¡Contenido creado exitosamente!',
             'data' => $contenido

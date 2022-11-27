@@ -17,7 +17,7 @@ class NotificationContenido extends Notification
      * @return void
      */
     public function __construct($contenido)
-    {
+    { 
         $this->contenido = $contenido;
     }
 

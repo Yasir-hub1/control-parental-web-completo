@@ -15,7 +15,7 @@ class CreateContenidoPruebasTable extends Migration
     {
         Schema::create('contenido_pruebas', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
+            $table->string('nombre');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

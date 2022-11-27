@@ -15,6 +15,7 @@ class ExpoTokenController extends Controller
             'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
             'user_id' => 'required|exists:users,id'
         ]);
+
         $registrar = RegistrarToken::create($request->all());
         return response()->json([
             'data' => $registrar

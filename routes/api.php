@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CarpetaController;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\ContactoController;
 use App\Http\Controllers\Api\ContenidoController;
+use App\Http\Controllers\Api\ExpoTokenController;
 use App\Http\Controllers\Api\HijoController;
 use App\Http\Controllers\Api\InfanteController;
 use App\Http\Controllers\Api\LlamadaController;
@@ -80,7 +81,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     //METODOS PARA USUARIO LOGGUEADO TUTOR
     Route::post('/profileTutor', [AuthController::class, 'tutor']); //Para ver los datos del tutor loggueado
-    Route::post('/hijos-tutor', [TutorController::class, 'hijosTutor']); //Para ver los hijos que tiene un tutor loggueado
+    Route::get('/hijos-tutor', [TutorController::class, 'hijosTutor']); //Para ver los hijos que tiene un tutor loggueado
     Route::post('/registerHijo', [AuthController::class, 'registerHijo']); //Para que un tutor loggueado pueda registrar a un nuevo usuario hijo
     Route::put('tutor', [TutorController::class, 'update']); //Para actualizar los datos del tutor loggueado
     Route::delete('tutor', [TutorController::class, 'destroy']); //Para eliminar el usuario tutor loggueado
@@ -93,6 +94,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('/profileHijo', [AuthController::class, 'hijo']); //Para ver los datos del hijo loggueado
     Route::post('/tutor-hijo', [AuthController::class, 'tutorHijo']); //Para ver el tutor del hijo
     Route::post('/localizacion', [LocalizacionController::class, 'store']); //Para agregar localización al hijo
+    //Registrar el expo-token al usuario
+    Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
     /****PLAN *****/
     Route::apiResource('plan', PlanController::class);
 });

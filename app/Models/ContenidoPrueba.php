@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContenidoPrueba extends Model
 {
     use HasFactory;
-    protected $fillable=['descripcion','user_id'];
+    protected $fillable=['nombre','user_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

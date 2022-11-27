@@ -57,7 +57,7 @@ class PushNotification extends Notification
     {
         return [
             'contenido' => $this->contenido->id,
-            'descripcion' => $this->contenido->descripcion,
+            'nombre' => $this->contenido->nombre,
             'time'=>Carbon::now()->diffForHumans()
         ];
     }

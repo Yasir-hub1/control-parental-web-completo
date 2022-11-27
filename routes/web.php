@@ -42,6 +42,14 @@ Route::middleware(['auth'])->group(
     }
 );
 
+Route::get('/pusher', function () {
+    return view('pruebas.pruebaBroadcasting');
+});
+
+Route::get('/test',function(){
+   
+    return "Event has been sent";
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
