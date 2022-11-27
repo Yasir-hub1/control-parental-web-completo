@@ -20,7 +20,8 @@ class Hijo extends Model
         'name',
         'apellido',
         'celular',
-        'sexo'
+        'sexo',
+        'id_tutor'
     ];
 
      
