@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RegistrarToken extends Model
 {
     use HasFactory;
-    protected $fillable=['expo-token','user_id'];
+    protected $fillable=['expo_token','user_id'];
 
     public function user(){
         return $this->belongsTo(User::class);
