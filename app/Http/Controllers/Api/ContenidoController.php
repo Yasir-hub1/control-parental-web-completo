@@ -27,7 +27,7 @@ class ContenidoController extends Controller
         // return $request;
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->pluck('id');
-        $hijos_id= Hijo::whereIn('tutore_id', $tutor_id)->pluck('id');
+        $hijos_id= Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
         $contenidos = Contenido::whereIn('hijo_id', $hijos_id)->get('url');
         $cant = $contenidos->count('url');
         return response()->json([
