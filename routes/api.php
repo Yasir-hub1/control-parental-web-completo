@@ -112,6 +112,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('/profileHijo', [AuthController::class, 'hijo']); //Para ver los datos del hijo loggueado
     Route::post('/tutor-hijo', [AuthController::class, 'tutorHijo']); //Para ver el tutor del hijo
     Route::post('/localizacion', [LocalizacionController::class, 'store']); //Para agregar localización al hijo
+    //Registrar el expo-token al usuario
+    Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
     /****PLAN *****/
     Route::apiResource('plan', PlanController::class);
 

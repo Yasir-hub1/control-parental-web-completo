@@ -18,29 +18,20 @@ class PushNotificationPruebaController extends Controller
     public function link(Request $request)
     {
         $request->validate([
-            'descripcion' => 'required|string'
+            'nombre' => 'required|string'
         ]);
 
         $contenidop = ContenidoPrueba::create([
-            'descripcion' => $request->descripcion,
+            'nombre' => $request->nombre,
             'user_id' => Auth::user()->id
         ]);
-
-
+     
         //  auth()->user()->notify(new PruebaNotification($contenidop));
         event(new PushNotificationEvent($contenidop));
-        if (count(Auth::user()->expotokens)>0) {
-            $channelName = 'news';
-            $recipient = Auth::user()->expotokens[0]->expo_token;
-            // You can quickly bootup an expo instance
-            $expo = \ExponentPhpSDK\Expo::normalSetup();
-            // Subscribe the recipient to the server
-            $expo->subscribe($channelName, $recipient);
-            // Build the notification data
-            $notification = ['body' => $contenidop->descripcion];
-            // Notify an interest with a notification
-            $expo->notify([$channelName], $notification);
-        }
+       
+      /*  if (count(Auth::user()->expotokens)>0) {
+          
+        }*/
         return redirect()->back()->with('message', 'Notificación creada');
     }
     public function markNotification(Request $request)

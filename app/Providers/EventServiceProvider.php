@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\MyEvent;
 use App\Events\NotificationContenidoEvent;
 use App\Events\PushNotificationEvent;
 use App\Listeners\NotificationContenidoListener;

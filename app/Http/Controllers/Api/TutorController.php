@@ -67,19 +67,16 @@ class TutorController extends Controller
             ], 404);
         }
     }
-    public function hijosTutor(Request $request)
+    public function hijosTutor()
     {
-        $user = User::findOrFail($request->user()->id);
+        
+        $user = User::find(Auth::user()->id);
+
         if ($user->tipo == 'T') {
-            $h = new Collection();
-            foreach ($user->tutor->hijos as $hijo) {
-                $hijo = Hijo::all()->find($hijo->id);
-                $hijo->user;
-                $h->push($hijo);
-            }
+            
             return response()->json([
                 'message' => 'Hijos del tutor',
-                'data' => $h
+                'data' => $user->tutor
             ]);
         } else {
             return response()->json([

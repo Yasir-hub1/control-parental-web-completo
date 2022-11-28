@@ -70,7 +70,7 @@
                         <i class="far fa-bell"></i>
                         @if (count(auth()->user()->unreadNotifications))
                             <span
-                                class="badge rounded-pill badge-notification bg-danger">{{ count(auth()->user()->unreadNotifications) }}</span>
+                                class="badge rounded-pill badge-notification bg-danger count-notification">{{ count(auth()->user()->unreadNotifications) }}</span>
                         @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
@@ -105,7 +105,7 @@
                                 <a href="#" class="dropdown-item mb-0">
                                     <div class="row">
                                         <div class="col-12"><i class="fas fa-users mr-2"></i>
-                                            {{ $notification->data['descripcion'] }}</div>
+                                            {{ $notification->data['nombre'] }}</div>
                                         <div class="col-12"><small class="ml-3 float-end text-muted text-sm"
                                                 style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
                                         </div>
@@ -144,6 +144,7 @@
 
     @yield('content')
 
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
@@ -152,7 +153,28 @@
         crossorigin="anonymous"></script>
     <!--SCRIPT NOTIFICATION-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('109c670c473fed2434ca', {
+            cluster: 'us2'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+
+            console.log(data);
+         /*   console.log('leidas: '+data['read']);
+            console.log('sin leer: '+data['unread']);*/
+           // var isAdmin = {{ (Auth::user()) }}
+          // alert(JSON.stringify(data));
+          //  $('.count-notification').text(data['message']);
+        });
+    </script>
+
     </head>
+
 
 
 

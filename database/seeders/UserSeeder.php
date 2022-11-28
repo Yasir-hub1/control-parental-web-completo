@@ -85,12 +85,14 @@ class UserSeeder extends Seeder
             Administrativo::create(['user_id' => $admin->id]);
         }
 
-        foreach ($tutors as $tutor) {
-            Tutor::create([
-                'user_id' => $tutor->first()->id,
-            ]);
-        }
-
+        Tutor::create([
+            'user_id' => 1,
+        ]);
+        
+        Tutor::create([
+            'user_id' => 4,
+        ]);
+        
         $hijos = [
             [
                 'name' => 'Joselito',
