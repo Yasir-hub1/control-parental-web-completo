@@ -8,9 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Contenido\Contenido;
 use App\Models\Hijo\Hijo;
 use App\Models\User;
+use App\Notifications\NotificationContenido;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class ContenidoController extends Controller
 {
@@ -70,10 +72,11 @@ class ContenidoController extends Controller
 
         ]);
         $contenido = Contenido::create($request->all());
-      
-        event(new NotificationContenidoEvent($contenido));
         
-        event(new MyEvent());
+      //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+        event(new NotificationContenidoEvent($contenido));
+        event(new MyEvent($contenido));
+       
         return response()->json([
             'message' => '¡Contenido creado exitosamente!',
             'data' => $contenido

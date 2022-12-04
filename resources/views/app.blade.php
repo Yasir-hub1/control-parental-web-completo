@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     
     <link rel="stylesheet" href="admilte/css/iconics.css"> --}}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+        integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('css')
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
@@ -68,33 +70,51 @@
                     <a class="me-3 mr-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
                         role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="far fa-bell"></i>
-                        @if (count(auth()->user()->unreadNotifications))
+                        @if (count(auth()->user()->unreadNotifications) > 0)
                             <span
                                 class="badge rounded-pill badge-notification bg-danger count-notification">{{ count(auth()->user()->unreadNotifications) }}</span>
+                        @else
+                            <span class="badge rounded-pill badge-notification bg-danger count-notification"></span>
                         @endif
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right scrollspy-example"
                         aria-labelledby="navbarDropdownMenuLink">
                         <span class="dropdown-header border-bottom"
                             style="background: rgb(226, 223, 223)">NOTIFICACIONES SIN LEER</span>
-                        @forelse (auth()->user()->unreadNotifications as $notification)
-                            <a href="#" class="dropdown-item border-bottom me-1">
-                                <div class="row">
-                                    <div class="col-12"><i class="fas fa-envelope mr-2"></i>
-                                        {{ $notification->data['nombre'] }}</div>
-                                    <div class="col-12"><small class="ml-2 float-end text-muted text-sm"
-                                            style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                        <div class="unread-notification">
+                            @php
+                                $i = 1;
+                            @endphp
+                            @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
+                                <a href="#" class="dropdown-item border-bottom me-1" id={{ $i }}>
+                                    <div class="row">
+                                        <div class="col-12"><i class="fas fa-envelope mr-2"></i>
+                                            {{ $notification->data['nombre'] }}</div>
+                                        <div class="col-12"><small class="ml-2 float-end text-muted text-sm"
+                                                style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                @php
+                                    $i = $i + 1;
+                                @endphp
+                            @empty
+                                <div class="row" id="remove-unread">
+                                    <div class="col-12">
+                                        <span class="float-end text-muted text-sm">Sin notificaciones por leer </span>
                                     </div>
                                 </div>
-                            </a>
+                            @endforelse
 
-                        @empty
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="float-end text-muted text-sm">Sin notificaciones por leer </span>
-                                </div>
-                            </div>
-                        @endforelse
+                            @if (count(auth()->user()->unreadNotifications) > 2)
+                                <a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">
+                                    <div class="row">
+                                        <div class="col-12 bg-gray">
+                                            Ver más Notificaciones...</div>
+                                    </div>
+                                </a>
+                            @endif
+                        </div>
                         <span class="dropdown-header border-bottom"
                             style="background: rgb(226, 223, 223)">NOTIFICACIONES LEÍDAS</span>
                         @php
@@ -153,23 +173,113 @@
         crossorigin="anonymous"></script>
     <!--SCRIPT NOTIFICATION-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+        integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        //  Pusher.logToConsole = true;
 
-        var pusher = new Pusher('109c670c473fed2434ca', {
+        var pusher = new Pusher('bad7372f1fbd6e00a121', {
             cluster: 'us2'
         });
 
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
-
+            console.log('entra');
             console.log(data);
-         /*   console.log('leidas: '+data['read']);
-            console.log('sin leer: '+data['unread']);*/
-           // var isAdmin = {{ (Auth::user()) }}
-          // alert(JSON.stringify(data));
-          //  $('.count-notification').text(data['message']);
+
+            //cambiando html con notificación nueva
+            //cambiando html con unread notification sin la notification nueva
+            if (data['unread'].length == 2) {
+                $('.unread-notification').find('#1').html('<div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
+                        'contenido']['nombre'] + '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                    ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                    '</div>' + '</div>');
+
+                for (let index = 0; index < 2; index++) {
+                    console.log('notificacion sin leer: ' + data['unread'][index]['nombre']);
+                    $('.unread-notification').find('#' + (index + 2)).css('display', 'block').html(
+                        '<div class="row">' +
+                        '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['unread'][index][
+                            'nombre'
+                        ] + '</div>' +
+                        '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                        ' style="font-size: 0.6rem">' + data['timesur'][index] + '</small>' +
+                        '</div>' + '</div>');
+
+                }
+            } else if (data['unread'].length == 1) {
+                console.log('entra uno sin leer')
+                $('.unread-notification').find('#1').html('<div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
+                        'contenido']['nombre'] + '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                    ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                    '</div>' + '</div>');
+                $('.unread-notification').append(
+                    '<a href="#" class="dropdown-item border-bottom me-1" id="2"><div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['unread'][0]['nombre'] +
+                    '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                    ' style="font-size: 0.6rem">' + data['timesur'][0] + '</small>' +
+                    '</div>' + '</div></a>');
+                $('.unread-notification').append(
+                    '<a href="#" class="dropdown-item border-bottom me-1" id="3" style="display:none"><div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' +
+                    'nombre' + '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm "' +
+                    ' style="font-size: 0.6rem">' + '</small>' +
+                    '</div>' + '</div></a>');
+            } else if (data['unread'].length == 0) {
+                $('.unread-notification').find('#remove-unread').remove();
+                $('.unread-notification').prepend(
+                    '<a href="#" class="dropdown-item border-bottom me-1" id="1"><div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['contenido']['nombre'] +
+                    '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                    ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                    '</div>' + '</div></a>');
+            }
+
+            //modificando el contador encima del icono de notificación
+            if (data['contenido'] != null) {
+                //Cuando entra una notificación
+                d = $('.count-notification').text();
+                if (d != '') {
+                    c = parseInt(d);
+                    c = c + 1;
+                    if (c > 2) {
+                     //   console.log($('.unread-notification').find('#ver-mas').length);
+                        if ($('.unread-notification').find('#ver-mas').length == 0) {
+                            $('.unread-notification').append(
+                                '<a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">' +
+                                '<div class = "row">' +
+                                '<div class = "col-12 bg-gray">' + 'Ver más Notificaciones... </div>' +
+                                ' </div > ' + '</a>'
+                            );
+                        }
+                    }
+
+                } else {
+                    c = 1;
+                }
+
+                $('.count-notification').text(c);
+
+                iziToast.show({
+                    title: '¡Nueva Notificación!',
+                    message: data['contenido']['nombre'],
+                    backgroundColor: 'red',
+                    theme: 'dark', // dark
+                    color: 'red', // blue, red, green, yellow
+                    timeout: 10000,
+                    overlayClose: false,
+                });
+            }
         });
     </script>
 

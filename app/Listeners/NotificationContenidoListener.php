@@ -36,7 +36,7 @@ class NotificationContenidoListener implements ShouldQueue
         $user = User::find($hijo->tutor->user->id);
         Notification::send($user, new NotificationContenido($event->contenido));
 
-        if (count($user->expotokens) > 0) {
+         if (count($user->expotokens) > 0) {
             $recipient = $user->expotokens[0]->expo_token;
             // You can quickly bootup an expo instance
             $expo = \ExponentPhpSDK\Expo::normalSetup();
@@ -47,6 +47,5 @@ class NotificationContenidoListener implements ShouldQueue
             // Notify an interest with a notification
             $expo->notify(['canal'], $notification);
         }
-
     }
 }

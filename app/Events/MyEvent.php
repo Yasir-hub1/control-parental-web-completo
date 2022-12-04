@@ -14,29 +14,24 @@ class MyEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    public $newnotification;
+    public $time;
 
-
-    public function __construct()
+    public function __construct($contenido)
     {
-        $this->message = [
-            [
-                'unread' => auth()->user()->unreadNotifications->take(3),
-            ],
-            [
-                'read' => auth()->user()->readNotifications->take(3)
-            ]
-        ];
+        
+       $this->newnotification=$contenido;
+       $this->time=$contenido->created_at->diffForHumans();
         //   $this->read= auth()->user()->readNotifications->take(3);
     }
 
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return ['canal-vista-notification'];
     }
 
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'evento-vista-notification';
     }
 }

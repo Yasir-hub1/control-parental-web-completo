@@ -21,6 +21,13 @@ class ExpoTokenController extends Controller
             'data' => $registrar
         ], 404);
     }
+
+    public function eliminarExpoToken(){
+        
+        $expoToken=RegistrarToken::find(auth()->user()->expotokens->first()->id);
+        $expoToken->delete();
+        return response()->noContent();
+    }
     public function allNotification()
     {
         $user = Auth::user();
