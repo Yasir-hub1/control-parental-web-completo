@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MyEvent;
 use App\Events\PushNotificationEvent;
 use App\Models\ContenidoPrueba;
 use Illuminate\Http\Request;
@@ -36,10 +37,12 @@ class PushNotificationPruebaController extends Controller
     }
     public function markNotification(Request $request)
     {
-        auth()->user()->unreadNotifications
+        return $request;
+      /*  auth()->user()->unreadNotifications
             ->when($request->input('id'), function ($query) use ($request) {
-                return $query->where('id', $request->input('id'));
+                return $query->where('contenido', $request->input('id'));
             })->markAsRead();
-        return response()->noContent();
+        //event(new MyEvent());
+        return response()->noContent();*/
     }
 }

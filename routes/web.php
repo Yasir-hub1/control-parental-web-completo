@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(
             auth()->user()->unreadNotifications->markAsRead();
             return redirect()->back();
         })->name('markAsRead');
+
         Route::get('notificaciones',[PushNotificationPruebaController::class,'index'])->name('notification.index');
         Route::post('/mark-as-read', [PushNotificationPruebaController::class,'markNotification'])->name('markNotification');
 
