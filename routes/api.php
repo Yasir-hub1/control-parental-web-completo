@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\LocalizacionController;
 use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\PlanTutorController;
 use App\Http\Controllers\Api\TutorController;
+use App\Models\Token;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -119,4 +120,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
 
     Route::put('update_perfil', [TutorController::class, 'update_perfil']); //Para actualizar los datos del tutor loggueado
+    
+    Route::post('/send_token', [ExpoTokenController::class, 'send_token']);
 });
