@@ -610,4 +610,30 @@ class HijoController extends Controller
             ]);
         }
     }
+    public function store_boy(Request $request){
+        $rules = [
+            'name'=>'required',
+            'lastName' => 'required',
+            'cellPhone' => 'required|numeric',
+            'alias'=> 'required',
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'lastName.required' => 'El apellido es requerido.',
+            'cellPhone.required' =>'El celular es requerido.',
+            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'alias.required' => 'El alias es requerido.',
+        ];
+        $this->validate($request, $rules, $messages);
+        
+        $u = User::all()->find(Auth::user()->id);
+        $hijo=Hijo::create([
+            'name'=> $request->name,
+            'apellido'=> $request->lastName,
+            'celular'=> $request->cellPhone,
+            'alias'=> $request->alias,
+            'id_tutor'=> $u->id,
+        ]);
+        return $hijo;
+    }
 }

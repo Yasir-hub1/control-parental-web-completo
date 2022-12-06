@@ -91,18 +91,22 @@ class ContenidoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hijo_id' => 'required|numeric|exists:hijos,id',
+            // 'hijo_id' => 'required|numeric|exists:hijos,id',
             'fecha' => 'required|string',
             'nombre' => 'required|string',
             'path' => 'required|string',
             'url' => 'required|string',
             'categoria_id' => 'required|numeric|exists:categorias,id',
-
+            
         ]);
+        // return 'entra/*/*/*/*/*/*/*/';
         $contenido = Contenido::create($request->all());
         
       //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-        event(new NotificationContenidoEvent($contenido));
+      $hijo=Hijo::find($request->hijo_id);
+      $user=User::find($hijo->tutor->user->id);
+    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+      event(new NotificationContenidoEvent($contenido,$user));
         event(new MyEvent($contenido));
        
         return response()->json([

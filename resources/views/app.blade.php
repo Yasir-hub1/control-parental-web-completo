@@ -107,7 +107,8 @@
                             @endforelse
 
                             @if (count(auth()->user()->unreadNotifications) > 2)
-                                <a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">
+                                <a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1"
+                                    id="ver-mas">
                                     <div class="row">
                                         <div class="col-12 bg-gray">
                                             Ver más Notificaciones...</div>
@@ -181,7 +182,7 @@
         // Enable pusher logging - don't include this in production
         //  Pusher.logToConsole = true;
 
-        var pusher = new Pusher('bad7372f1fbd6e00a121', {
+        var pusher = new Pusher('37043fdf6f86d96c9095', {
             cluster: 'us2'
         });
 
@@ -253,7 +254,7 @@
                     c = parseInt(d);
                     c = c + 1;
                     if (c > 2) {
-                     //   console.log($('.unread-notification').find('#ver-mas').length);
+                        //   console.log($('.unread-notification').find('#ver-mas').length);
                         if ($('.unread-notification').find('#ver-mas').length == 0) {
                             $('.unread-notification').append(
                                 '<a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">' +

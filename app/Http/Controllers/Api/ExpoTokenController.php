@@ -16,16 +16,20 @@ class ExpoTokenController extends Controller
 {
     public function registrarExpoToken(Request $request)//para tutor y hijo
     {
-        // return $request->expo_token;
-        $request->validate([
-            'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
-            'user_id' => 'required|exists:users,id'
-        ]);
-
-        $registrar = RegistrarToken::create($request->all());
+        // return 'entra************************//////////////////////*/*/';
+        
+        // return $request;
+        // $request->validate([
+        //     'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
+        //     'user_id' => 'required|exists:users,id'
+        // ]);
+        $registrar = RegistrarToken::create([
+                'expo_token'=> $request->expo_token,
+                'user_id'=> $request->user_id,
+            ]);
         return response()->json([
             'data' => $registrar
-        ], 404);
+        ]);
     }
 
     public function eliminarExpoToken(){

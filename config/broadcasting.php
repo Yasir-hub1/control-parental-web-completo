@@ -38,7 +38,7 @@ return [
             'options' => [
                 'cluster' => 'us2',
                 'useTLS' => true
-            ],
+              ],
             /*  'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,

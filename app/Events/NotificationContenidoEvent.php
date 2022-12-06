@@ -25,21 +25,20 @@ class NotificationContenidoEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($contenido)
+    public function __construct($contenido,$user)
     {
        
         $this->contenido = $contenido;
         $this->time=$contenido->created_at->diffForHumans();
-        $this->unread = auth()->user()->unreadNotifications->take(2)->pluck('data');
-        $this->read = auth()->user()->readNotifications->take(3)->pluck('data');
-        $times=auth()->user()->unreadNotifications->take(2)->pluck('created_at');
+        $this->unread = $user->unreadNotifications->take(2)->pluck('data');
+        $this->read = $user->readNotifications->take(3)->pluck('data');
+        $times=$user->unreadNotifications->take(2)->pluck('created_at');
         $tiemposur= [];
         foreach ($times as $t) {
             array_push($tiemposur,$t->diffForHumans());
         }
         $this->timesur=$tiemposur;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
