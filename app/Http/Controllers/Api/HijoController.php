@@ -11,6 +11,7 @@ use App\Models\Contacto\Contacto;
 use App\Models\Localizacion\Localizacion;
 use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
@@ -635,5 +636,16 @@ class HijoController extends Controller
             'id_tutor'=> $u->id,
         ]);
         return $hijo;
+    }
+    public function get_boy_not_register(){
+
+        $user = User::all()->find(Auth::user()->id);
+        $hijo_id= Token::where('id_tutor', $user->id)
+                        ->where('estado', 1)
+                        ->pluck('id_hijo');
+        $hijos=Hijo::where('id_tutor', $user->id)
+                    ->whereNotIn('id', $hijo_id)
+                    ->get();
+        return $hijos;
     }
 }

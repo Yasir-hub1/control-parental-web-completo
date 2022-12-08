@@ -124,4 +124,6 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     
     Route::post('/send_token', [ExpoTokenController::class, 'send_token']);
     Route::post('/store_boy', [HijoController::class, 'store_boy']);
+    Route::post('/get_boy_not_register', [HijoController::class, 'get_boy_not_register']);
+
 });
