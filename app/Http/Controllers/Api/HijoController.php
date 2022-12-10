@@ -643,7 +643,8 @@ class HijoController extends Controller
         $hijo_id= Token::where('id_tutor', $user->id)
                         ->where('estado', 1)
                         ->pluck('id_hijo');
-        $hijos=Hijo::where('id_tutor', $user->id)
+        $hijos=Hijo::select(['name', 'apellido', 'alias', 'id'])
+                ->where('id_tutor', $user->id)
                     ->whereNotIn('id', $hijo_id)
                     ->get();
         return $hijos;

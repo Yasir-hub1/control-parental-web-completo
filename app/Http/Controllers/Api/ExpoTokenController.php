@@ -65,16 +65,17 @@ class ExpoTokenController extends Controller
     
     public function send_token(Request $request)//envia el token de registro
     {
-        // return $request->token_register;
         $user_id = User::all()->find(Auth::user()->id)->id;
         $tutor_id= Tutor::where('user_id', $user_id)->first()->id;
         // $fechaActual = date('d-m-Y H:i:s');
+        // return $request;
         $fechaActual=Carbon::now()->setTimezone('America/La_Paz');
         $token= new token();
-        $token->codigo= $request->token_register;
+        $token->codigo= $request->params['token_register'];
         $token->fecha_creacion= $fechaActual;
         $token->estado= 0;
         $token->id_tutor= $tutor_id;
+        $token->id_hijo= $request->params['id_hijo'];
         // return $token;
         $token->save();
 
