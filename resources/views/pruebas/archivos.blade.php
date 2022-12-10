@@ -7,7 +7,6 @@
     <div class="card" style="width: 40%;">
         <div class="card-header">
           <h4 class="d-flex justify-content-center text-uppercase"><u><strong>archivos de {{$info->name}} </strong></u></h4>
-            
         </div>
         <div class="card-body">
               <table class="table table-striped table-dark table-hover">
@@ -16,7 +15,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Path</th>
-                    
                   </tr>
                 </thead>
                 <tbody>
@@ -30,77 +28,14 @@
                           <tr>
                             <th scope="row">{{$a}}</th>
                             <td>{{$archivo->fecha}}</td>
-                            <td>{{$archivo->path}}</td>
-                            
+                            <td>{{$archivo->path}}</td>    
                           </tr>
-                          
-                      
-                      
                       @endforeach
-
-                  
                 </tbody>
-                    
-              </table>  
-
-                
-                
-              
+              </table>             
         </div>
     </div>
-
 </div>
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo dispositivo</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form action="{{route('crear_hijo')}}" method="POST" >
-                @csrf
-                <div class="mb-3">
-                  <label for="nombre" class="form-label">Nombre</label>
-                  <input type="text" name="nombre" class="form-control" id="nombre" >
-                </div>
-                <div class="mb-3">
-                    <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" name="apellido" class="form-control" id="apellido" >
-                </div>
-                <div class="mb-3">
-                    <label for="alias" class="form-label">Alias</label>
-                    <input type="text" name="alias" class="form-control" id="alias" >
-                  </div>
-                <div class="mb-3">
-                <div class="mb-3">
-                  <label for="celular" class="form-label">Celular</label>
-                  <input type="text" name="celular" class="form-control" id="celular">
-                </div>
-                <div class="mb-3">
-                    <label for="sexo" class="form-label">sexo</label>
-                    <input type="text" name="sexo" class="form-control" id="sexo">
-                </div>
-
-                <div class="mb-3">
-                    <label for="edad" class="form-label">Edad</label>
-                    <input type="text" name="edad" class="form-control" id="edad">
-                </div>
-                
-                <button type="submit" class="btn btn-dark">Guardar dispositivo</button>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 @stop
 
 @section('css')
