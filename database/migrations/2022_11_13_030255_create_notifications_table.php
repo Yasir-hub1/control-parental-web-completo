@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocalizacionesTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLocalizacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('localizaciones', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('hijo_id');
-            $table->double('latitud');
-            $table->double('longitud');
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateLocalizacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('localizaciones');
+        Schema::dropIfExists('notifications');
     }
 }

@@ -33,6 +33,8 @@ class UserController extends Controller
     }
 
     public function menu(){
+
+        
         return view('pruebas.dashboard');
     }
 

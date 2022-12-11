@@ -10,7 +10,7 @@
 
         <div class="card-header">
           <h4 class="d-flex justify-content-center"><u><strong>DISPOSITIVOS DE HIJOS</strong></u></h4>
-            
+
         </div>
         <div class="card-body">
             <div class="accordion" id="accordionExample">
@@ -21,7 +21,7 @@
                 @foreach ($tokens as $token)
                 @php
                     $a=$a+1;
-                    
+
                     $hijo=App\Models\Hijo\Hijo::where('id',$token['id_hijo'])->first();
                 @endphp
                 <div class="accordion-item">
@@ -36,7 +36,7 @@
                         <label for="" class="form-label">Alias: <strong>{{$hijo->alias}}</strong> </label><br>
                         <label for="" class="form-label">Celular: <strong>{{$hijo->celular}}</strong> </label><br>
                         <label for="" class="form-label">Edad: <strong>{{$hijo->edad}}</strong> </label><br>
-                        
+
                           <div class="d-flex container justify-content-center">
                             <div class="row">
                               <div class="col m-1">
@@ -59,23 +59,23 @@
                                   <button class="btn btn-primary">Contenido</button>
                                 </form>
                               </div>
-                            
+
                               <div class="col m-1">
                                 <form action="{{ route('hijoUbicacion', ['id'=>$hijo->id]) }}">
                                   <button class="btn btn-primary">Ubicacion</button>
                                 </form>
                               </div>
                             </div>
-                            
+
                           </div>
-                          
-                          
-                       
+
+
+
                     </div>
                   </div>
                 </div>
                 @endforeach
-                
+
               </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
                   <label for="celular" class="form-label">Celular</label>
                   <input type="text" name="celular" class="form-control" id="celular">
                 </div>
-                
+
                 <button type="submit" class="btn btn-dark">Guardar dispositivo</button>
               </form>
         </div>
@@ -126,7 +126,7 @@
 @stop
 
 @section('css')
-   
+
 
 
 
@@ -136,3 +136,4 @@
 <script src=""></script>
 
 @stop
+

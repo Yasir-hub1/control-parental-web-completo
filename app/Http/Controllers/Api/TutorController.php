@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hijo\Hijo;
+use App\Models\Token;
 use App\Models\Tutor\Tutor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -67,25 +68,58 @@ class TutorController extends Controller
             ], 404);
         }
     }
-    public function hijosTutor(Request $request)
+    public function hijosTutor()
     {
-        $user = User::findOrFail($request->user()->id);
+        
+        $user = User::find(Auth::user()->id);
+
         if ($user->tipo == 'T') {
-            $h = new Collection();
-            foreach ($user->tutor->hijos as $hijo) {
-                $hijo = Hijo::all()->find($hijo->id);
-                $hijo->user;
-                $h->push($hijo);
-            }
+            
             return response()->json([
                 'message' => 'Hijos del tutor',
-                'data' => $h
+                'data' => $user->tutor
             ]);
         } else {
             return response()->json([
                 'message' => 'Debes ser tutor para ver tus hijos'
             ], 404);
         }
+    }public function children_turor(Request $request)
+    {
+        $user = User::findOrFail($request->user()->id);
+        $tutor_id = Tutor::where('user_id', $user->id)->first()->id;
+        // return $tutor_id;
+        $tokens_hijo= Token::where('id_tutor', $tutor_id)
+                            ->where('estado', 1)
+                            ->pluck('id_hijo');
+        
+        $hijos= Hijo::whereIn('id', $tokens_hijo)->get();
+        $CantBoys = $hijos->count();
+        foreach($hijos as $hijo){
+            $hijo->image= 'https://picsum.photos/200';
+        }
+        return response()->json([
+                    'message' => 'Hijos del tutor',
+                    'data' => $hijos,
+                    'cantChildren' => $CantBoys
+                ]);
+        // return $hijos;
+        // if ($user->tipo == 'T') {
+        //     $h = new Collection();
+        //     foreach ($user->tutor->hijos as $hijo) {
+        //         $hijo = Hijo::all()->find($hijo->id);
+        //         $hijo->user;
+        //         $h->push($hijo);
+        //     }
+        //     return response()->json([
+        //         'message' => 'Hijos del tutor',
+        //         'data' => $h
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         'message' => 'Debes ser tutor para ver tus hijos'
+        //     ], 404);
+        // }
     }
     public function destroy()
     {
@@ -102,5 +136,39 @@ class TutorController extends Controller
                 'message' => "Debe ser un usuario Tutor para eliminar"
             ]);
         }
+    }
+    public function update_perfil(Request $request)
+    {
+        // return $request;
+        $rules = [
+            'name'=>'required',
+            'lastName' => 'required',
+            'cellPhone' => 'required|numeric',
+            'email'=> 'required|email',
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'lastName.required' => 'El apellido es requerido.',
+            'cellPhone.required' =>'El celular es requerido.',
+            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'email.required' => 'El email es requerido.',
+            'email.email' => 'Se requiere un Correo Electronico.',
+        ];
+        $this->validate($request, $rules, $messages);
+
+        $user = User::findOrFail($request->user()->id);
+        // return $user;
+            $user->name = $request['name'];
+            $user->apellido = $request['lastName'];
+            $user->celular = $request['cellPhone'];
+            $user->email = $request['email'];
+            $user->save();
+
+            //return $t;
+            //token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'Datos de usuario actualizado exitosamente',
+                'data' => ['user' => $user]
+            ]);
     }
 }

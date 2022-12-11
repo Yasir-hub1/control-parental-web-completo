@@ -11,6 +11,7 @@ use App\Models\Contacto\Contacto;
 use App\Models\Localizacion\Localizacion;
 use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
@@ -137,10 +138,10 @@ class HijoController extends Controller
             ]);
         }
     }
-    public function localizacionesHijo($id)
+    public function localizacionesHijo(request $request)
     { //id del hijo
         if (Auth::user()->tipo == "T") {
-            $hijo = Hijo::findOrFail($id);
+            $hijo = Hijo::findOrFail($request->hijo_id);
             if (isset($hijo)) {
                 return response()->json([
                     'message' => 'Localizaciones del hijo',
@@ -482,47 +483,46 @@ class HijoController extends Controller
 
     public function storageContacto(Request $request)
     {
-        $i=1;
+        $i = 1;
 
         $constact = $request->contactos;
-        $number= $request->number;
-       /*  if (is_iterable($constact)) { */
+        $number = $request->number;
+        /*  if (is_iterable($constact)) { */
 
-            foreach ($constact as  $constactos) {
+        foreach ($constact as  $constactos) {
 
-                $guardar = new Contacto();
-                $guardar->nombre = $constactos;
-                foreach ($number as  $numbers) {
+            $guardar = new Contacto();
+            $guardar->nombre = $constactos;
+            foreach ($number as  $numbers) {
 
-                    $guardar->numero =$numbers;
-                }
-                $i++;
-                $guardar->hijo_id =$i;
-                $guardar->save();
+                $guardar->numero = $numbers;
             }
+            $i++;
+            $guardar->hijo_id = $i;
+            $guardar->save();
+        }
 
-       /*  } */
+        /*  } */
         return response()->json([
             'message' => "Contacto subida",
             'data' =>  "constact",
         ]);
-
-
-
-
     }
 
     public function storageUbicacion(Request $request)
     {
-        $coord=$request->coordenadas;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+
         $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
-        $contacto->gps =  $coord;
+        $contacto->latitud =  $latitude;
+        $contacto->longitud =   $longitude;
         $contacto->hijo_id = 1;
         $contacto->save();
 
         return response()->json([
             'message' => "coord subida",
-            'data' =>   $coord,
+            'data' =>  [$latitude,$longitude],
         ]);
     }
 
@@ -550,11 +550,9 @@ class HijoController extends Controller
             ]);
             $resultLabels = $result->get('ModerationLabels');
 
+            try {
+                if ($resultLabels !== []) {
 
-
-            if ($resultLabels !== []) {
-
-                try {
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
@@ -563,7 +561,7 @@ class HijoController extends Controller
                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
                     $guardarFoto->fecha = Carbon::now();
-                    $guardarFoto->path = 'DCIM/Camera/' . $nombre;
+                    $guardarFoto->path = 'CapturarPantalla/' . $nombre;
 
                     //Onteniendo datos del tipo de contenido
                     //  dd($resultLabels[1]);
@@ -576,18 +574,35 @@ class HijoController extends Controller
                         $parentName = $resultLabels[0]["ParentName"];
                         $name = $resultLabels[0]["Name"];
                     }
+
+
                     $guardarFoto->url = $imageRuta;
                     $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
                     $guardarFoto->contenido = $name;  // NAME DE AWS
                     $guardarFoto->hijo_id = 1;
-
-
-
                     $guardarFoto->save();
-                } catch (\Exception $e) {
-                    dd($e);
+                } else {
+
+                    $nombre = $request->file('fotos')->getClientOriginalName();
+                    // guardando foto inadecuada del infante en BD y S3
+                    $folder = "infante";
+                    $guardarFoto = new Contenido;
+
+                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+
+                    $guardarFoto->fecha = Carbon::now();
+                    $guardarFoto->path = 'CapturarPantalla/' . $nombre;
+
+                    $guardarFoto->url = $imageRuta;
+                    $guardarFoto->tipo_contenido = "Ninguno"; //PARENT NAME DE AWS
+                    $guardarFoto->contenido = "Ninguno";  // NAME DE AWS
+                    $guardarFoto->hijo_id = 1;
+                    $guardarFoto->save();
                 }
+            } catch (\Exception $e) {
+                dd($e);
             }
+
 
 
             return response()->json([
@@ -595,5 +610,43 @@ class HijoController extends Controller
                 'data' => $resultLabels,
             ]);
         }
+    }
+    public function store_boy(Request $request){
+        $rules = [
+            'name'=>'required',
+            'lastName' => 'required',
+            'cellPhone' => 'required|numeric',
+            'alias'=> 'required',
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'lastName.required' => 'El apellido es requerido.',
+            'cellPhone.required' =>'El celular es requerido.',
+            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'alias.required' => 'El alias es requerido.',
+        ];
+        $this->validate($request, $rules, $messages);
+        
+        $u = User::all()->find(Auth::user()->id);
+        $hijo=Hijo::create([
+            'name'=> $request->name,
+            'apellido'=> $request->lastName,
+            'celular'=> $request->cellPhone,
+            'alias'=> $request->alias,
+            'id_tutor'=> $u->id,
+        ]);
+        return $hijo;
+    }
+    public function get_boy_not_register(){
+
+        $user = User::all()->find(Auth::user()->id);
+        $hijo_id= Token::where('id_tutor', $user->id)
+                        ->where('estado', 1)
+                        ->pluck('id_hijo');
+        $hijos=Hijo::select(['name', 'apellido', 'alias', 'id'])
+                ->where('id_tutor', $user->id)
+                    ->whereNotIn('id', $hijo_id)
+                    ->get();
+        return $hijos;
     }
 }

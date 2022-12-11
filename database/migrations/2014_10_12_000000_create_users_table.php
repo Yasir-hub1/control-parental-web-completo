@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             //$table->String('foto')->nullable();
            // $table->String('sexo',1);
             $table->String('foto')->nullable();
-            //$table->String('tipo',1);//A,T,H
+            $table->String('tipo')->default('T');//A,T,H
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
