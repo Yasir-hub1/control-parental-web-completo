@@ -85,47 +85,21 @@
                                 </div>
                             </div>
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <span class="menu-link">
-                                    <span class="menu-icon">
-                                        <!--begin::Svg Icon | path: assets/media/icons/duotune/communication/com014.svg-->
-                                        <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z"
-                                                    fill="black" />
-                                                <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2"
-                                                    fill="black" />
-                                                <path
-                                                    d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z"
-                                                    fill="black" />
-                                                <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3"
-                                                    fill="black" />
-                                            </svg></span>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <span class="menu-title">Usuarios</span>
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                
+                             
                                    
                                        
                                 
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                        <span class="menu-link">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Personal</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                          
                                             <div class="menu-item">
-                                                <a class="menu-link" href="{{route('perfil')}}">
+                                                <a class="menu-link" href="{{route('menu')}}">
                                                     <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
+                                                            <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
+                                                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                                                          </svg>
                                                     </span>
-                                                    <span class="menu-title">Perfil</span>
+                                                    <span class="menu-title">Mi Familia</span>
                                                 </a>
                                             </div>
                                             <div class="menu-item">
@@ -139,7 +113,10 @@
                                             <div class="menu-item">
                                                 <a class="menu-link" href="{{route('plan')}}">
                                                     <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                                          </svg>
                                                     </span>
                                                     <span class="menu-title">Plan</span>
                                                 </a>
@@ -147,17 +124,10 @@
                                            
                                             
 
-                                        </div>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                      <span class="menu-link">
-                                          <span class="menu-bullet">
-                                              <span class="bullet bullet-dot"></span>
-                                          </span>
-                                          <span class="menu-title">Hijos1</span>
-                                          <span class="menu-arrow"></span>
-                                      </span>
-                                      <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                   
+                                   
+                                      
+                                     
                                           <div class="menu-item">
                                               <a class="menu-link" href="{{route('dispositivos')}}">
                                                   <span class="menu-bullet">
@@ -169,9 +139,8 @@
                                           
                                           
 
-                                      </div>
-                                  </div>
-                                </div>
+                                   
+                                
                             </div>
                             
                             

@@ -23,7 +23,10 @@ class UserController extends Controller
     }
 
     public function menu(){
-        return view('pruebas.dashboard');
+        $usuario = auth()->user();
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
+        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
+        return view('pruebas.dashboard')->with('tokens',$tokens);
     }
 
     public function dispositivos(){
