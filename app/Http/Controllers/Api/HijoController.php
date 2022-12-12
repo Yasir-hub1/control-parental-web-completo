@@ -614,15 +614,15 @@ class HijoController extends Controller
     public function store_boy(Request $request){
         $rules = [
             'name'=>'required',
-            'lastName' => 'required',
-            'cellPhone' => 'required|numeric',
+            'lastname' => 'required',
+            'cell_phone' => 'required|numeric',
             'alias'=> 'required',
         ];
         $messages = [
             'name.required' => 'El nombre es requerido',
-            'lastName.required' => 'El apellido es requerido.',
-            'cellPhone.required' =>'El celular es requerido.',
-            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'lastname.required' => 'El apellido es requerido.',
+            'cell_phone.required' =>'El celular es requerido.',
+            'cell_phone.numeric' =>'El celular debe ser de tipo numérico.',
             'alias.required' => 'El alias es requerido.',
         ];
         $this->validate($request, $rules, $messages);
@@ -630,8 +630,8 @@ class HijoController extends Controller
         $u = User::all()->find(Auth::user()->id);
         $hijo=Hijo::create([
             'name'=> $request->name,
-            'apellido'=> $request->lastName,
-            'celular'=> $request->cellPhone,
+            'apellido'=> $request->lastname,
+            'celular'=> $request->cell_phone,
             'alias'=> $request->alias,
             'id_tutor'=> $u->id,
         ]);
