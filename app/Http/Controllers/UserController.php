@@ -61,7 +61,7 @@ class UserController extends Controller
         $hijo->id_tutor = $usuario->id;
         $hijo->apellido=$request->apellido;
         $hijo->celular=$request->celular;
-        //$hijo->sexo=$request->sexo;
+        $hijo->sexo=$request->sexo;
         $hijo->alias=$request->alias;
         //$hijo->edad=$request->edad;
         $hijo->save();

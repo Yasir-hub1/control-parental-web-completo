@@ -10,25 +10,17 @@
          
             @foreach ($hijos as $hijo)
            
-              @if($hijo->sexo == 'M')
-              <div class="col-md-4 col-xs-4 col-6 px-md-5">
+               <div class="col-md-4 col-xs-4 col-6 px-md-5">
                 <td>
                     <a href=""  target="_blank">
-                        <img src="{{ asset('img/niño.jpg')}}"class="img-responsive mx-auto op-7"
-                        style="max-height: 150px;">
-                        <br>
-                        <H5>{{$hijo->alias}} </H5>
-                    </a>
-                   
-                </td>
-               
-            </div>
-              @endif
-              <div class="col-md-4 col-xs-4 col-6 px-md-5">
-                <td>
-                    <a href=""  target="_blank">
+                        @if ($hijo->sexo == 'F')
                         <img src="{{ asset('img/niña.jpg')}}"class="img-responsive mx-auto op-7"
                         style="max-height: 150px;">
+                        @endif
+                        @if ($hijo->sexo == 'M')
+                        <img src="{{ asset('img/niño.jpg')}}"class="img-responsive mx-auto op-7"
+                        style="max-height: 150px;">
+                        @endif
                         <br>
                         <H5>{{$hijo->alias}} </H5>
                     </a>
@@ -36,7 +28,6 @@
                 </td>
                
             </div>
-               
             @endforeach
             <div class="col-md-4 col-xs-4 col-6 px-md-5">
              <td>
@@ -59,7 +50,7 @@
                     <!--begin::Modal header-->
                     <div class="modal-header" id="kt_modal_add_user_header">
                         <!--begin::Modal title-->
-                        <h2 class="fw-bolder">Add User</h2>
+                        <h2 class="fw-bolder">Añadir Hijo</h2>
                         <!--end::Modal title-->
                         <!--begin::Close-->
                         <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -93,7 +84,7 @@
                                     <label class="required fw-bold fs-6 mb-2">Nombre</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" name="nombre" id="nombre" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombre Completo" value="" />
+                                    <input type="text" name="nombre" id="nombre" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombre" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -103,7 +94,7 @@
                                     <label class="required fw-bold fs-6 mb-2">Apellido</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" name="apellido" id="apellido" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="" />
+                                    <input type="text" name="apellido" id="apellido" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellido" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <div class="fv-row mb-7">
@@ -111,7 +102,7 @@
                                     <label class="required fw-bold fs-6 mb-2">Alias</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" name="alias" id="alias" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Carnet de identidad" value="" />
+                                    <input type="text" name="alias" id="alias" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Alias" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <div class="fv-row mb-7">
@@ -119,7 +110,7 @@
                                     <label class="required fw-bold fs-6 mb-2">Sexo</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" name="sexo" id="sexo" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Consultorio" value="" />
+                                    <input type="text" name="sexo" id="sexo" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Sexo" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <div class="fv-row mb-7">
@@ -127,7 +118,7 @@
                                     <label class="required fw-bold fs-6 mb-2">Edad</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="text" name="edad" id="edad" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Consultorio" value="" />
+                                    <input type="text" name="edad" id="edad" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Edad" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <div class="fv-row mb-7">
