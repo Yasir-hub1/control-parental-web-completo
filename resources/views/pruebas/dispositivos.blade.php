@@ -1,6 +1,17 @@
 @extends('app')
 
+@section('title')
 
+<nav>
+  <ul>
+      <li><a href="" class="active">INICIO</a></li>
+      <li><a href="{{ url('/contact')}}">CONTÁCTENOS</a></li>
+      <li><a href="{{ url('/nosotros')}}">NOSOTROS</a></li>
+      <li><a href="#">LOGIN</a></li>
+      <li><a href="{{route('register')}}">REGISTRATE</a></li>
+  </ul>
+</nav>
+@endsection
 @section('content')
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
