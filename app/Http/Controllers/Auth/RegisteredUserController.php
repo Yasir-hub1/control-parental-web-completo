@@ -51,7 +51,6 @@ class RegisteredUserController extends Controller
             'apellido' => $request->apellido,
             'celular' => $request->celular,
             'fecha_nacimiento' => $request->fecha_nacimiento,
-            'sexo' => $request->sexo,
         ]);
 
         $tutor=new Tutor;

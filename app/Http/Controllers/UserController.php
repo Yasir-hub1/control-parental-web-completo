@@ -3,6 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tutor\Tutor;
+use App\Models\Contacto\Contacto;
+use App\Models\Llamada\Llamada;
+use App\Models\Archivo\Archivo;
+use App\Models\Contenido\Contenido;
+use App\Models\Localizacion\Localizacion;
+
+
+
+
+
 use App\Models\Hijo\Hijo;
 use App\Models\Token;
 
@@ -29,7 +39,7 @@ class UserController extends Controller
     public function dispositivos(){
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
+        $tokens=Token::where('id_tutor',$tutor->id)->where('estado',1)->get();;
         return view('pruebas.dispositivos')->with('tokens',$tokens);
     }
 
@@ -42,29 +52,66 @@ class UserController extends Controller
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
         $tokens = DB::table('tokens')->where('id_tutor',$tutor->id)->get();
-        return view('pruebas.tokens', ['tokens' => $tokens]);
+        $hijos = Hijo::where('id_tutor',$tutor->id)->get();
+        return view('pruebas.tokens', ['tokens' => $tokens,'hijos'=>$hijos]);
     }
 
-    public function generarToken(){
+    public function generarToken(Request $request){
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        DB::insert('insert into tokens (codigo,fecha_creacion,estado,id_tutor) values (?,?,?,?)', [rand(10000,99999),Carbon::now()->setTimezone('America/La_Paz'),1,$tutor->id]);
+        DB::insert('insert into tokens (codigo,fecha_creacion,estado,id_hijo,id_tutor) values (?,?,?,?,?)', [rand(10000,99999),Carbon::now()->setTimezone('America/La_Paz'),0,$request->id_hijo,$tutor->id]);
         return redirect()->route('tokens');
     }
 
     public function crear_hijo(Request $request){
+        $usuario = auth()->user();
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
         $hijo=new Hijo;
         $hijo->name=$request->nombre;
         $hijo->apellido=$request->apellido;
         $hijo->celular=$request->celular;
-        $hijo->sexo=$request->sexo;
+        //$hijo->sexo=$request->sexo;
         $hijo->alias=$request->alias;
-        $hijo->edad=$request->edad;
+        //$hijo->edad=$request->edad;
+        $hijo->id_tutor=$tutor->id;
         $hijo->save();
 
         return redirect()->route('dispositivos');
     }
 
+    public function hijoContactos($id){
+        $data=Hijo::where('id',$id)->first();
+        $contactos=Contacto::where('hijo_id',$id)->get();
+        return view('pruebas.contactos', ['contactos' => $contactos, 'info' => $data]);
+       
+    }
+
+    public function hijoLlamadas($id){
+        $data=Hijo::where('id',$id)->first();
+        $llamadas=Llamada::where('hijo_id',$id)->get();
+        return view('pruebas.llamadas', ['llamadas' => $llamadas, 'info' => $data]);
+    }
+
+    public function hijoGaleria($id){
+        $data=Hijo::where('id',$id)->first();
+        $archivos=Archivo::where('hijo_id',$id)->get();
+        return view('pruebas.archivos', ['archivos' => $archivos, 'info' => $data]);
+    }
+
+    public function hijoContenido($id){
+        $data=Hijo::where('id',$id)->first();
+        $archivos=Contenido::where('hijo_id',$id)->get();
+        return view('pruebas.contenido', ['contenidos' => $archivos, 'info' => $data]);
+    }
+
+    public function hijoUbicacion($id){
+        $data=Hijo::where('id',$id)->first();
+        $ubicacion=Localizacion::where('hijo_id',$id)->first();
+        
+        //$archivos=Contenido::where('hijo_id',$id)->get();
+        return view('pruebas.ubicacion', ['localizacion'=>$ubicacion,'info' => $data]);
+    }
+    
     function checkout(Request $request) {
         $stripe = new \Stripe\StripeClient(
         'sk_test_51LmGK0FzDqUMV7KR60uYN3GMiz8Lj9E8NTNjcn0S0JJgc3ckYgq3HTf3jEIwbGnw32CRaoCqaVZbuZKLnrdQE9NV009wbCpeEa'

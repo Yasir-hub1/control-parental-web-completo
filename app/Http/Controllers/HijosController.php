@@ -45,9 +45,8 @@ class HijosController extends Controller
         $hijos->name=$request->name;
         $hijos->apellido=$request->apellido;
         $hijos->celular=$request->celular;
-        $hijos->sexo=$request->sexo;
         $hijos->alias=$request->alias;
-        $hijos->edad=$request->edad;
+        $hijos->save();
         return redirect()->route('dispositivos');
     }
 

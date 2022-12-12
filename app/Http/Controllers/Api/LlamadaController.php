@@ -109,4 +109,21 @@ class LlamadaController extends Controller
             ]);
         }
     }
+    public function get_all_calls_from_child(Request $request){
+        $contactos_id= Contacto::where('hijo_id', $request->hijo_id)->pluck('id');
+        $llamadas = Llamada::select([
+            'llamadas.id',
+            'llamadas.aceptada',
+            'llamadas.tiempo',
+            'llamadas.fecha',
+            'contactos.nombre',
+            'contactos.numero',
+        ])
+        ->join('contactos', 'contactos.id', 'llamadas.contacto_id')
+        ->wherein('llamadas.contacto_id', $contactos_id)
+        ->orderBy('llamadas.fecha', 'DESC')
+        ->get();
+        
+        return $llamadas;
+    }
 }

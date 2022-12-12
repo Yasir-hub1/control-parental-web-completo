@@ -17,21 +17,24 @@ class LocalizacionSeeder extends Seeder
 
         $localizaciones = [
             [
-                'hijo_id' => 1,
-                'gps' => "longitude:-63.091125, latitude:-17.8028995002",
+                'hijo_id' => 6,
+                'latitud' =>-17.846318897515975,
+                'longitud'=>-63.08150387992806,
             ],
             [
-                'hijo_id' => 1,
-                'gps' => "longitude:-63.0915178999, latitude:-17.8027536002",
+                'hijo_id' => 5,
+                'latitud' =>-17.846318897515975,
+                'longitud'=>-63.08150387992806,
             ],
             [
-                'hijo_id' => 2,
-                'gps' => "longitude:-63.0916626004, latitude:-17.8027173004",
+                'hijo_id' => 4,
+                'latitud' =>-17.846318897515975,
+                'longitud'=>-63.08150387992806,
             ],
             [
-                'hijo_id' => 2,
-                'gps' => "latitude:-17.8026152, longitude:-63.0921586",
-            ],
+                'hijo_id' => 3,
+                'latitud' =>-17.846318897515975,
+                'longitud'=>-63.08150387992806,]
         ];
         foreach ($localizaciones as $localizacion) {
             Localizacion::create($localizacion);

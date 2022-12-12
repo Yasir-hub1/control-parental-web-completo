@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocalizacionesTable extends Migration
+class AddCapturaToContenidos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateLocalizacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('localizaciones', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('hijo_id');
-            $table->double('latitud');
-            $table->double('longitud');
-            $table->timestamps();
+        Schema::table('contenidos', function (Blueprint $table) {
+            $table->boolean('captura')->nullable()->default(false);
         });
     }
 
@@ -29,6 +25,8 @@ class CreateLocalizacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('localizaciones');
+        Schema::table('contenidos', function (Blueprint $table) {
+            $table->dropColumn('captura');
+        });
     }
 }
