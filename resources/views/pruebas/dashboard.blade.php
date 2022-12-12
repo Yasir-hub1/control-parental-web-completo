@@ -13,7 +13,7 @@
            
                <div class="col-md-4 col-xs-4 col-6 px-md-5">
                 <td>
-                    <a href=""  target="_blank">
+                    <a href="{{route('dispositivos')}}"  >
                         @if ($hijo->sexo == 'F')
                         <img src="{{ asset('img/niña.jpg')}}"class="img-responsive mx-auto op-7"
                         style="max-height: 150px;">

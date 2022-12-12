@@ -29,10 +29,11 @@ class UserController extends Controller
     }
 
     public function dispositivos(){
+       
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
         $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
-        return view('pruebas.dispositivos')->with('tokens',$tokens);
+        return view('pruebas.dispositivos')->with('tokens', $tokens);
     }
 
     public function perfil(){

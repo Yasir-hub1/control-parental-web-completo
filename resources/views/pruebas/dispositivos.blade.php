@@ -1,8 +1,31 @@
 @extends('app')
 
-
+@section('title')
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <div class="container-fluid">
+   
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        NOMBRE DEL NIÑO
+        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('perfil')}}">CONTACTOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('tokens')}}">LLAMADAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('dispositivos')}}">GALERÍA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('plan')}}">Plan</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+@endsection
 @section('content')
-
 
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
