@@ -2,6 +2,8 @@
 
 
 @section('content')
+
+
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
     <div class="card" style="width: 40%;">

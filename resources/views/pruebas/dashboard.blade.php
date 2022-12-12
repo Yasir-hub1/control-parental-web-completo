@@ -3,6 +3,7 @@
 
 @section('content')
 
+
 <section class="section bg-light">
     <div class="container"><h4 class="bold text-center mb-5 text-secondary">
        Mi Familia</h4>
