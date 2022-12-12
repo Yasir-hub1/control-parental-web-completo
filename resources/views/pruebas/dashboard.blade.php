@@ -8,12 +8,10 @@
        Mi Familia</h4>
         <div class="row gap-y">
          
-            @foreach ($tokens as $token)
-            @php
-               
-                $hijo=App\Models\Hijo\Hijo::where('id',$token['id_hijo'])->first();
-            @endphp
-               <div class="col-md-4 col-xs-4 col-6 px-md-5">
+            @foreach ($hijos as $hijo)
+           
+              @if($hijo->sexo == 'M')
+              <div class="col-md-4 col-xs-4 col-6 px-md-5">
                 <td>
                     <a href=""  target="_blank">
                         <img src="{{ asset('img/niño.jpg')}}"class="img-responsive mx-auto op-7"
@@ -25,6 +23,20 @@
                 </td>
                
             </div>
+              @endif
+              <div class="col-md-4 col-xs-4 col-6 px-md-5">
+                <td>
+                    <a href=""  target="_blank">
+                        <img src="{{ asset('img/niña.jpg')}}"class="img-responsive mx-auto op-7"
+                        style="max-height: 150px;">
+                        <br>
+                        <H5>{{$hijo->alias}} </H5>
+                    </a>
+                   
+                </td>
+               
+            </div>
+               
             @endforeach
             <div class="col-md-4 col-xs-4 col-6 px-md-5">
              <td>
