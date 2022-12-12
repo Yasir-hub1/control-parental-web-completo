@@ -56,8 +56,10 @@ class UserController extends Controller
     }
 
     public function crear_hijo(Request $request){
+        $usuario = auth()->user();
         $hijo=new Hijo;
         $hijo->name=$request->nombre;
+        $hijo->id_tutor = $usuario->id;
         $hijo->apellido=$request->apellido;
         $hijo->celular=$request->celular;
         $hijo->sexo=$request->sexo;

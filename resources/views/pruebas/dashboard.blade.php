@@ -19,7 +19,7 @@
                         <img src="{{ asset('img/niño.jpg')}}"class="img-responsive mx-auto op-7"
                         style="max-height: 150px;">
                         <br>
-                        <H5>{{$hijo->name}} {{$hijo->apellido}}</H5>
+                        <H5>{{$hijo->alias}} </H5>
                     </a>
                    
                 </td>
