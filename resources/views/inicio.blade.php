@@ -118,15 +118,24 @@
     <div class="row_cards">
         <div class="col-md-3 col-sm-6 mb-3">
             <div class="single-content">
-                <img src="{{ asset('img/ubicación.jpg')}}" alt="Categorias Higienika Oficce Perú">
+                <img src="{{ asset('img/infante.png')}}" >
                 <div class="text-content">
-                    <h3>Localizcación</h3>
+                    <h3>Tokens</h3>
                     <hr class="style2">
-                    <h5>Lugar exacto</h5>
+                    <h5>Conecta a tu niño con el token generado</h5>
                 </div>
             </div>
         </div>
-       
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="single-content">
+                <img src="{{ asset('img/infante1.png')}}" alt="Categorias Higienika Oficce Perú">
+                <div class="text-content">
+                    <h3>Multimedia</h3>
+                    <hr class="style2">
+                    <h5>Ten acceso a los archivos multimedia</h5>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -185,7 +194,7 @@
 <div class="col-12">
 		<div class="testimonial-title">
 			<h5>CONOCE</h5>
-            <h3>NUESTRAS CATEGORÍAS</h3>
+            <h3>LAS VISTAS DEL INFANTE</h3>
             <hr class="style1">
 	    </div>
 </div>

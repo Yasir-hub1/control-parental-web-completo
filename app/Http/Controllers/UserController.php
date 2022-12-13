@@ -33,13 +33,16 @@ class UserController extends Controller
     }
 
     public function menu(){
-        return view('pruebas.dashboard');
+        $usuario = auth()->user();
+        $hijos = Hijo::where('id_tutor', $usuario->id)->get();
+        return view('pruebas.dashboard', compact('hijos'));
     }
 
     public function dispositivos(){
+       
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('estado',1)->get();;
+        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
         return view('pruebas.dispositivos')->with('tokens',$tokens);
     }
 
@@ -65,15 +68,14 @@ class UserController extends Controller
 
     public function crear_hijo(Request $request){
         $usuario = auth()->user();
-        $tutor=Tutor::where('user_id',$usuario->id)->first();
         $hijo=new Hijo;
         $hijo->name=$request->nombre;
+        $hijo->id_tutor = $usuario->id;
         $hijo->apellido=$request->apellido;
         $hijo->celular=$request->celular;
         //$hijo->sexo=$request->sexo;
         $hijo->alias=$request->alias;
-        //$hijo->edad=$request->edad;
-        $hijo->id_tutor=$tutor->id;
+        $hijo->edad=$request->edad;
         $hijo->save();
 
         return redirect()->route('dispositivos');
