@@ -8,7 +8,7 @@
     <title>PROTECTING YOU</title>
 
    
-    <link rel="shortcut icon" href="../../img/logowhite.png" />
+    <link rel="shortcut icon" href="{{ asset('../img/logowhite.png')}}" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -21,7 +21,8 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="../../../demo1/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   {{--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>  --}}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 </head>
 <!--end::Head-->
 <!--begin::Body-->

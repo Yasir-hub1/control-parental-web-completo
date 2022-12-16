@@ -1,22 +1,39 @@
 @extends('app')
 
-
+@section('title')
+<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
+  <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoContactos', $info->id )}}">                                    
+            <span class="text-muted">Contacto</span>
+        </a>                                        
+  </div>
+  <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoLlamadas', $info->id )}}">                                   
+            <span class="text-muted">Llamada</span>
+        </a>
+    </div>									
+</div>
+@endsection
 @section('content')
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
-    <div class="card" style="width: 40%;">
-        <div class="card-header">
-          <h4 class="d-flex justify-content-center text-uppercase"><u><strong>llamadas de {{$info->name}} </strong></u></h4>
-            
-        </div>
-        <div class="card-body">
-              <table class="table table-striped table-dark table-hover">
-                <thead class="thead-dark">
-                  <tr >
-                    <th scope="col">#</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Duracion</th>
+    <div class="card" style="width: 60%;">
+      <div class="text-center mb-10">
+        <!--begin::Title-->
+        <h1 class="text-dark mb-5">Lista de Llamadas de {{$info->name}} </h1>
+        <!--end::Title-->
+       
+    </div>
+        <div class="card-body py-3">
+          
+              <table class="table table-hover">
+                <thead  style="font-family: Poppins;">
+                  <tr class="fw-bolder text-muted bg-light">
+                    <th class="ps-4 min-w-8px rounded-start">#</th>
+                    <th class="min-w-125px"> Estado </th>
+                    <th class="min-w-125px">Fecha</th>
+                    <th class="min-w-125px rounded-finish">Duracion</th>
                     
                   </tr>
                 </thead>
@@ -29,10 +46,10 @@
                           $a=$a+1;
                       @endphp
                           <tr>
-                            <th scope="row">{{$a}}</th>
-                            <td>{{$llamada->ecpetada}}</td>
-                            <td>{{$llamada->fecha}}</td>
-                            <td>{{$llamada->tiempo}}</td>
+                            <th class="ps-4"><span>{{$a}}</span></th>
+                            <td ><span>{{($llamada->aceptada == 1)? "SI":(($llamada->aceptada == 0)? "NO": '--')}}</span></td>
+                            <td ><span> {{$llamada->fecha}} </span></td>
+                            <td ><span>{{$llamada->tiempo}}</span></td>
                             
                           </tr>
                           
@@ -46,7 +63,7 @@
               </table>  
 
                 
-                
+           
               
         </div>
     </div>
