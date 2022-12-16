@@ -9,10 +9,6 @@ use App\Models\Archivo\Archivo;
 use App\Models\Contenido\Contenido;
 use App\Models\Localizacion\Localizacion;
 
-
-
-
-
 use App\Models\Hijo\Hijo;
 use App\Models\PlanTutor\PlanTutor;
 use App\Models\Token;
@@ -26,6 +22,8 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -34,9 +32,13 @@ class UserController extends Controller
     }
 
     public function menu(){
-
+        $usuario = auth()->user();
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
+        
         
         return view('pruebas.dashboard');
+        
+       
     }
 
     public function dispositivos(){

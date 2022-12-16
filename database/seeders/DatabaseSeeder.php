@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ArchivoSeeder::class);
         $this->call(ContactoSeeder::class);
         $this->call(LlamadaSeeder::class);
-        $this->call(PlanTutorSeeder::class);
+        //$this->call(PlanTutorSeeder::class);
+        $this->call(PlanSeeder::class);
      //   $this->call(RegistrarTokenSeeder::class);
     }
 }

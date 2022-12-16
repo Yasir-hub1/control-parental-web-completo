@@ -53,9 +53,9 @@
                         <a class="nav-link active" aria-current="page"
                             href="{{ route('dispositivos') }}">Dispositivos</a>
                     </li>
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('plan') }}">Plan</a>
-                    </li>
+                    </li>--}}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
                             href="{{ route('notification.index') }}">Notificaciones</a>

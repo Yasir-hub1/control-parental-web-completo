@@ -15,9 +15,9 @@
         <form action="{{ route('notification.link') }}" method="post">
             @csrf
             <h1>HELLOOOOOOOOO</h1>
-            <label for="">Descripcion: </label>
+            {{--<label for="">Descripcion: </label>
             <input type="text" name="nombre" required>
-            <button type="submit" class="btn btn-primary button">Notification</button>
+            <button type="submit" class="btn btn-primary button">Notification</button>--}}
 
         </form>
 
