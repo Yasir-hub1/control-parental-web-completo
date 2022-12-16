@@ -17,12 +17,39 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+     <!--ESTILOS DROPDOWN NOTIFICATION-->
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="pricing.css" rel="stylesheet">
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#" style=""> <img src="img/controlparental2.png" width="150">
+          </a>
+          
+          
+          <a class="btn btn-danger navbar-btn" href="#"
+              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="fa fa-fw fa-power-off text-red"></i>
+
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+              <a href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  this.closest('form').submit();">Log Out</a>
+          </form>
+      </div>
+
+  </nav>
+
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">Subscripcion</h1>
       <p class="lead">Escoja uno de nuestros planes para tener acceso a todas las funciones</p>

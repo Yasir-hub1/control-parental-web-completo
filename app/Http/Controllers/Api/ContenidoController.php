@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\MyEvent;
+use App\Events\NotificationContenidoEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Contenido\Contenido;
 use App\Models\Hijo\Hijo;
 use App\Models\Tutor\Tutor;
 use App\Models\User;
+use App\Notifications\NotificationContenido;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class ContenidoController extends Controller
 {
@@ -25,7 +29,7 @@ class ContenidoController extends Controller
         // return $request;
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->pluck('id');
-        $hijos_id= Hijo::whereIn('tutore_id', $tutor_id)->pluck('id');
+        $hijos_id= Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
         $contenidos = Contenido::whereIn('hijo_id', $hijos_id)->get('url');
         $cant = $contenidos->count('url');
         return response()->json([
@@ -87,15 +91,24 @@ class ContenidoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hijo_id' => 'required|numeric|exists:hijos,id',
+            // 'hijo_id' => 'required|numeric|exists:hijos,id',
             'fecha' => 'required|string',
             'nombre' => 'required|string',
             'path' => 'required|string',
             'url' => 'required|string',
             'categoria_id' => 'required|numeric|exists:categorias,id',
-
+            
         ]);
+        // return 'entra/*/*/*/*/*/*/*/';
         $contenido = Contenido::create($request->all());
+        
+      //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+      $hijo=Hijo::find($request->hijo_id);
+      $user=User::find($hijo->tutor->user->id);
+    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+      event(new NotificationContenidoEvent($contenido,$user));
+        event(new MyEvent($contenido));
+       
         return response()->json([
             'message' => '¡Contenido creado exitosamente!',
             'data' => $contenido

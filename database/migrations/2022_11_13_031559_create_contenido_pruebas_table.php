@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanesTable extends Migration
+class CreateContenidoPruebasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatePlanesTable extends Migration
      */
     public function up()
     {
-        Schema::create('planes', function (Blueprint $table) {
+        Schema::create('contenido_pruebas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('dispositivos');
-            $table->unsignedSmallInteger('estado');
-            $table->String('nombre');
-            $table->float('precio',8,2);
-            $table->String('tiempo_plan');
+            $table->string('nombre');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePlanesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planes');
+        Schema::dropIfExists('contenido_pruebas');
     }
 }

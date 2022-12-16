@@ -11,6 +11,7 @@ use App\Models\Contacto\Contacto;
 use App\Models\Localizacion\Localizacion;
 use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
@@ -609,5 +610,43 @@ class HijoController extends Controller
                 'data' => $resultLabels,
             ]);
         }
+    }
+    public function store_boy(Request $request){
+        $rules = [
+            'name'=>'required',
+            'lastName' => 'required',
+            'cellPhone' => 'required|numeric',
+            'alias'=> 'required',
+        ];
+        $messages = [
+            'name.required' => 'El nombre es requerido',
+            'lastName.required' => 'El apellido es requerido.',
+            'cellPhone.required' =>'El celular es requerido.',
+            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'alias.required' => 'El alias es requerido.',
+        ];
+        $this->validate($request, $rules, $messages);
+        
+        $u = User::all()->find(Auth::user()->id);
+        $hijo=Hijo::create([
+            'name'=> $request->name,
+            'apellido'=> $request->lastName,
+            'celular'=> $request->cellPhone,
+            'alias'=> $request->alias,
+            'id_tutor'=> $u->id,
+        ]);
+        return $hijo;
+    }
+    public function get_boy_not_register(){
+
+        $user = User::all()->find(Auth::user()->id);
+        $hijo_id= Token::where('id_tutor', $user->id)
+                        ->where('estado', 1)
+                        ->pluck('id_hijo');
+        $hijos=Hijo::select(['name', 'apellido', 'alias', 'id'])
+                ->where('id_tutor', $user->id)
+                    ->whereNotIn('id', $hijo_id)
+                    ->get();
+        return $hijos;
     }
 }

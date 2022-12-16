@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tutor\Tutor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,5 +48,11 @@ class User extends Authenticatable
     }
     public function admin(){
         return $this->hasOne('App\Models\Administrativo\Administrativo','user_id','id');
+    }
+    public function contenidoprueba(){
+        return $this->hasMany(ContenidoPrueba::class);
+    }
+    public function expotokens(){
+        return $this->hasMany(RegistrarToken::class);
     }
 }

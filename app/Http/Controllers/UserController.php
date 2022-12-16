@@ -9,11 +9,8 @@ use App\Models\Archivo\Archivo;
 use App\Models\Contenido\Contenido;
 use App\Models\Localizacion\Localizacion;
 
-
-
-
-
 use App\Models\Hijo\Hijo;
+use App\Models\PlanTutor\PlanTutor;
 use App\Models\Token;
 
 
@@ -24,6 +21,8 @@ use Carbon\Carbon;
 
 
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -128,7 +127,7 @@ class UserController extends Controller
             ],
             ],
             'mode' => 'subscription',
-            'customer' => 'cus_MiCFK5KDnMIn3k'
+            'customer' => auth()->user()->stripe_id,
         ]);
         //Plan y precio --> "$request->plan" ; customer en la tabla user --> "stripe_id"
         //Enviar el metodo update a una funcion de verificacion en success
@@ -151,14 +150,26 @@ class UserController extends Controller
       }
 
       function success(Request $request){
-        dd($request->id);
         $stripe = new \Stripe\StripeClient(
             'sk_test_51LmGK0FzDqUMV7KR60uYN3GMiz8Lj9E8NTNjcn0S0JJgc3ckYgq3HTf3jEIwbGnw32CRaoCqaVZbuZKLnrdQE9NV009wbCpeEa'
           );
         $stripe->customers->update(
             auth()->user()->stripe_id,
-            ['metadata' => ['plan' => 'Plan Premium']]
+            ['metadata' => ['plan' => $request->id]]
         );
-        return redirect()->route('plan');
+        switch ($request->id) {
+            case "Plan Free": $precio = 0; $time="+ 1 month"; $plan = 1; break;
+            case "Plan Standard": $precio = 50; $time="+ 6 month"; $plan = 2; break;
+            case "Plan Premium": $precio = 80; $time="+ 12 month"; $plan = 3; break;
+        }
+        $fecha = date('Y-m-d');
+        $planTutor = new PlanTutor;
+        $planTutor->plan_id = $plan;
+        $planTutor->tutor_id = auth()->user()->id;
+        $planTutor->activo = 1;
+        $planTutor->fecha_inicio = $fecha;
+        $planTutor->fecha_fin = date("Y-m-d",strtotime($fecha.$time));
+        $planTutor->save();
+        return redirect()->route('menu');
       }
 }

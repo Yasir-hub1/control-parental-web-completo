@@ -91,16 +91,16 @@ var KTUsersAddUser = function () {
                                 i.disabled = !0, setTimeout((function () {
                                     i.removeAttribute("data-kt-indicator"),
                                         i.disabled = !1, Swal.fire({
-                                            text: "Form has been successfully submitted!", icon: "success", buttonsStyling: !1,
-                                            confirmButtonText: "Ok, got it!", customClass: {
+                                            text: "¡El formulario ha sido enviado con éxito!", icon: "success", buttonsStyling: !1,
+                                            confirmButtonText: "Ok", customClass: {
                                                 confirmButton: "btn btn-primary"
                                             }
                                         }).then((function (t) { t.isConfirmed && n.hide() }))
                                 }), 2e3)) : 
                                 Swal.fire ({
-                                     text: "Sorry, looks like there are some errors detected, please try again.", 
+                                     text: "Lo sentimos, parece que se han detectado algunos errores, inténtalo de nuevo.", 
                                      icon: "error", buttonsStyling: !1, 
-                                     confirmButtonText: "Ok, got it!",
+                                     confirmButtonText: "Ok",
                                       customClass: 
                                         { 
                                           confirmButton: "btn btn-primary" 
@@ -110,21 +110,21 @@ var KTUsersAddUser = function () {
                 })),
                     t.querySelector('[data-kt-users-modal-action="cancel"]').addEventListener("click", (t => {
                         t.preventDefault(), Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "Está seguro en cancelar?",
                             icon: "warning", showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
+                            confirmButtonText: "Si, cancelar!",
+                            cancelButtonText: "No, volver",
                             customClass: {
                                 confirmButton: "btn btn-primary",
                                 cancelButton: "btn btn-active-light"
                             }
                         }).then((function (t) {
                             t.value ? (e.reset(), n.hide()) : "cancel" === t.dismiss && Swal.fire({
-                                text: "Your form has not been cancelled!.",
+                                text: "¡Tu formulario no ha sido cancelado!.",
                                 icon: "error",
                                 buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -133,22 +133,22 @@ var KTUsersAddUser = function () {
                     })),
                     t.querySelector('[data-kt-users-modal-action="close"]').addEventListener("click", (t => {
                         t.preventDefault(), Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "Está seguro en cancelar?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
+                            confirmButtonText: "Si, cancelar!",
+                            cancelButtonText: "No, volver",
                             customClass: {
                                 confirmButton: "btn btn-primary",
                                 cancelButton: "btn btn-active-light"
                             }
                         }).then((function (t) {
                             t.value ? (e.reset(), n.hide()) : "cancel" === t.dismiss && Swal.fire({
-                                text: "Your form has not been cancelled!.",
+                                text: "¡Tu formulario no ha sido cancelado!.",
                                 icon: "error",
                                 buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }

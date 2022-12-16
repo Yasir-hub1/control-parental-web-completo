@@ -12,6 +12,24 @@
         <a class="menu-link active py-3" href="{{route('hijoLlamadas', $info->id )}}">                                   
             <span class="text-muted">Llamada</span>
         </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoContenido', $info->id )}}">                                   
+            <span class="text-muted">Contenido</span>
+        </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoUbicacion', $info->id )}}">                                   
+            <span class="text-muted">Ubicación</span>
+        </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoGaleria', $info->id )}}">                                   
+            <span class="text-muted">Galería</span>
+        </a>
     </div>									
 </div>
 @endsection

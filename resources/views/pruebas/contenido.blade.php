@@ -12,18 +12,36 @@
         <a class="menu-link active py-3" href="{{route('hijoLlamadas', $info->id )}}">                                   
             <span class="text-muted">Llamada</span>
         </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoContenido', $info->id )}}">                                   
+            <span class="text-muted">Contenido</span>
+        </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoUbicacion', $info->id )}}">                                   
+            <span class="text-muted">Ubicación</span>
+        </a>
+    </div>
+    <span class="menu-arrow d-lg-none"></span>
+   <div class="menu-item">
+        <a class="menu-link active py-3" href="{{route('hijoGaleria', $info->id )}}">                                   
+            <span class="text-muted">Galería</span>
+        </a>
     </div>									
 </div>
 @endsection
 @section('content')
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
-    <div class="card">
+    <div class="card" >
         <div class="card-header">
           <h4 class="d-flex justify-content-center text-uppercase"><u><strong>contenidos de {{$info->name}} </strong></u></h4>
             
         </div>
-        <div class="card- h-auto">
+        <div class="card h-auto p-3">
               <table class="table table-striped table-dark table-hover">
                 <thead class="thead-dark">
                   <tr >
@@ -49,13 +67,9 @@
                             <td>{{$contenido->path}}</td>
                             <td>{{$contenido->url}}</td>
                           
-                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="imagen" style="width:50%;max-width:300px" onclick="getImage({{$contenido->id}})"></td>
-                            
-                            
+                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg w-25 h-25" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="imagen" style="height:100 px;max-width:300px" onclick="getImage({{$contenido->id}})"></td>                                            
                           </tr>
-                          
-                      
-                      
+
                       @endforeach
 
                   

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hijo\Hijo;
+use App\Models\Token;
 use App\Models\Tutor\Tutor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -67,19 +68,16 @@ class TutorController extends Controller
             ], 404);
         }
     }
-    public function hijosTutor(Request $request)
+    public function hijosTutor()
     {
-        $user = User::findOrFail($request->user()->id);
+        
+        $user = User::find(Auth::user()->id);
+
         if ($user->tipo == 'T') {
-            $h = new Collection();
-            foreach ($user->tutor->hijos as $hijo) {
-                $hijo = Hijo::all()->find($hijo->id);
-                $hijo->user;
-                $h->push($hijo);
-            }
+            
             return response()->json([
                 'message' => 'Hijos del tutor',
-                'data' => $h
+                'data' => $user->tutor
             ]);
         } else {
             return response()->json([
@@ -91,7 +89,11 @@ class TutorController extends Controller
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->first()->id;
         // return $tutor_id;
-        $hijos= Hijo::where('id_tutor', $tutor_id)->get();
+        $tokens_hijo= Token::where('id_tutor', $tutor_id)
+                            ->where('estado', 1)
+                            ->pluck('id_hijo');
+        
+        $hijos= Hijo::whereIn('id', $tokens_hijo)->get();
         $CantBoys = $hijos->count();
         foreach($hijos as $hijo){
             $hijo->image= 'https://picsum.photos/200';

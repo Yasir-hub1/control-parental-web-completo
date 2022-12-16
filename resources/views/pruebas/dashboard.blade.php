@@ -232,13 +232,13 @@
     </section>
     <section class="sec" id="about" style="background-color:#fff;">
         {{-- <span style="text-align:center;align-items:center;height:60px;width:60px;">Dispositivos</span> }}
-        @if ($plan->name=="free" && $numDispositivos<2)
+        @if ($plan->name == 'free' && $numDispositivos < 2)
             <a href="" class="btn btn-dark" style="height: 3%; margin: 5px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir dispositivo.</a>
         @endif
-        @if ($plan->name=="standard" && $numDispositivos<3)
+        @if ($plan->name == 'standard' && $numDispositivos < 3)
             <a href="" class="btn btn-dark" style="height: 3%; margin: 5px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir dispositivo.</a>
         @endif
-        @if ($plan->name=="Premiun" && $numDispositivos<5)
+        @if ($plan->name == 'Premiun' && $numDispositivos < 5)
             <a href="" class="btn btn-dark" style="height: 3%; margin: 5px;" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir dispositivo.</a>
         @endif
         
@@ -324,19 +324,19 @@
         </div>
       </div>
     </div>
-  </div>--}}
+  </div> --}}
 @stop
 
 @section('css')
 
-    {{--<link rel="stylesheet" href="{{ asset('css/tutor.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/tutor.css') }}">
     <link rel="stylesheet" href="{{ asset('css/SecInfo.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lightslider.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('css/lightslider.css') }}"> --}}
 
 @stop
 
 @section('js')
-    {{--<script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script>
+    {{-- <script src="{{ asset('js/jquery.min.js') }}" charset="utf-8"></script>
     {{-- <script src="{{ asset('js/jquery-3.6.0.js') }}"></script> }}
     <script src="{{ asset('js/script.js') }}"></script>
 
@@ -363,8 +363,7 @@
             });
 
         });
-    </script>--}}
+    </script> --}}
 
 
 @stop
-  

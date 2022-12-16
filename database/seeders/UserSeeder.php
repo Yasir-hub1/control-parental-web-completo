@@ -24,6 +24,9 @@ class UserSeeder extends Seeder
                 'apellido' => "Mamani",
                 'celular' => "77348732",
                 'fecha_nacimiento' => "2000/01/04",
+                // 'sexo' => "M",
+                'foto' => "https://w7.pngwing.com/pngs/327/57/png-transparent-cartoon-business-man-people-illustration-character-cartoon-characters.png",
+                'tipo' => "T",
                 'password' => bcrypt("12345678")
             ],
             [
@@ -69,6 +72,7 @@ class UserSeeder extends Seeder
         ];
         foreach ($users as $user) {
             $data=User::create($user);
+            $data->createAsStripeCustomer();
             $tutor=new Tutor;
             $tutor->user_id=$data->id;
             $tutor->save();
@@ -82,40 +86,45 @@ class UserSeeder extends Seeder
             Administrativo::create(['user_id' => $admin->id]);
         }
 
-        $t=Tutor::create([
-            'user_id' => $tutors->first()->id,
+        Tutor::create([
+            'user_id' => 1,
         ]);
-        $hijos=[
+        
+        Tutor::create([
+            'user_id' => 4,
+        ]);
+        
+        $hijos = [
             [
-                'name'=>'Joselito',
-                'apellido'=>'Vaca',
-                'celular'=>'77656344',
-                'sexo'=>'M',
-                'alias'=>'josesiño',
-                'edad'=>8,
-                'tutore_id'=>$t->id
+                'name' => 'Joselito',
+                'apellido' => 'Vaca',
+                'celular' => '77656344',
+                'sexo' => 'M',
+                'alias' => 'josesiño',
+                'edad' => 8,
+                'tutore_id' => 1
             ],
             [
-                'name'=>'Mariana',
-                'apellido'=>'Ipi',
-                'celular'=>'65633214',
-                'sexo'=>'F',
-                'alias'=>'mary',
-                'edad'=>6,
-                'tutore_id'=>$t->id
+                'name' => 'Mariana',
+                'apellido' => 'Ipi',
+                'celular' => '65633214',
+                'sexo' => 'F',
+                'alias' => 'mary',
+                'edad' => 6,
+                'tutore_id' => 2
             ],
             [
-                'name'=>'Carlos',
-                'apellido'=>'Perez',
-                'celular'=>'74412243',
-                'sexo'=>'M',
-                'alias'=>'carliño',
-                'edad'=>5,
-                'tutore_id'=>$t->id
+                'name' => 'Carlos',
+                'apellido' => 'Perez',
+                'celular' => '74412243',
+                'sexo' => 'M',
+                'alias' => 'carliño',
+                'edad' => 5,
+                'tutore_id' => 1
             ],
         ];
         foreach ($hijos as $hijo) {
-            Hijo::create($hijo);   
+            Hijo::create($hijo);
         }
 
         /*Hijo::create([
