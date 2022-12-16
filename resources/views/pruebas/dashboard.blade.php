@@ -14,14 +14,11 @@
                <div class="col-md-4 col-xs-4 col-6 px-md-5">
                 <td>
                     <a href="{{route('hijoContactos', $hijo->id)}}"  >
-                        @if ($hijo->sexo == 'F')
-                        <img src="{{ asset('img/niña.jpg')}}"class="img-responsive mx-auto op-7"
-                        style="max-height: 150px;">
-                        @endif
-                        @if ($hijo->sexo == 'M')
+                       
                         <img src="{{ asset('img/niño.jpg')}}"class="img-responsive mx-auto op-7"
                         style="max-height: 150px;">
-                        @endif
+                       
+                    
                         <br>
                         <H5>{{$hijo->alias}} </H5>
                     </a>

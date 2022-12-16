@@ -38,7 +38,7 @@
 
 
 <script>
-    
+
   	 function initMap() {
       console.log('hola mundo');
       const  map = new google.maps.Map(document.getElementById('map'), {

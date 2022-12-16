@@ -8,7 +8,7 @@
     <title>PROTECTING YOU</title>
 
    
-    <link rel="shortcut icon" href="{{ asset('../img/logowhite.png')}}" />
+    <link rel="shortcut icon" href="../../img/logowhite.png" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -19,10 +19,10 @@
         type="text/css" />
     <!--end::Page Vendor Stylesheets-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="../../../demo1/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="../../../demo1/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
-   {{--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>  --}}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -44,7 +44,7 @@
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="#">
-                        <img alt="Logo" src="img/logowhite.png" class="h-70px logo" />
+                        <img alt="Logo" src="{{asset('img/logowhite.png')}}" class="h-70px logo" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Aside toggler-->
@@ -322,15 +322,16 @@
     <script src="../../../demo1/dist/assets/js/custom/utilities/modals/users-search.js"></script>
     <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/table.js"></script>
 
-    <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
-		<script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/add.js"></script>
+    {{--  <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/export-users.js"></script>  --}}
+		{{--  <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/add.js"></script>  --}}
 		<script src="../../../demo1/dist/assets/js/widgets.bundle.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/widgets.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/apps/chat/chat.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/utilities/modals/users-search.js"></script>
-        <script src="../../../demo1/dist/assets/js/custom/apps/calendar/calendar.js"></script>
+  {{--        <script src="../../../demo1/dist/assets/js/custom/apps/calendar/calendar.js"></script>  --}}
+  @yield('js')
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
 </body>
