@@ -45,8 +45,8 @@
 								<h1 class="text-dark mb-3">Crear nueva cuenta</h1>
 								<!--end::Title-->
 								<!--begin::Link-->
-								<div class="text-gray-400 fw-bold fs-4">Already have an account?
-								<a href="{{ route('login') }}" class="link-primary fw-bolder">Sign in here</a></div>
+								<div class="text-gray-400 fw-bold fs-4">Tienes una cuenta?
+								<a href="{{ route('login') }}" class="link-primary fw-bolder">Iniciar aqui</a></div>
 								<!--end::Link-->
 							</div>
 							<!--end::Heading-->
@@ -80,22 +80,7 @@
 								</div>
 								
                                 <!--begin::Sexo-->
-								<div class="col-xl-6">
-									<label class="form-label fw-bolder text-dark fs-6">Sexo</label>
-									<div class="col-md-6">
-                                        <select name="sexo" id="sexo" class="form-control">
-                                            <option value="" disabled>Sexo</option>
-                                            <option value="masculino">Masculino</option>
-                                            <option value="femenino">Femenino</option>
-                                        </select>
-                    
-                                        @error('sexo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-								</div>
+								
 								
 							</div>
 							<!--end::Input group-->
@@ -115,7 +100,7 @@
 								<!--begin::Wrapper-->
 								<div class="mb-1">
 									<!--begin::Label-->
-									<label class="form-label fw-bolder text-dark fs-6">Password</label>
+									<label class="form-label fw-bolder text-dark fs-6">Contraseña</label>
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="position-relative mb-3">
@@ -148,7 +133,7 @@
 							<!--end::Input group=-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-5">
-								<label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+								<label class="form-label fw-bolder text-dark fs-6">Confirmar Contraseña</label>
 								<div class="position-relative mb-3">
 								<input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password_confirmation" required autocomplete="new-password" />
 								<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
@@ -166,19 +151,13 @@
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
-							<div class="fv-row mb-10">
-								<label class="form-check form-check-custom form-check-solid form-check-inline">
-									<input class="form-check-input" type="checkbox" name="toc" value="1" />
-									<span class="form-check-label fw-bold text-gray-700 fs-6">I Agree
-									<a href="#" class="ms-1 link-primary">Terms and conditions</a>.</span>
-								</label>
-							</div>
+							
 							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center">
 								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-warning" style="background-color: #fe5000">
-									<span class="indicator-label">Submit</span>
-									<span class="indicator-progress">Please wait...
+									<span class="indicator-label">Guardar</span>
+									<span class="indicator-progress">Espere por favor ...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 								</button>
 							</div>

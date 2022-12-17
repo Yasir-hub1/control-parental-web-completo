@@ -70,7 +70,18 @@
                             <td>{{$contenido->path}}</td>
                             <td>{{$contenido->url}}</td>
                             <td>{{$contenido->tipo_contenido}}</td>
-                            <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg w-25 h-25" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="imagen" style="height:100 px;max-width:300px" onclick="getImage({{$contenido->id}})"></td>                                            
+                           {{--   <td class="d-flex justify-content-center">
+                              <img id="myImg{{$contenido->id}}" class="myImg w-25 h-25" src="{{Storage::disk('s3')->url($contenido->url)}}"
+                               alt="imagen" style="height:100 px;max-width:300px" onclick="getImage({{$contenido->id}})">
+                              </td>   --}}                                           
+                               <td>
+                                <a  href="{{Storage::disk('s3')->url($contenido->url)}}"
+                                    data-lightbox="imagen"
+                                    data-title="{{$contenido->tipo_contenido}}"  >
+                                    <img src="{{Storage::disk('s3')->url($contenido->url)}}" alt="" width="60" height="70">
+                                </a>
+        
+                            </td>
                           </tr>
 
                       @endforeach
@@ -107,13 +118,13 @@
 
 @section('css')
    
-<link rel="stylesheet" href="{{ asset('css/popup.css') }}">
+<link rel="stylesheet" href="{{ asset('lightbox/lightbox.min.css') }}">
 
 
 @stop
 
 @section('js')
-<script src="{{ asset('js/popup.js') }}" charset="utf-8"></script>
-<script src=""></script>
+<script src="{{ asset('lightbox/lightbox.min.js') }}" ></script>
+
 
 @stop

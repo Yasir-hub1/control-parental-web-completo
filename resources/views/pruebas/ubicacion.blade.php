@@ -39,9 +39,21 @@
     <h1 class="text-dark mb-5">Ubicación de {{$info->name}} </h1>
       
   </div>
+ @if($existe == 'true')
+  <input type="hidden"  id="lati" value="{{$localizacion->latitud}}">
+  <input type="hidden"  id="longi" value="{{$localizacion->longitud}}">
+  @else
+  <input type="hidden"  id="lati" value="">
+  <input type="hidden"  id="longi" value="">
+  @endif
   <div class="card-body">
-    <div id="map" style="height: 800px; "> </div> 
+    <h1 id="mensaje">
+      ACEPTE LOS PERMISOS NECESARIOS PARA OBTENER LA UBICACIÓN DEL NIÑO.
+     </h1>
+    <div id="map"  style="height: 800px; "> </div> 
+    
   </div>
+  
 </div>
   
 @stop
@@ -59,16 +71,25 @@
 <script>
 
   	 function initMap() {
-      console.log('hola mundo');
+     var lati = document.getElementById('lati').value;
+     var longi = document.getElementById('longi').value;
+     console.log(lati);
+      if(lati != ""){
+        
       const  map = new google.maps.Map(document.getElementById('map'), {
-		  center: {lat: {!! $localizacion->latitud !!}, lng: {!! $localizacion->longitud !!}},
-          zoom: 13,
-        });
-      new google.maps.Marker({
-          position: {lat: {!! $localizacion->latitud !!}, lng: {!! $localizacion->longitud !!}},
-          map: map,
-	  title: 'Ubicacion de Mercado el Quior'
-        });
+          center: {lat: parseFloat(lati) , lng: parseFloat(longi)},
+              zoom: 13,
+            });
+          new google.maps.Marker({
+              position: {lat: parseFloat(lati) , lng: parseFloat(longi)},
+              map: map,
+        title: 'Ubicacion de Mercado el Quior'
+            });
+            var mensaje = document.getElementById('mensaje').style.display = "none";
+      }else{
+        var mensaje = document.getElementById('mensaje');
+      }
+      
       }
       window.initMap=initMap;
 </script>

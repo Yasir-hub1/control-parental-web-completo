@@ -35,7 +35,7 @@ class UserController extends Controller
         
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
+        $tokens=Token::where('id_tutor',$tutor->id)->where('estado',1)->get();
         return view('pruebas.dashboard')->with('tokens',$tokens);
     }
 
@@ -78,10 +78,8 @@ class UserController extends Controller
         $hijo->alias=$request->alias;
         //$hijo->edad=$request->edad;
         $hijo->save();
-        $usuario = auth()->user();
-        $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
-        return redirect()->route('pruebas.dashboard')->with('tokens',$tokens);
+       
+        return redirect()->back();
     }
 
     public function hijoContactos($id){
@@ -112,9 +110,12 @@ class UserController extends Controller
     public function hijoUbicacion($id){
         $data=Hijo::where('id',$id)->first();
         $ubicacion=Localizacion::where('hijo_id',$id)->first();
-        
+        $existe = 'true';
+        if(empty($ubicacion)){
+            $existe = 'falso';
+        }
         //$archivos=Contenido::where('hijo_id',$id)->get();
-        return view('pruebas.ubicacion', ['localizacion'=>$ubicacion,'info' => $data]);
+        return view('pruebas.ubicacion', ['localizacion'=>$ubicacion,'info' => $data, 'existe' => $existe]);
     }
     
     function checkout(Request $request) {

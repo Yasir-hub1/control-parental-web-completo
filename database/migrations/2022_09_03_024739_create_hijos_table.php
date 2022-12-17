@@ -21,7 +21,7 @@ class CreateHijosTable extends Migration
             //$table->String('sexo')->nullable();
             $table->String('alias');
             //$table->unsignedSmallInteger('edad');
-            $table->unsignedInteger('id_tutor');
+            $table->foreignId('id_tutor')->references('id')->on('tutores');
 
             $table->timestamps();
         });

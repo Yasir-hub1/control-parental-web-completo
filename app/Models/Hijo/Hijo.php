@@ -50,6 +50,6 @@ class Hijo extends Model
     }
     public function tutor()
     {
-        return $this->belongsTo(Tutor::class,'tutore_id','id');
+        return $this->belongsTo(Tutor::class,'id_tutor','id');
     }
 }

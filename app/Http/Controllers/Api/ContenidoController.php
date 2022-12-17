@@ -90,29 +90,33 @@ class ContenidoController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            // 'hijo_id' => 'required|numeric|exists:hijos,id',
-            'fecha' => 'required|string',
-            'nombre' => 'required|string',
-            'path' => 'required|string',
-            'url' => 'required|string',
-            'categoria_id' => 'required|numeric|exists:categorias,id',
-            
-        ]);
-        // return 'entra/*/*/*/*/*/*/*/';
-        $contenido = Contenido::create($request->all());
-        
-      //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-      $hijo=Hijo::find($request->hijo_id);
-      $user=User::find($hijo->tutor->user->id);
+       //return $request;
+       $request->validate([
+        'hijo_id' => 'required|numeric|exists:hijos,id',
+        'fecha' => 'required|string',
+        'tipo_contenido' => 'required|string',
+        'contenido' => 'required|string',
+        'path' => 'required|string',
+        'url' => 'required|string',
+       // 'categoria_id' => 'required|numeric|exists:categorias,id',
+    ]);
+   // 
+    // return 'entra///////*/';
+    $contenido = Contenido::create($request->all());
+
     //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-      event(new NotificationContenidoEvent($contenido,$user));
-        event(new MyEvent($contenido));
-       
-        return response()->json([
-            'message' => '¡Contenido creado exitosamente!',
-            'data' => $contenido
-        ]);
+    $hijo = Hijo::find($request->hijo_id);
+   
+    $user = User::find($hijo->tutor->user->id);
+    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+   
+    event(new NotificationContenidoEvent($contenido, $user));
+    event(new MyEvent($contenido));
+
+    return response()->json([
+        'message' => '¡Contenido creado exitosamente!',
+        'data' => $contenido
+    ]);
     }
     public function update(Request $request, $id)
     {

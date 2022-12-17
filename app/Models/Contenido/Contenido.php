@@ -17,10 +17,11 @@ class Contenido extends Model
 
     protected $fillable = [
         'fecha',
-        'nombre',
+        'contenido',
+        'tipo_contenido',
         'path',
         'url',
-        'categoria_id',
+      //  'categoria_id',
         'hijo_id',
     ];
 

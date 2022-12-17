@@ -1,12 +1,11 @@
-@extends('app')
+@extends('app2')
 
 @section('css')
-<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
+{{--  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">  --}}
 
 <!-- Bootstrap core CSS -->
 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
- <!--ESTILOS DROPDOWN NOTIFICATION-->
-<!-- Font Awesome -->
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
@@ -56,14 +55,14 @@
 @yield('js')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<script src="../../assets/js/vendor/holder.min.js"></script>
+{{--  <script src="../../assets/js/vendor/popper.min.js"></script>  --}}
+{{--  <script src="../../dist/js/bootstrap.min.js"></script> --}}
+{{--  <script src="../../../assets/js/vendor/holder.min.js"></script> 
 <script>
   Holder.addTheme('thumb', {
     bg: '#55595c',
     fg: '#eceeef',
     text: 'Thumbnail'
   });
-</script>
+</script>  --}}
  @stop

@@ -37,7 +37,7 @@
         // Enable pusher logging - don't include this in production
         //  Pusher.logToConsole = true;
 
-        var pusher = new Pusher('bad7372f1fbd6e00a121', {
+        var pusher = new Pusher('109c670c473fed2434ca', {
             cluster: 'us2'
         });
 
@@ -47,7 +47,7 @@
             console.log(data);
             $('#notificaciones-view').prepend('<div class="alert alert-warning" id=' + data['newnotification']['id'] +
                 '>Descripción: ' +
-                data['newnotification']['nombre'] + '<p>' +
+                data['newnotification']['contenido'] + '<p>' +
                 data['time'] + '</p>');
 
             if ($('#notification-empty').length == 1) {

@@ -88,53 +88,18 @@
                                 
                              
                                    
-                                       
+                               
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('perfil')}}">
+                                    <a class="menu-link" href="{{route('plan')}}">
                                         <span class="menu-bullet">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
                                               </svg>
                                         </span>
-                                        <span class="menu-title">Perfil</span>
+                                        <span class="menu-title">Plan</span>
                                     </a>
                                 </div>
-                    
-                                            <div class="menu-item">
-                                                <a class="menu-link" href="{{route('menu')}}">
-                                                    <span class="menu-bullet">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewBox="0 0 16 16">
-                                                            <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
-                                                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.707L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.646a.5.5 0 0 0 .708-.707L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-                                                          </svg>
-                                                    </span>
-                                                    <span class="menu-title">Mi Familia</span>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link" href="{{route('notification.index')}}">
-                                                    <span class="menu-bullet">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                                                          </svg>
-                                                      </span>
-                                                    <span class="menu-title">Notificaciones</span>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a class="menu-link" href="{{route('tokens')}}">
-                                                    <span class="menu-bullet">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
-                                                            <path d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"/>
-                                                          </svg>
-                                                      </span>
-                                                    <span class="menu-title">Tokens</span>
-                                                </a>
-                                            </div>
-                                           
-                                           
-                              
                                 
                             </div>
                             
@@ -448,7 +413,7 @@
     // Enable pusher logging - don't include this in production
     //  Pusher.logToConsole = true;
 
-    var pusher = new Pusher('109c670c473fed2434ca', {
+    var pusher = new Pusher('37043fdf6f86d96c9095', {
         cluster: 'us2'
     });
 
@@ -462,7 +427,7 @@
         if (data['unread'].length == 2) {
             $('.unread-notification').find('#1').html('<div class="row">' +
                 '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
-                    'contenido']['contenido'] + '</div>' +
+                    'contenido']['nombre'] + '</div>' +
                 '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
                 ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
                 '</div>' + '</div>');
@@ -539,7 +504,7 @@
 
             iziToast.show({
                 title: '¡Nueva Notificación!',
-                message: data['contenido']['contenido'],
+                message: data['contenido']['nombre'],
                 backgroundColor: 'red',
                 theme: 'dark', // dark
                 color: 'red', // blue, red, green, yellow
