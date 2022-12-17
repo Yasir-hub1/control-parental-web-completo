@@ -29,7 +29,7 @@ class ContenidoController extends Controller
         // return $request;
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->pluck('id');
-        $hijos_id= Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
+        $hijos_id = Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
         $contenidos = Contenido::whereIn('hijo_id', $hijos_id)->get('url');
         $cant = $contenidos->count('url');
         return response()->json([
@@ -43,7 +43,7 @@ class ContenidoController extends Controller
         // return $request;
         // $hijo = Hijo::findOrFail($request->hijo_id);
         // $contenidos = $hijo->contenidos;
-        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', false)->get();
+        $contenidos = Contenido::where('hijo_id', $request->hijo_id)->where('captura', false)->get();
         return response()->json([
             'message' => 'Lista de Contenido del hijo',
             'data' => $contenidos
@@ -54,7 +54,7 @@ class ContenidoController extends Controller
         // return $request;
         // $hijo = Hijo::findOrFail($request->hijo_id);
         // $contenidos = $hijo->contenidos;
-        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', true)->get();
+        $contenidos = Contenido::where('hijo_id', $request->hijo_id)->where('captura', true)->get();
         return response()->json([
             'message' => 'Lista de Contenido del hijo',
             'data' => $contenidos

@@ -32,8 +32,8 @@ class NotificationContenidoListener implements ShouldQueue
     public function handle($event)
     {
         //para el tutor del hijo
-        $hijo = Hijo::find($event->contenido->hijo_id);
-        $user = User::find($hijo->tutor->user->id);
+        $hijo = Hijo::find($event->contenido['hijo_id']);
+        $user = User::find($hijo->tutor->user['id']);
         Notification::send($user, new NotificationContenido($event->contenido));
 
          if (count($user->expotokens) > 0) {
@@ -43,7 +43,7 @@ class NotificationContenidoListener implements ShouldQueue
             // Subscribe the recipient to the server
             $expo->subscribe('canal', $recipient);
             // Build the notification data
-            $notification = ['body' => $event->contenido->nombre, 'title' => 'AVISO IMPORTANTE', 'ttl' => 60, 'Sound' => 'Default'];
+            $notification = ['body' => $event->contenido->contenido, 'title' => 'AVISO IMPORTANTE', 'ttl' => 60, 'Sound' => 'Default'];
             // Notify an interest with a notification
             $expo->notify(['canal'], $notification);
         }

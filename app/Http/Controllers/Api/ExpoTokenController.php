@@ -19,10 +19,10 @@ class ExpoTokenController extends Controller
         // return 'entra************************//////////////////////*/*/';
         
         // return $request;
-        // $request->validate([
-        //     'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
-        //     'user_id' => 'required|exists:users,id'
-        // ]);
+        $request->validate([
+            'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
+            'user_id' => 'required|exists:users,id'
+         ]);
         $registrar = RegistrarToken::create([
                 'expo_token'=> $request->expo_token,
                 'user_id'=> $request->user_id,

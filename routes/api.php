@@ -49,8 +49,9 @@ Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
 Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
 Route::post('/contenido', [ContenidoController::class, 'store']);
     // Route::get('/contenido', [ContenidoController::class, 'index']);
-    // Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);//Registrar el expoToken al usuario
-    //Eliminar el expotoken al usuario
+     Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);//Registrar el expoToken al usuario
+     Route::get('/eliminar-token',[ExpoTokenController::class,'eliminarExpoToken']);
+     //Eliminar el expotoken al usuario
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/localizacion', [LocalizacionController::class, 'index']); //Para ver todas las localizaciones, sólo usuarios loggueados que sean administrador
