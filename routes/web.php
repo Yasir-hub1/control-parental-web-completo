@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::post('notification', [PushNotificationPruebaController::class, 'link'])->name('notification.link');
-Route::middleware(['auth','planVerification'])->group(
+Route::middleware(['auth'])->group(//,'planVerification'])->group(
     function () {
 
         Route::get('/menu', [App\Http\Controllers\UserController::class, 'menu'])->name('menu');

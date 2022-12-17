@@ -56,7 +56,7 @@ class NotificationContenido extends Notification implements ShouldQueue
     {
         return [
             'contenido' => $this->contenido->id,
-            'nombre' => $this->contenido->nombre,
+            'nombre' => $this->contenido->contenido,
         ];
     }
 }

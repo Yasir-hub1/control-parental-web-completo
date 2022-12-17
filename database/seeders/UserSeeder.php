@@ -72,72 +72,11 @@ class UserSeeder extends Seeder
         ];
         foreach ($users as $user) {
             $data=User::create($user);
-            $data->createAsStripeCustomer();
+         //   $data->createAsStripeCustomer();
             $tutor=new Tutor;
             $tutor->user_id=$data->id;
             $tutor->save();
         }
-        /*$users = User::all();
-        $admins = $users->where('tipo', 'A');
-        $tutors = $users->where('tipo', 'T');
-        //$hijos = $users->where('tipo', 'H');
-        $c = 0;
-        foreach ($admins as $admin) {
-            Administrativo::create(['user_id' => $admin->id]);
-        }
-
-        Tutor::create([
-            'user_id' => 1,
-        ]);
-        
-        Tutor::create([
-            'user_id' => 4,
-        ]);
-        
-        $hijos = [
-            [
-                'name' => 'Joselito',
-                'apellido' => 'Vaca',
-                'celular' => '77656344',
-                'sexo' => 'M',
-                'alias' => 'josesiño',
-                'edad' => 8,
-                'tutore_id' => 1
-            ],
-            [
-                'name' => 'Mariana',
-                'apellido' => 'Ipi',
-                'celular' => '65633214',
-                'sexo' => 'F',
-                'alias' => 'mary',
-                'edad' => 6,
-                'tutore_id' => 2
-            ],
-            [
-                'name' => 'Carlos',
-                'apellido' => 'Perez',
-                'celular' => '74412243',
-                'sexo' => 'M',
-                'alias' => 'carliño',
-                'edad' => 5,
-                'tutore_id' => 1
-            ],
-        ];
-        foreach ($hijos as $hijo) {
-            Hijo::create($hijo);
-        }
-
-        /*Hijo::create([
-            'alias' => 'sarita',
-            'edad' => 18,
-            'user_id' => $hijos->first()->id,
-            'tutor_id' => 1
-        ]);
-        Hijo::create([
-            'alias' => 'joss',
-            'edad' => 18,
-            'user_id' => $hijos->last()->id,
-            'tutor_id' => 1
-        ]);*/
+    
     }
 }

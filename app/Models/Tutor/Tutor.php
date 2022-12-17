@@ -31,7 +31,7 @@ class Tutor extends Model
     }
     //relación de 1 a muchos
     public function hijos(){
-        return $this->hasMany(Hijo::class,'tutore_id','id');
+        return $this->hasMany(Hijo::class,'id_tutor','id');
     }
 
 

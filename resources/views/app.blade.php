@@ -53,9 +53,9 @@
                         <a class="nav-link active" aria-current="page"
                             href="{{ route('dispositivos') }}">Dispositivos</a>
                     </li>
-                    {{--<li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('plan') }}">Plan</a>
-                    </li>--}}
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
                             href="{{ route('notification.index') }}">Notificaciones</a>
@@ -181,10 +181,10 @@
     <script>
         // Enable pusher logging - don't include this in production
         //  Pusher.logToConsole = true;
-
-        var pusher = new Pusher('37043fdf6f86d96c9095', {
+        var pusher = new Pusher('109c670c473fed2434ca', {
             cluster: 'us2'
         });
+
 
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
@@ -196,7 +196,7 @@
             if (data['unread'].length == 2) {
                 $('.unread-notification').find('#1').html('<div class="row">' +
                     '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
-                        'contenido']['nombre'] + '</div>' +
+                        'contenido']['contenido'] + '</div>' +
                     '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
                     ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
                     '</div>' + '</div>');
@@ -273,7 +273,7 @@
 
                 iziToast.show({
                     title: '¡Nueva Notificación!',
-                    message: data['contenido']['nombre'],
+                    message: data['contenido']['contenido'],
                     backgroundColor: 'red',
                     theme: 'dark', // dark
                     color: 'red', // blue, red, green, yellow

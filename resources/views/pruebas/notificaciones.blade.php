@@ -33,8 +33,7 @@
     <script>
         // Enable pusher logging - don't include this in production
         //  Pusher.logToConsole = true;
-
-        var pusher = new Pusher('bad7372f1fbd6e00a121', {
+        var pusher = new Pusher('109c670c473fed2434ca', {
             cluster: 'us2'
         });
 
@@ -42,52 +41,54 @@
         channel.bind('evento-vista-notification', function(data) {
             console.log('en vista de ver notificaciones');
             console.log(data);
-            $('#notificaciones-view').prepend('<div class="alert alert-warning" id=' + data['newnotification']['id'] +
+            $('#notificaciones-view').prepend('<div class="alert alert-warning" id=' + data['newnotification'][
+                'id'] +
                 '>Descripción: ' +
                 data['newnotification']['nombre'] + '<p>' +
                 data['time'] + '</p>');
 
             if ($('#notification-empty').length == 1) {
                 $('#notification-empty').remove();
-                $('#notificaciones').append(' <a href="{{ route("markAsRead") }}" id="mark-all">Marcar todo como leído</a>');
+                $('#notificaciones').append(
+                    ' <a href="{{ route('markAsRead') }}" id="mark-all">Marcar todo como leído</a>');
             }
         });
     </script>
 
     <script>
         /*    function sendMarkRequest(id = null) {
-                    if (id == null) {
-                        console.log('click sin id');
-                    } else {
-                        console.log('click con id');
-                    }
-                    return $.ajax("{{ route('markNotification') }}", {
-                        method: 'POST',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            id
+                        if (id == null) {
+                            console.log('click sin id');
+                        } else {
+                            console.log('click con id');
                         }
-                    });
-                }
+                        return $.ajax("{{ route('markNotification') }}", {
+                            method: 'POST',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                id
+                            }
+                        });
+                    }
 
-                $(document).ready(function() {
-                    $('.mark-as-read').on('click', function() {
-                        console.log('click');
-                        let request = sendMarkRequest($(this).data('id'));
+                    $(document).ready(function() {
+                        $('.mark-as-read').on('click', function() {
+                            console.log('click');
+                            let request = sendMarkRequest($(this).data('id'));
 
-                        request.done(() => {
-                            $(this).parents('div.alert').remove();
+                            request.done(() => {
+                                $(this).parents('div.alert').remove();
+                            });
+                        });
+
+                        $('#mark-all').on('click', function() {
+                            let request = sendMarkRequest();
+
+                            request.done(() => {
+                                $('div.alert').remove();
+                            })
                         });
                     });
-
-                    $('#mark-all').on('click', function() {
-                        let request = sendMarkRequest();
-
-                        request.done(() => {
-                            $('div.alert').remove();
-                        })
-                    });
-                });
-           */
+               */
     </script>
 @endsection

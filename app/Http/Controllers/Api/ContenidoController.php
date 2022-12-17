@@ -29,7 +29,7 @@ class ContenidoController extends Controller
         // return $request;
         $user = User::findOrFail($request->user()->id);
         $tutor_id = Tutor::where('user_id', $user->id)->pluck('id');
-        $hijos_id= Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
+        $hijos_id = Hijo::whereIn('id_tutor', $tutor_id)->pluck('id');
         $contenidos = Contenido::whereIn('hijo_id', $hijos_id)->get('url');
         $cant = $contenidos->count('url');
         return response()->json([
@@ -43,7 +43,7 @@ class ContenidoController extends Controller
         // return $request;
         // $hijo = Hijo::findOrFail($request->hijo_id);
         // $contenidos = $hijo->contenidos;
-        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', false)->get();
+        $contenidos = Contenido::where('hijo_id', $request->hijo_id)->where('captura', false)->get();
         return response()->json([
             'message' => 'Lista de Contenido del hijo',
             'data' => $contenidos
@@ -54,7 +54,7 @@ class ContenidoController extends Controller
         // return $request;
         // $hijo = Hijo::findOrFail($request->hijo_id);
         // $contenidos = $hijo->contenidos;
-        $contenidos= Contenido::where('hijo_id', $request->hijo_id)->where('captura', true)->get();
+        $contenidos = Contenido::where('hijo_id', $request->hijo_id)->where('captura', true)->get();
         return response()->json([
             'message' => 'Lista de Contenido del hijo',
             'data' => $contenidos
@@ -90,25 +90,28 @@ class ContenidoController extends Controller
     }
     public function store(Request $request)
     {
+        //return $request;
         $request->validate([
-            // 'hijo_id' => 'required|numeric|exists:hijos,id',
+            'hijo_id' => 'required|numeric|exists:hijos,id',
             'fecha' => 'required|string',
-            'nombre' => 'required|string',
+            'tipo_contenido' => 'required|string',
+            'contenido' => 'required|string',
             'path' => 'required|string',
             'url' => 'required|string',
-            'categoria_id' => 'required|numeric|exists:categorias,id',
-            
+           // 'categoria_id' => 'required|numeric|exists:categorias,id',
         ]);
+       // return $request;
         // return 'entra/*/*/*/*/*/*/*/';
         $contenido = Contenido::create($request->all());
-        
-      //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-      $hijo=Hijo::find($request->hijo_id);
-      $user=User::find($hijo->tutor->user->id);
-    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-      event(new NotificationContenidoEvent($contenido,$user));
+
+        //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+        $hijo = Hijo::find($request->hijo_id);
+        $user = User::find($hijo->tutor->user->id);
+        //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+      ///return $user;
+        event(new NotificationContenidoEvent($contenido, $user));
         event(new MyEvent($contenido));
-       
+
         return response()->json([
             'message' => '¡Contenido creado exitosamente!',
             'data' => $contenido
