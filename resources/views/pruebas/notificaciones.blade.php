@@ -37,6 +37,7 @@
             cluster: 'us2'
         });
 
+
         var channel = pusher.subscribe('canal-vista-notification');
         channel.bind('evento-vista-notification', function(data) {
             console.log('en vista de ver notificaciones');
