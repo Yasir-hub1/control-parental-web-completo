@@ -242,12 +242,12 @@ sup {
 }
 
 a {
-    color: #009ef7;
+    color: #fe5000;
     text-decoration: none
 }
 
 a:hover {
-    color: #006dab;
+    color: #ffc700;
     text-decoration: underline
 }
 
@@ -3841,8 +3841,8 @@ fieldset:disabled .btn {
 .btn-check:focus+.btn-dark,
 .btn-dark:focus {
     color: #fff;
-    background-color: #14182b;
-    border-color: #131628;
+    background-color: #ffc700;
+    border-color: #ffc700;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075), 0 0 0 .25rem rgba(59, 62, 81, .5)
 }
 
@@ -41771,12 +41771,12 @@ a:hover {
 
 .btn.btn-dark {
     color: #fff;
-    border-color: #181c32;
-    background-color: #181c32
+    border-color: #fe5000;;
+    background-color: #fe5000;
 }
 
 .btn.btn-dark i {
-    color: #fff
+    color: #ffc700
 }
 
 .btn.btn-dark .svg-icon svg [fill]:not(.permanent):not(g) {
@@ -41801,8 +41801,8 @@ a:hover {
 .btn.btn-dark:hover:not(.btn-active),
 .show>.btn.btn-dark {
     color: #fff;
-    border-color: #131628;
-    background-color: #131628 !important
+    border-color: #ffc700;
+    background-color: #ffc700 !important
 }
 
 .btn-check:active+.btn.btn-dark i,
@@ -56076,7 +56076,7 @@ body {
 }
 
 .aside.aside-dark .aside-logo {
-    background-color: ##fe5000
+    background-color: #fe5000
 }
 
 .aside.aside-dark .aside-toggle svg [fill]:not(.permanent):not(g) {
@@ -56093,7 +56093,7 @@ body {
 }
 
 .aside.aside-dark .btn-custom {
-    color: #white;
+    color: white;
     background-color: #ffc72c
 }
 
@@ -56332,7 +56332,7 @@ body {
 .aside-dark .menu .menu-item .menu-link .menu-icon i {
     color: #dea076
 }
-//iconoss
+/* //iconoss */
 .aside-dark .menu .menu-item .menu-link .menu-icon .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
     fill: #ffc72c 

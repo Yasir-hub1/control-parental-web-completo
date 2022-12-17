@@ -16,11 +16,11 @@ class Hijo extends Model
 
     protected $fillable = [
         'alias',
-        'edad',
+
         'name',
         'apellido',
         'celular',
-        'sexo',
+ 
         'id_tutor'
     ];
 

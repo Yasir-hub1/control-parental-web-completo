@@ -35,8 +35,9 @@
 @endsection
 @section('content')
 <div class="card">
-  <div class="card-header">
-    <h3>Ubicacion de {{$info->name}}</h3>
+  <div class=" text-center mb-10">
+    <h1 class="text-dark mb-5">Ubicación de {{$info->name}} </h1>
+      
   </div>
   <div class="card-body">
     <div id="map" style="height: 800px; "> </div> 

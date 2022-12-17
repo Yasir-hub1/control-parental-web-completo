@@ -36,17 +36,18 @@
 @section('content')
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
-    <div class="card" style="width: 40%;">
-        <div class="card-header">
-          <h4 class="d-flex justify-content-center text-uppercase"><u><strong>archivos de {{$info->name}} </strong></u></h4>
-        </div>
+    <div class="card" style="width: 60%;">
+      <div class=" text-center mb-10">
+        <h1 class="text-dark mb-5">Galería de {{$info->name}} </h1>
+          
+      </div>
         <div class="card-body">
-              <table class="table table-striped table-dark table-hover">
-                <thead class="thead-dark">
-                  <tr >
-                    <th scope="col">#</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Path</th>
+          <table class="table table-hover">
+            <thead  style="font-family: Poppins;">
+              <tr class="fw-bolder text-muted bg-light">
+                <th class="ps-4 min-w-8px rounded-start">#</th>
+                <th class="min-w-125px">Fecha</th>
+                <th class="min-w-125px rounded-finish">Path</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,7 +59,7 @@
                           $a=$a+1;
                       @endphp
                           <tr>
-                            <th scope="row">{{$a}}</th>
+                            <th class="ps-4">{{$a}}</th>
                             <td>{{$archivo->fecha}}</td>
                             <td>{{$archivo->path}}</td>    
                           </tr>

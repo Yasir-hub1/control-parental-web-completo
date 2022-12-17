@@ -36,20 +36,23 @@
 @section('content')
 <br>
 <div class="container-fluid d-flex justify-content-center aling-items-center">
-    <div class="card" >
-        <div class="card-header">
-          <h4 class="d-flex justify-content-center text-uppercase"><u><strong>contenidos de {{$info->name}} </strong></u></h4>
+    <div class="card" style="width: 100%;" >
+        <div class=" text-center mb-10">
+          <h1 class="text-dark mb-5">Lista de Contenido de {{$info->name}} </h1>
             
         </div>
-        <div class="card h-auto p-3">
-              <table class="table table-striped table-dark table-hover">
-                <thead class="thead-dark">
-                  <tr >
-                    <th scope="col">#</th>
-                    <th class="text-center" scope="col">Fecha</th>
-                    <th class="text-center" scope="col">Path</th>
-                    <th class="text-center" scope="col">URL</th>
-                    <th class="text-center" scope="col">Imagen</th>
+
+       
+        <div class="card-body py-3">
+          <table class="table table-hover">
+            <thead  style="font-family: Poppins;">
+              <tr class="fw-bolder text-muted bg-light">
+                <th class="ps-4 min-w-8px rounded-start">#</th>
+                <th class="min-w-125px">Fecha</th>
+                    <th class="min-w-125px" >Path</th>
+                    <th class="min-w-125px">URL</th>
+                    <th class="min-w-125px">Tipo</th>
+                    <th class="min-w-125px" >Imagen</th>
                     
                   </tr>
                 </thead>
@@ -62,11 +65,11 @@
                           $a=$a+1;
                       @endphp
                           <tr>
-                            <th scope="row">{{$a}}</th>
+                            <th class="ps-4">{{$a}}</th>
                             <td>{{$contenido->fecha}}</td>
                             <td>{{$contenido->path}}</td>
                             <td>{{$contenido->url}}</td>
-                          
+                            <td>{{$contenido->tipo_contenido}}</td>
                             <td class="d-flex justify-content-center"><img id="myImg{{$contenido->id}}" class="myImg w-25 h-25" src="{{Storage::disk('s3')->url($contenido->url)}}" alt="imagen" style="height:100 px;max-width:300px" onclick="getImage({{$contenido->id}})"></td>                                            
                           </tr>
 

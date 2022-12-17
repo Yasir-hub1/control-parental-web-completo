@@ -3,71 +3,32 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid d-flex justify-content-center aling-items-center">
     <div class="row">
         <div class="col">
-            <div class="card" style="margin: 2%">
-                <div class="card-header" style="background-color: rgb(0, 0, 20); color: white;">
-                    <a class="btn btn-primary" onclick="enviarFormulario()" role="button">Crear token y Asignar usuario</a>
-                </div>
-                <div class="card-body">
-                    token usuario
-                    <table class="table" style="padding-left:10%;">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                           {{--  <th scope="col">id</th> --}}
-                            <th scope="col">Codigo</th>
-                            <th scope="col"> Usuario Asignado</th>
-                            <th scope="col">Fecha Creacion</th>
-                            <th scope="col">Fecha Registro</th>
-                            <th scope="col">Tiempo restante</th>
-                          </tr>
-                        </thead>
-                        @php
-                               $a=0;
-                        @endphp
-                        <tbody>
-                            @foreach ($tokens as $token)
-                            @php
-                                $a=$a+1;
-                                $hijo=App\Models\Hijo\Hijo::where('id',$token->id_hijo)->first();
-                            @endphp
-            
-                            <tr>
-                                <td>{{$a}}</td>
-                               {{--  <td>{{$token->id}}</td> --}}
-                                <td>{{$token->codigo}}</td>
-                                <td>{{$hijo->name}} {{$hijo->apellido}}</td>
-
-                                <td>{{$token->fecha_creacion}}</td>
-                                @if ($token->fecha_registro!="")
-                                    <td>{{$token->fecha_registro}}</td>        
-                                @else
-                                    <td>Sin registrar</td>
-                                @endif
-                                <td><input type="hidden" id="input{{$a}}" value="{{$token->fecha_creacion}}"><strong id="demo{{$a}}"></strong></td>
-            
-                            </tr>
-                            @endforeach
-            
-                          <input type="hidden" id="cont" value="{{$a}}">
-                        </tbody>
-                      </table>
-                </div>
+            <div class="card"  style="margin: 2%; width: 40%;">
                 
+                <div class="card-body py-3">
+            <button type="button" class="btn btn-warning" onclick="enviarFormulario()" >
+                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                <span class="svg-icon svg-icon-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->Añadir Token</button>
             </div>
         </div>
-        <div class="col">
+        </div>     
+ <div class="col">
 
-            <div class="card"  style="margin: 2%">
-                <div class="card-header" style="background-color: rgb(0, 0, 20); color: white;">
-                    <h3>Seleccione un hijo antes de crear token:</h3>
-                </div>
-                <div class="card-body">
+            <div class="card"  style="margin: 2%; width: 60%;">
+                
+                <div class="card-body py-3">
                     <form class="d-flex justify-content-center" action="{{route('crearToken')}}" method="post" id="form1">
                         @csrf
-                        <select name="id_hijo" id="selector">
+                        <select  class="form-select form-select-solid" name="id_hijo" id="selector">
                             <option value="" disabled selected>Seleccione un hijo</option>
                             
                                 @php
@@ -93,6 +54,62 @@
                 </div>
             </div>
         </div>
+            <div class="card" style="margin: 2%; width: 80%;">
+                
+                   {{--   <a class="btn btn-primary" onclick="enviarFormulario()" role="button">Asignar Token</a>  --}}
+             
+                <div class="card-body py-3">
+                    <div class=" text-center mb-10">
+                        <h1 class="text-dark mb-5">Token de Usuario</h1>
+                          
+                      </div>
+                    <table class="table table-hover">
+                        <thead  style="font-family: Poppins;">
+                          <tr class="fw-bolder text-muted bg-light">
+                            <th class="ps-4 min-w-8px rounded-start">#</th>
+                            <th class="min-w-125px">Codigo</th>
+                          
+                            <th class="min-w-125px"> Usuario Asignado</th>
+                            <th class="min-w-125px">Fecha Creacion</th>
+                            <th class="min-w-125px">Fecha Registro</th>
+                            <th class="min-w-125px">Tiempo restante</th>
+                          </tr>
+                        </thead>
+                        @php
+                               $a=0;
+                        @endphp
+                        <tbody>
+                            @foreach ($tokens as $token)
+                            @php
+                                $a=$a+1;
+                                $hijo=App\Models\Hijo\Hijo::where('id',$token->id_hijo)->first();
+                            @endphp
+            
+                            <tr>
+                                <td class="ps-4">{{$a}}</td>
+                               {{--  <td>{{$token->id}}</td> --}}
+                                <td>{{$token->codigo}}</td>
+                                <td>{{$hijo->name}} {{$hijo->apellido}}</td>
+
+                                <td>{{$token->fecha_creacion}}</td>
+                                @if ($token->fecha_registro!="")
+                                    <td>{{$token->fecha_registro}}</td>        
+                                @else
+                                    <td>Sin registrar</td>
+                                @endif
+                                <td><input type="hidden" id="input{{$a}}" value="{{$token->fecha_creacion}}"><strong id="demo{{$a}}"></strong></td>
+            
+                            </tr>
+                            @endforeach
+            
+                          <input type="hidden" id="cont" value="{{$a}}">
+                        </tbody>
+                      </table>
+                </div>
+                
+            </div>
+      
+       
     </div>
 </div>
    

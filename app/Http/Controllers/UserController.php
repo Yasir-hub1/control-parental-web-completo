@@ -32,16 +32,18 @@ class UserController extends Controller
     }
 
     public function menu(){
+        
         $usuario = auth()->user();
-        $hijos = Hijo::where('id_tutor', $usuario->id)->get();
-        return view('pruebas.dashboard', compact('hijos'));
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
+        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
+        return view('pruebas.dashboard')->with('tokens',$tokens);
     }
 
     public function dispositivos(){
        
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
-        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();;
+        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
         return view('pruebas.dispositivos')->with('tokens',$tokens);
     }
 
@@ -74,10 +76,12 @@ class UserController extends Controller
         $hijo->celular=$request->celular;
         //$hijo->sexo=$request->sexo;
         $hijo->alias=$request->alias;
-        $hijo->edad=$request->edad;
+        //$hijo->edad=$request->edad;
         $hijo->save();
-
-        return redirect()->route('dispositivos');
+        $usuario = auth()->user();
+        $tutor=Tutor::where('user_id',$usuario->id)->first();
+        $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
+        return redirect()->route('pruebas.dashboard')->with('tokens',$tokens);
     }
 
     public function hijoContactos($id){

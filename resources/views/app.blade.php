@@ -89,8 +89,18 @@
                              
                                    
                                        
-                                
-                          
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{route('perfil')}}">
+                                        <span class="menu-bullet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                                              </svg>
+                                        </span>
+                                        <span class="menu-title">Perfil</span>
+                                    </a>
+                                </div>
+                    
                                             <div class="menu-item">
                                                 <a class="menu-link" href="{{route('menu')}}">
                                                     <span class="menu-bullet">
@@ -103,10 +113,22 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
+                                                <a class="menu-link" href="{{route('notification.index')}}">
+                                                    <span class="menu-bullet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                                          </svg>
+                                                      </span>
+                                                    <span class="menu-title">Notificaciones</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
                                                 <a class="menu-link" href="{{route('tokens')}}">
                                                     <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
+                                                            <path d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"/>
+                                                          </svg>
+                                                      </span>
                                                     <span class="menu-title">Tokens</span>
                                                 </a>
                                             </div>
@@ -122,26 +144,7 @@
                                                 </a>
                                             </div>
                                            
-                                            
-
-                                   
-                                   
-                                      
-                                     
-                                 {{--           <div class="menu-item">
-                                              <a class="menu-link" href="{{route('dispositivos')}}">
-                                                  <span class="menu-bullet">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
-                                                        <path d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"/>
-                                                      </svg>
-                                                  </span>
-                                                  <span class="menu-title">Dispositivos</span>
-                                              </a>
-                                          </div>  --}}
-                                          
-                                          
-
-                                   
+                              
                                 
                             </div>
                             
@@ -176,7 +179,7 @@
                 <!--begin::Header-->
                 <div id="kt_header" style="" class="header align-items-stretch">
                     <!--begin::Container-->
-                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+                    <div class="container-fluid d-flex align-items-center justify-content-between">
                         <!--begin::Aside mobile toggle-->
                         <h1 class="d-flex align-items-center text-dark fw-bolder fs-5 my-1"> <b>
                            
@@ -186,7 +189,15 @@
                             <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                             <!--end::Separator-->
                             <!--begin::Description-->
-                            <small class="text-muted fs-7 fw-bold my-1 ms-1">{{auth()->user()->name}} {{auth()->user()->apellido}}</small>
+                            <div class="cursor-pointer symbol symbol-3px symbol-md-4px dropdown float-left" style="margin-right: 10px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                  
+                                <img src="{{ asset('img/pagre.jpg')}}" alt="user" />
+                                <a href="{{route('perfil')}}"> 
+                                    <small class="text-muted fs-7 fw-bold my-1 ms-1">{{auth()->user()->name}} {{auth()->user()->apellido}}</small>
+                                </a>
+                               
+
+                        </div>
                             <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
                                 <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
                                     id="kt_aside_mobile_toggle">
@@ -201,17 +212,119 @@
                                                 d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z"
                                                 fill="black" />
                                         </svg>
+                                       
                                     </span>
                                     <!--end::Svg Icon-->
 
                                 </div>
                             </div>
-
+                        </div>
+                            <div class="container-fluid d-flex align-items-center dropdown justify-content-between" >
+                                <div class="cursor-pointer symbol symbol-3px symbol-md-4px dropdown float-left" style="margin-right: 10px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                  
+                                        <small class="text-muted fs-7 fw-bold my-1 ms-1"> </small>
+                                   
+                                   
+    
+                            </div> 
+                        
+                            <ul class="navbar-nav float-left">
+                                <!-- Notifications Dropdown Menu -->
+                                <li class="nav-item dropdown float-left">
+                                   
+                                    <!--  <div class="dropdown ml-auto">-->
+                                    <a class="me-3 mr-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                                        <span class="menu-bullet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                                              </svg>
+                                        </span>
+                                       
+                                        @if (count(auth()->user()->unreadNotifications) > 0)
+                                            <span
+                                                class="badge rounded-pill badge-notification bg-danger count-notification">{{ count(auth()->user()->unreadNotifications) }}</span>
+                                        @else
+                                            <span class="badge rounded-pill badge-notification bg-danger count-notification"></span>
+                                        @endif
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right scrollspy-example"
+                                        aria-labelledby="navbarDropdownMenuLink">
+                                        <span class="dropdown-header border-bottom"
+                                            style="background: rgb(226, 223, 223)">NOTIFICACIONES SIN LEER</span>
+                                        <div class="unread-notification">
+                                            @php
+                                                $i = 1;
+                                            @endphp
+                                            @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
+                                                <a href="#" class="dropdown-item border-bottom me-1" id={{ $i }}>
+                                                    <div class="row">
+                                                        <div class="col-12"><i class="fas fa-envelope mr-2"></i>
+                                                            {{ $notification->data['nombre'] }}</div>
+                                                        <div class="col-12"><small class="ml-2 float-end text-muted text-sm"
+                                                                style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                @php
+                                                    $i = $i + 1;
+                                                @endphp
+                                            @empty
+                                                <div class="row" id="remove-unread">
+                                                    <div class="col-12">
+                                                        <span class="float-end text-muted text-sm">Sin notificaciones por leer </span>
+                                                    </div>
+                                                </div>
+                                            @endforelse
+                
+                                            @if (count(auth()->user()->unreadNotifications) > 2)
+                                                <a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1"
+                                                    id="ver-mas">
+                                                    <div class="row">
+                                                        <div class="col-12 bg-gray">
+                                                            Ver más Notificaciones...</div>
+                                                    </div>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <span class="dropdown-header border-bottom"
+                                            style="background: rgb(226, 223, 223)">NOTIFICACIONES LEÍDAS</span>
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @forelse (auth()->user()->readNotifications->take(3) as $notification)
+                                            @if ($i < 4)
+                                                <a href="#" class="dropdown-item mb-0">
+                                                    <div class="row">
+                                                        <div class="col-12"><i class="fas fa-users mr-2"></i>
+                                                            {{ $notification->data['nombre'] }}</div>
+                                                        <div class="col-12"><small class="ml-3 float-end text-muted text-sm"
+                                                                style="font-size: 0.6rem">{{ $notification->created_at->diffForHumans() }}</small>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                            @endif
+                                        @empty
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span class=" float-end text-muted text-sm">Sin notificaciones leidas </span>
+                                                </div>
+                                            </div>
+                                        @endforelse
+                                        <a href="{{ route('markAsRead') }}" class="dropdown-item dropdown-footer border-top">Marcar
+                                            todas como leídas</a>
+                                    </div>
+                                </li>
+                            </ul>
                             <!--end::Aside mobile toggle-->
                             <!--begin::Mobile logo-->
 
                             <!--end::Mobile logo-->
                             <!--end::Wrapper-->
+                            
                     </div>
                     <!--end::Container-->
                 </div>
@@ -300,11 +413,15 @@
         <!--end::Svg Icon-->
     </div>
     <!--end::Scrolltop-->
-
+    @yield('css')
     <!--begin::Javascript-->
     <script>
         var hostUrl = "../../../demo1/dist/assets/";
     </script>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
     <!--begin::Global Javascript Bundle(used by all pages)-->
     <script src="../../../demo1/dist/assets/plugins/global/plugins.bundle.js"></script>
     <script src="../../../demo1/dist/assets/js/scripts.bundle.js"></script>
@@ -323,7 +440,7 @@
     <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/table.js"></script>
 
     {{--  <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/export-users.js"></script>  --}}
-		  <script src="../../../demo1/dist/assets/js/custom/apps/user-management/users/list/add.js"></script>  
+		 
 		<script src="../../../demo1/dist/assets/js/widgets.bundle.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/widgets.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/apps/chat/chat.js"></script>
@@ -331,6 +448,117 @@
 		<script src="../../../demo1/dist/assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="../../../demo1/dist/assets/js/custom/utilities/modals/users-search.js"></script>
   {{--        <script src="../../../demo1/dist/assets/js/custom/apps/calendar/calendar.js"></script>  --}}
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+      integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    // Enable pusher logging - don't include this in production
+    //  Pusher.logToConsole = true;
+
+    var pusher = new Pusher('37043fdf6f86d96c9095', {
+        cluster: 'us2'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        console.log('entra');
+        console.log(data);
+
+        //cambiando html con notificación nueva
+        //cambiando html con unread notification sin la notification nueva
+        if (data['unread'].length == 2) {
+            $('.unread-notification').find('#1').html('<div class="row">' +
+                '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
+                    'contenido']['nombre'] + '</div>' +
+                '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                '</div>' + '</div>');
+
+            for (let index = 0; index < 2; index++) {
+                console.log('notificacion sin leer: ' + data['unread'][index]['nombre']);
+                $('.unread-notification').find('#' + (index + 2)).css('display', 'block').html(
+                    '<div class="row">' +
+                    '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['unread'][index][
+                        'nombre'
+                    ] + '</div>' +
+                    '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                    ' style="font-size: 0.6rem">' + data['timesur'][index] + '</small>' +
+                    '</div>' + '</div>');
+
+            }
+        } else if (data['unread'].length == 1) {
+            console.log('entra uno sin leer')
+            $('.unread-notification').find('#1').html('<div class="row">' +
+                '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data[
+                    'contenido']['nombre'] + '</div>' +
+                '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                '</div>' + '</div>');
+            $('.unread-notification').append(
+                '<a href="#" class="dropdown-item border-bottom me-1" id="2"><div class="row">' +
+                '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['unread'][0]['nombre'] +
+                '</div>' +
+                '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                ' style="font-size: 0.6rem">' + data['timesur'][0] + '</small>' +
+                '</div>' + '</div></a>');
+            $('.unread-notification').append(
+                '<a href="#" class="dropdown-item border-bottom me-1" id="3" style="display:none"><div class="row">' +
+                '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' +
+                'nombre' + '</div>' +
+                '<div class="col-12"><small class="ml-2 float-end text-muted text-sm "' +
+                ' style="font-size: 0.6rem">' + '</small>' +
+                '</div>' + '</div></a>');
+        } else if (data['unread'].length == 0) {
+            $('.unread-notification').find('#remove-unread').remove();
+            $('.unread-notification').prepend(
+                '<a href="#" class="dropdown-item border-bottom me-1" id="1"><div class="row">' +
+                '<div class="col-12"><i class="fas fa-envelope mr-2"></i>' + data['contenido']['nombre'] +
+                '</div>' +
+                '<div class="col-12"><small class="ml-2 float-end text-muted text-sm"' +
+                ' style="font-size: 0.6rem">' + data['time'] + '</small>' +
+                '</div>' + '</div></a>');
+        }
+
+        //modificando el contador encima del icono de notificación
+        if (data['contenido'] != null) {
+            //Cuando entra una notificación
+            d = $('.count-notification').text();
+            if (d != '') {
+                c = parseInt(d);
+                c = c + 1;
+                if (c > 2) {
+                    //   console.log($('.unread-notification').find('#ver-mas').length);
+                    if ($('.unread-notification').find('#ver-mas').length == 0) {
+                        $('.unread-notification').append(
+                            '<a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">' +
+                            '<div class = "row">' +
+                            '<div class = "col-12 bg-gray">' + 'Ver más Notificaciones... </div>' +
+                            ' </div > ' + '</a>'
+                        );
+                    }
+                }
+
+            } else {
+                c = 1;
+            }
+
+            $('.count-notification').text(c);
+
+            iziToast.show({
+                title: '¡Nueva Notificación!',
+                message: data['contenido']['nombre'],
+                backgroundColor: 'red',
+                theme: 'dark', // dark
+                color: 'red', // blue, red, green, yellow
+                timeout: 10000,
+                overlayClose: false,
+            });
+        }
+    });
+</script>
   @yield('js')
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->

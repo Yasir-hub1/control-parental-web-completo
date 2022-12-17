@@ -1,11 +1,14 @@
 @extends('app')
 
 @section('content')
-
-    <div class="card" style="margin: 2%">
-        <div class="card-header" style="background-color: rgb(0, 0, 20); color: white;">
-            <label for="">Notificaciones sin leer</label>
-        </div>
+<div class="container-fluid d-flex justify-content-center aling-items-center">
+    <div class="card" style="margin: 2%; width: 100%;">
+       
+            <div class=" text-center" style="margin: 2%">
+                <h1 class="text-dark mb-5">Notificaciones </h1>
+                  
+              </div>
+        
         <div class="card-body" id="notificaciones-view">
             @if (auth()->user())
                 @forelse ($postNotifications as $notification)
@@ -25,7 +28,7 @@
             @endif
         </div>
     </div>
-
+</div>
 @endsection
 
 @section('js')

@@ -32,6 +32,9 @@
     @yield('title5')
         @yield('Proveedores')
     @yield('title2')
+    <div class="body_cards">
+        @yield('cards2')
+    </div>
     @yield('products')
     @yield('footer')
     @yield('modals')
