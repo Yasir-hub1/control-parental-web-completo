@@ -41,11 +41,11 @@ class NotificationContenidoListener implements ShouldQueue
             // You can quickly bootup an expo instance
             $expo = \ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
-            $expo->subscribe('canal', $recipient);
+            $expo->subscribe('new', $recipient);
             // Build the notification data
             $notification = ['body' => $event->contenido->nombre, 'title' => 'AVISO IMPORTANTE', 'ttl' => 60, 'Sound' => 'Default'];
             // Notify an interest with a notification
-            $expo->notify(['canal'], $notification);
+            $expo->notify(['new'], $notification);
         }
     }
 }
