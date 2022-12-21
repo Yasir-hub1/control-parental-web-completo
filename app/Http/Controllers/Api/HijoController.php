@@ -195,32 +195,41 @@ class HijoController extends Controller
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
-                    $guardarFoto = new Contenido;
 
-                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                    // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                    $imgExistente = 'DCIM/Camera/' . $nombre;
 
-                    $guardarFoto->fecha = Carbon::now();
-                    $guardarFoto->path = 'DCIM/Camera/' . $nombre;
+                    $consulta = Contenido::where('path', $imgExistente)->first();
 
-                    //Onteniendo datos del tipo de contenido
-                    //  dd($resultLabels[1]);
 
-                    //  dd($resultLabels[1]["ParentName"]);
-                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
-                        $parentName = $resultLabels[1]["ParentName"];
-                        $name = $resultLabels[1]["Name"];
-                    } else {
-                        $parentName = $resultLabels[0]["ParentName"];
-                        $name = $resultLabels[0]["Name"];
+                    if (!$consulta) {
+                        $guardarFoto = new Contenido;
+
+                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+
+                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->path = 'DCIM/Camera/' . $nombre;
+
+                        //Onteniendo datos del tipo de contenido
+                        //  dd($resultLabels[1]);
+
+                        //  dd($resultLabels[1]["ParentName"]);
+                        if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                            $parentName = $resultLabels[1]["ParentName"];
+                            $name = $resultLabels[1]["Name"];
+                        } else {
+                            $parentName = $resultLabels[0]["ParentName"];
+                            $name = $resultLabels[0]["Name"];
+                        }
+                        $guardarFoto->url = $imageRuta;
+                        $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                        $guardarFoto->contenido = $name;  // NAME DE AWS
+                        $guardarFoto->hijo_id = 1;
+
+
+
+                        $guardarFoto->save();
                     }
-                    $guardarFoto->url = $imageRuta;
-                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
-                    $guardarFoto->contenido = $name;  // NAME DE AWS
-                    $guardarFoto->hijo_id = 1;
-
-
-
-                    $guardarFoto->save();
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -244,11 +253,20 @@ class HijoController extends Controller
             try {
                 $nombre = $request->file('fotos')->getClientOriginalName();
 
-                $storageDoc = new Archivo;
-                $storageDoc->fecha = Carbon::now();
-                $storageDoc->path = "Storage/Documents/" . $nombre;
-                $storageDoc->hijo_id = 1;
-                $storageDoc->save();
+                // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                $imgExistente = "Storage/Documents/" . $nombre;
+
+                $consulta = Contenido::where('path', $imgExistente)->first();
+
+
+                if (!$consulta) {
+
+                    $storageDoc = new Archivo;
+                    $storageDoc->fecha = Carbon::now();
+                    $storageDoc->path = "Storage/Documents/" . $nombre;
+                    $storageDoc->hijo_id = 1;
+                    $storageDoc->save();
+                }
             } catch (\Exception $e) {
                 dd($e);
             }
@@ -295,32 +313,42 @@ class HijoController extends Controller
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
-                    $guardarFoto = new Contenido;
 
-                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                    // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                    $imgExistente = 'Storage/Descarga/' . $nombre;
 
-                    $guardarFoto->fecha = Carbon::now();
-                    $guardarFoto->path = 'Storage/Descarga/' . $nombre;
+                    $consulta = Contenido::where('path', $imgExistente)->first();
 
-                    //Onteniendo datos del tipo de contenido
-                    //  dd($resultLabels[1]);
 
-                    //  dd($resultLabels[1]["ParentName"]);
-                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
-                        $parentName = $resultLabels[1]["ParentName"];
-                        $name = $resultLabels[1]["Name"];
-                    } else {
-                        $parentName = $resultLabels[0]["ParentName"];
-                        $name = $resultLabels[0]["Name"];
+                    if (!$consulta) {
+
+                        $guardarFoto = new Contenido;
+
+                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+
+                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->path = 'Storage/Descarga/' . $nombre;
+
+                        //Onteniendo datos del tipo de contenido
+                        //  dd($resultLabels[1]);
+
+                        //  dd($resultLabels[1]["ParentName"]);
+                        if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                            $parentName = $resultLabels[1]["ParentName"];
+                            $name = $resultLabels[1]["Name"];
+                        } else {
+                            $parentName = $resultLabels[0]["ParentName"];
+                            $name = $resultLabels[0]["Name"];
+                        }
+                        $guardarFoto->url = $imageRuta;
+                        $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                        $guardarFoto->contenido = $name;  // NAME DE AWS
+                        $guardarFoto->hijo_id = 1;
+
+
+
+                        $guardarFoto->save();
                     }
-                    $guardarFoto->url = $imageRuta;
-                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
-                    $guardarFoto->contenido = $name;  // NAME DE AWS
-                    $guardarFoto->hijo_id = 1;
-
-
-
-                    $guardarFoto->save();
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -369,6 +397,15 @@ class HijoController extends Controller
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
+
+                     // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                     $imgExistente = 'Storage/DCIM/Facebook/' . $nombre;
+
+                     $consulta = Contenido::where('path', $imgExistente)->first();
+
+
+                     if (!$consulta) {
+
                     $guardarFoto = new Contenido;
 
                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
@@ -395,6 +432,8 @@ class HijoController extends Controller
 
 
                     $guardarFoto->save();
+
+                }
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -442,6 +481,14 @@ class HijoController extends Controller
                     $nombre = $request->file('fotos')->getClientOriginalName();
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
+
+                     // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                     $imgExistente = 'Storage/Pictures/Telegram/'. $nombre;
+
+                     $consulta = Contenido::where('path', $imgExistente)->first();
+
+
+                     if (!$consulta) {
                     $guardarFoto = new Contenido;
 
                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
@@ -466,8 +513,8 @@ class HijoController extends Controller
                     $guardarFoto->hijo_id = 1;
 
 
-
                     $guardarFoto->save();
+                }
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -514,15 +561,20 @@ class HijoController extends Controller
         $latitude = $request->latitude;
         $longitude = $request->longitude;
 
-        $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
-        $contacto->latitud =  $latitude;
-        $contacto->longitud =   $longitude;
-        $contacto->hijo_id = 1;
-        $contacto->save();
+        $existeLocation=Localizacion::where('latitud',$latitude)->where('longitud',$longitude)->first();
+        if(!$existeLocation){
+            $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
+            $contacto->latitud =  $latitude;
+            $contacto->longitud =   $longitude;
+            $contacto->hijo_id = 1;
+            $contacto->save();
+
+        }
+
 
         return response()->json([
             'message' => "coord subida",
-            'data' =>  [$latitude,$longitude],
+            'data' =>  [$latitude, $longitude],
         ]);
     }
 
@@ -612,41 +664,44 @@ class HijoController extends Controller
         }
     }
     public function store_boy(Request $request){
+
         $rules = [
             'name'=>'required',
-            'lastName' => 'required',
-            'cellPhone' => 'required|numeric',
+            'lastname' => 'required',
+            'cell_phone' => 'required|numeric',
             'alias'=> 'required',
         ];
         $messages = [
             'name.required' => 'El nombre es requerido',
-            'lastName.required' => 'El apellido es requerido.',
-            'cellPhone.required' =>'El celular es requerido.',
-            'cellPhone.numeric' =>'El celular debe ser de tipo numérico.',
+            'lastname.required' => 'El apellido es requerido.',
+            'cell_phone.required' =>'El celular es requerido.',
+            'cell_phone.numeric' =>'El celular debe ser de tipo numérico.',
             'alias.required' => 'El alias es requerido.',
         ];
         $this->validate($request, $rules, $messages);
-        
-        $u = User::all()->find(Auth::user()->id);
+
+        $u = User::find(Auth::user()->id);
         $hijo=Hijo::create([
             'name'=> $request->name,
-            'apellido'=> $request->lastName,
-            'celular'=> $request->cellPhone,
+            'apellido'=> $request->lastname,
+            'celular'=> $request->cell_phone,
             'alias'=> $request->alias,
             'id_tutor'=> $u->id,
         ]);
+
         return $hijo;
     }
-    public function get_boy_not_register(){
+    public function get_boy_not_register()
+    {
 
         $user = User::all()->find(Auth::user()->id);
-        $hijo_id= Token::where('id_tutor', $user->id)
-                        ->where('estado', 1)
-                        ->pluck('id_hijo');
-        $hijos=Hijo::select(['name', 'apellido', 'alias', 'id'])
-                ->where('id_tutor', $user->id)
-                    ->whereNotIn('id', $hijo_id)
-                    ->get();
+        $hijo_id = Token::where('id_tutor', $user->id)
+            ->where('estado', 1)
+            ->pluck('id_hijo');
+        $hijos = Hijo::select(['name', 'apellido', 'alias', 'id'])
+            ->where('id_tutor', $user->id)
+            ->whereNotIn('id', $hijo_id)
+            ->get();
         return $hijos;
     }
 }

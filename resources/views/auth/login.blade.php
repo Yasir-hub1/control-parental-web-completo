@@ -24,7 +24,7 @@
 			<!--begin::Authentication - Sign-in -->
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="margin: 0px;
             padding: 0px;
-            background: url(img/niños.jpg) no-repeat center top ;
+            background: url(img/ninos.jpg) no-repeat center top ;
             background-size: cover;">
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
@@ -84,15 +84,15 @@
                                     </span>
                                 @enderror
 								<!--end::Input-->
-								
+
 							</div>
 							<!--end::Input group-->
                             <div class="row mb-3">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
-                                    
+
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-    
+
                                         <label class="form-check-label" for="remember">
                                             {{ __('Recuerdame') }}
                                         </label>
@@ -109,7 +109,7 @@
 								</button>
 								<!--end::Submit button-->
 								<!--begin::Separator-->
-								
+
 							</div>
 							<!--end::Actions-->
 						</form>

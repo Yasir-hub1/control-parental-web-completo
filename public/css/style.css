@@ -12,9 +12,9 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(../img/niños2.jpg);
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(../img/ninos2.jpg);
     background-attachment: fixed;
-    
+
 }
 #headerSection_nosotros{
     width: 100%;
@@ -26,7 +26,7 @@
     background-size: cover;
     background-position: center;
     min-height: 400px;
-    
+
 }
 #headerSection_contactanos{
     width: 100%;
@@ -70,7 +70,7 @@ header{
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 18px;
-    -webkit-box-shadow: -3px 9px 19px 4px rgba(0,0,0,0.54); 
+    -webkit-box-shadow: -3px 9px 19px 4px rgba(0,0,0,0.54);
     box-shadow: -3px 9px 19px 4px rgba(0,0,0,0.34);
     margin-left: auto;
     margin-right: auto;
@@ -222,7 +222,7 @@ nav ul li a:hover{
     margin-top: 25px;
     margin-right: -15px;
     margin-left: -15px;
-    
+
 }
 .container_cards{
     width: 100%;
@@ -250,7 +250,7 @@ nav ul li a:hover{
 .service:hover{
     background-color: #ffdd80;
     transform: translateY(-3px);
-    -webkit-box-shadow: -25px 35px 29px -3px rgba(0,0,0,0.65); 
+    -webkit-box-shadow: -25px 35px 29px -3px rgba(0,0,0,0.65);
     box-shadow: -25px 35px 29px -3px rgba(0,0,0,0.65);
     border-radius: 15px;
 }
@@ -309,7 +309,7 @@ nav ul li a:hover{
     background: linear-gradient(90deg,#ffc72c,#ffc72c);
 }
 .service:hover > .btn_modal_wel{
-    -webkit-box-shadow: inset 4px 4px 15px 0px #ffc72c, 5px 5px 15px 5px rgba(0,0,0,0); 
+    -webkit-box-shadow: inset 4px 4px 15px 0px #ffc72c, 5px 5px 15px 5px rgba(0,0,0,0);
     box-shadow: inset 4px 4px 15px 0px #ffc72c, 5px 5px 15px 5px rgba(0,0,0,0);
     transition: 0.3s;
     text-decoration: none;
@@ -379,7 +379,7 @@ nav ul li a:hover{
     overflow-y: scroll;
     overflow-x: hidden;
     overflow: auto;
-    
+
 }
 .btnwssp{
     margin-top: 35px;
@@ -451,67 +451,67 @@ nav ul li a:hover{
     background-size: 100% 100%;
     background-size: cover;
 }
-    
+
 .footer > * {
     flex:  1 100%;
 }
-    
+
 .l-footer {
     margin-right: 1.25em;
     margin-bottom: 2em;
-}   
+}
 h2 {
     font-weight: 400;
     font-size: 15px;
 }
-    
+
 .footer ul {
     list-style: none;
     padding-left: 0;
 }
-    
+
 .footer li {
     line-height: 2em;
 }
-    
+
 .footer a {
     text-decoration: none;
 }
-    
+
 .r-footer {
     display: flex;
     flex-flow: row wrap;
 }
-    
+
 .r-footer > * {
     flex: 1 50%;
     margin-right: 1.25em;
 }
-    
+
 .box a {
     color: #fff;
 }
-    
+
 .h-box {
     column-count: 2;
     column-gap: 1.25em;
 }
-    
+
 .b-footer {
     text-align: center;
     color: #fff;
     padding-top: 50px;
 }
-    
+
 .l-footer p {
     padding-right: 20%;
     color: #fff;
-}   
+}
 .l-footer .footer_img{
     width: auto;
     height: 100px;
     margin-bottom: 10px;;
-}  
+}
 /***********************************************
 ************CARTAS DE CLIENTES*****************
 ************************************************/
@@ -698,7 +698,7 @@ textarea.contact_input{
     border-radius: 22px;
     resize: none;
     overflow: auto;
-} 
+}
 .contact_btn{
     padding: 0.6rem 1.3rem;
     background-color: white;
@@ -711,7 +711,7 @@ textarea.contact_input{
     cursor: pointer;
     transition: 0.3s;
     margin: 0;
-} 
+}
 .contact_btn:hover{
     background-color: transparent;
     color: white;
@@ -757,16 +757,16 @@ textarea.contact_input{
     width: 35px;
     height: 35px;
     border-radius: 5px;
-    background: linear-gradient(45deg, #0781b6, #03577a); 
+    background: linear-gradient(45deg, #0781b6, #03577a);
     color: white;
     text-align: center;
     line-height: 35px;
     margin-right: 0.5rem;
-    transition: 0.3s;  
+    transition: 0.3s;
 }
 .social-icons a:hover{
     transform: scale(1.05);
-    background: linear-gradient(45deg, #03577a, #0781b6); 
+    background: linear-gradient(45deg, #03577a, #0781b6);
 }
 /***********************************************
 ******************FODA**************************
@@ -927,7 +927,7 @@ textarea.contact_input{
 	position: fixed;
 	bottom:20px;
 	right:20px;
-} 
+}
 
 /***********************************************
 ********MODAL DE TIPOS DE PAGOS ****************
@@ -1136,7 +1136,7 @@ textarea.contact_input{
     transform: translateY(5px);
     color: #00394B;
   }
-  
+
   .wrapper .container .bottom .right:hover .remove, .wrapper .container .bottom .right:hover .done {
     transform: translateY(-100%);
   }
@@ -1204,12 +1204,12 @@ textarea.contact_input{
     letter-spacing: 0;
     padding: 1rem;
   }
-  
+
   .main {
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+
   .main h1 {
     font-size: 24px;
     font-weight: 400;
@@ -1225,7 +1225,7 @@ textarea.contact_input{
     max-width: 100%;
     vertical-align: middle;
   }
-  
+
   .main .btn {
     color: #ffffff;
     padding: 0.8rem;
@@ -1240,11 +1240,11 @@ textarea.contact_input{
     background: transparent;
     font-family: 'Poppins', sans-serif;
   }
-  
+
   .main .btn:hover {
     background-color: rgba(255, 255, 255, 0.12);
   }
-  
+
   .main .cards {
     display: flex;
     flex-wrap: wrap;
@@ -1252,24 +1252,24 @@ textarea.contact_input{
     margin: 0;
     padding: 0;
   }
-  
+
   .main .cards_item {
     display: flex;
     padding: 1rem;
   }
-  
+
   @media (min-width: 40rem) {
     .cards_item {
       width: 50%;
     }
   }
-  
+
   @media (min-width: 56rem) {
     .cards_item {
       width: 33.3333%;
     }
   }
-  
+
   .card {
     background-color: white;
     border-radius: 0.25rem;
@@ -1278,12 +1278,12 @@ textarea.contact_input{
     flex-direction: column;
     overflow: hidden;
   }
-  
+
   .card_content {
     padding: 1rem;
     background: linear-gradient(to bottom left, #0781b6 40%,#04a5eb 100%);
   }
-  
+
   .card_title {
     color: #ffffff;
     font-size: 1.1rem;
@@ -1292,7 +1292,7 @@ textarea.contact_input{
     text-transform: capitalize;
     margin: 0px;
   }
-  
+
   .card_text {
     color: #ffffff;
     font-size: 0.875rem;
@@ -1306,7 +1306,7 @@ textarea.contact_input{
     margin-top: 35px;
     text-align: center;
   }
-  
+
 /***********************************************
 ***********LISTA DE PRODUCTOS*******************
 ************************************************/
@@ -1457,13 +1457,13 @@ textarea.contact_input{
     width: 65%;
     position: relative;
   }
-  
+
   .right-column {
     width: 35%;
     margin-top: 60px;
   }
 
-  
+
   /* Left Column */
   .left-column img {
     width: 100%;
@@ -1474,11 +1474,11 @@ textarea.contact_input{
     opacity: 0;
     transition: all 0.3s ease;
   }
-  
+
   .left-column img.active {
     opacity: 1;
   }
-  
+
   /* Product Description */
   .product-description {
     border-bottom: 1px solid #E1E8EE;
@@ -1507,16 +1507,16 @@ textarea.contact_input{
 .product-color {
     margin-bottom: 30px;
   }
-  
+
   .color-choose div {
     display: inline-block;
   }
-  
+
   .color-choose input
   [type="radio"] {
     display: none;
   }
-  
+
   .color-choose input[type="radio"] + label span {
     display: inline-block;
     width: 40px;
@@ -1526,12 +1526,12 @@ textarea.contact_input{
     cursor: pointer;
     border-radius: 50%;
   }
-  
+
   .color-choose input[type="radio"] + label span {
     border: 2px solid #FFFFFF;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
   }
-  
+
   .color-choose input[type="radio"]#red + label span {
     background-color: #C91524;
   }
@@ -1541,7 +1541,7 @@ textarea.contact_input{
   .color-choose input[type="radio"]#black + label span {
     background-color: #323232;
   }
-  
+
   .color-choose input[type="radio"]:checked + label span {
     background-image: url(images/check-icn.svg);
     background-repeat: no-repeat;
@@ -1551,7 +1551,7 @@ textarea.contact_input{
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  
+
   .cable-choose button {
     border: 2px solid #0781b6;
     border-radius: 6px;
@@ -1562,19 +1562,19 @@ textarea.contact_input{
     cursor: pointer;
     transition: all .5s;
   }
-  
+
   .cable-choose button:hover,
   .cable-choose button:active,
   .cable-choose button:focus {
     border: 2px solid #86939E;
     outline: none;
   }
-  
+
   .cable-config {
     border-bottom: 1px solid #E1E8EE;
     margin-bottom: 20px;
   }
-  
+
   .cable-config a {
     color: #358ED7;
     text-decoration: none;
@@ -1625,12 +1625,12 @@ textarea.contact_input{
       flex-direction: column;
       margin-top: 0;
     }
-  
+
     .left-column,
     .right-column {
       width: 100%;
     }
-  
+
     .left-column img {
       width: 300px;
       right: 0;
@@ -1638,8 +1638,8 @@ textarea.contact_input{
       left: initial;
     }
   }
-  
-  
+
+
   @media (max-width: 535px) {
     .left-column img {
       width: 220px;
@@ -1689,7 +1689,7 @@ textarea.contact_input{
     letter-spacing: 1.5px;
     font-size: 14px;
     background: rgb(7, 129, 182);
-    color: white;   
+    color: white;
 }
 
 .carousel_prove .item .content h1 {
@@ -1908,7 +1908,7 @@ textarea.contact_input{
     .l-footer .footer_img{
         width: auto;
         height: 60px;
-    } 
+    }
     .nosotros_container .nosotros_card{
         max-width: 300px;
         flex-direction: column;
@@ -1934,7 +1934,7 @@ textarea.contact_input{
     /**/
     #price{
     width: 100%;
-    height: 70%;    
+    height: 70%;
     overflow: auto;
 	overflow-y: scroll;
     }
@@ -1964,11 +1964,11 @@ textarea.contact_input{
 .r-footer > * {
     flex: 1;
 }
-    
+
 .features {
     flex-grow: 2;
 }
-    
+
 .l-footer {
     flex: 1 0px;
     width: 100%;
@@ -1977,7 +1977,7 @@ textarea.contact_input{
 .l-footer .footer_img{
     width: auto;
     height: 60px;
-} 
+}
 .r-footer {
     flex: 2 0px;
 }

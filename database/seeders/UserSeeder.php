@@ -72,11 +72,11 @@ class UserSeeder extends Seeder
         ];
         foreach ($users as $user) {
             $data=User::create($user);
-         //   $data->createAsStripeCustomer();
+           $data->createAsStripeCustomer();
             $tutor=new Tutor;
             $tutor->user_id=$data->id;
             $tutor->save();
         }
-    
+
     }
 }

@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     public function menu(){
-        
+
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
         $tokens=Token::where('id_tutor',$tutor->id)->where('estado',1)->get();
@@ -40,7 +40,7 @@ class UserController extends Controller
     }
 
     public function dispositivos(){
-       
+
         $usuario = auth()->user();
         $tutor=Tutor::where('user_id',$usuario->id)->first();
         $tokens=Token::where('id_tutor',$tutor->id)->where('id_hijo','!=',null)->get();
@@ -78,7 +78,7 @@ class UserController extends Controller
         $hijo->alias=$request->alias;
         //$hijo->edad=$request->edad;
         $hijo->save();
-       
+
         return redirect()->back();
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
         $data=Hijo::where('id',$id)->first();
         $contactos=Contacto::where('hijo_id',$id)->get();
         return view('pruebas.contactos', ['contactos' => $contactos, 'info' => $data]);
-       
+
     }
 
     public function hijoLlamadas($id){
@@ -117,14 +117,14 @@ class UserController extends Controller
         //$archivos=Contenido::where('hijo_id',$id)->get();
         return view('pruebas.ubicacion', ['localizacion'=>$ubicacion,'info' => $data, 'existe' => $existe]);
     }
-    
+
     function checkout(Request $request) {
         $stripe = new \Stripe\StripeClient(
         'sk_test_51LmGK0FzDqUMV7KR60uYN3GMiz8Lj9E8NTNjcn0S0JJgc3ckYgq3HTf3jEIwbGnw32CRaoCqaVZbuZKLnrdQE9NV009wbCpeEa'
         );
         $check = $stripe->checkout->sessions->create([
-            'success_url' => 'http://localhost:8000/success?id='.$request->plan,
-            'cancel_url' => 'http://localhost:8000/plan',
+            'success_url' => 'http://protectingyou.sw1.lol/success?id='.$request->plan,
+            'cancel_url' => 'http://protectingyou.sw1.lol/plan',
             'line_items' => [
             [
                 'price' => $request->precio,

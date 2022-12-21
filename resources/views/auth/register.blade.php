@@ -23,7 +23,7 @@
 			<!--begin::Authentication - Sign-up -->
 			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="margin: 0px;
             padding: 0px;
-            background: url(img/niños.jpg) no-repeat center top ;
+            background: url(img/ninos.jpg) no-repeat center top ;
             background-size: cover;">
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
@@ -37,8 +37,8 @@
 						<!--begin::Form-->
 						<form method="POST" action="{{ route('register') }}">
 							@csrf
-	
-	
+
+
 							<!--begin::Heading-->
 							<div class="mb-10 text-center">
 								<!--begin::Title-->
@@ -50,8 +50,8 @@
 								<!--end::Link-->
 							</div>
 							<!--end::Heading-->
-							
-							
+
+
 							<!--begin::Input group-->
 							<div class="row fv-row mb-7">
 								<!--begin::Nombre-->
@@ -59,29 +59,29 @@
 									<label class="form-label fw-bolder text-dark fs-6">Nombre</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="name" id="name" autocomplete="off" />
 								</div>
-								
+
 
                                 <!--begin::Apellido-->
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Apellido</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="apellido" id="apellido" autocomplete="off" />
 								</div>
-							
+
                                 <!--begin::Celular-->
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Celular</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="celular" id="celular" autocomplete="off" />
 								</div>
-								
+
                                 <!--begin::Fecha de Nacimiento-->
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Fecha de Nacimiento</label>
 									<input class="form-control form-control-lg form-control-solid" type="date" placeholder="" name="fecha_nacimiento" id="fecha_nacimiento" autocomplete="off" />
 								</div>
-								
+
                                 <!--begin::Sexo-->
-								
-								
+
+
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -151,7 +151,7 @@
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
-							
+
 							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center">
