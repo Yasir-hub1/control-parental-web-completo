@@ -84,5 +84,41 @@ class ExpoTokenController extends Controller
             'data' => 'realizado correctamente',
             // 'token'=> $token
         ]);
+
+    }
+    public function register_token(Request $request)//registra el token del niño en el dispositivo
+    {
+        
+        try {
+            $fechaActual=Carbon::now()->setTimezone('America/La_Paz');
+            $token= Token::where('codigo', $request->token)->where('estado', 0)->first();
+            if($token == ''){
+                if($token= Token::where('codigo', $request->token)->where('estado', 1)->exists()){
+                    return['error' => 'Token ya registrado!!'];
+                }
+                return['error' => 'Token no encontrado'];
+                }
+            $token->estado=1;
+            $token->fecha_registro = $fechaActual;
+            $token->save();
+            return response()->json([ 'data' => $token,
+                                      'boy_id' => $token->id_hijo
+                                    ]);
+        } catch (\Throwable $th) {
+            
+            return response()->json(['error' => 'Token no encontrado']);
+        }
+       
+        $token->codigo= $request->params['token'];
+        $token->fecha_creacion= $fechaActual;
+        $token->estado= 0;
+        // $token->id_tutor= $tutor_id;
+        $token->id_hijo= $request->params['id_hijo'];
+        // return $token;
+        $token->save();
+
+        return response()->json([
+            'data' => 'realizado correctamente',
+        ]);
     }
 }

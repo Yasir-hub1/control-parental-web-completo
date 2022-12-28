@@ -46,6 +46,7 @@ Route::post('/storageContacto',[HijoController::class,'storageContacto']);
 Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
 Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
 
+Route::post('/register_token_boy', [ExpoTokenController::class, 'register_token']);
 Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
 Route::post('/contenido', [ContenidoController::class, 'store']);
     // Route::get('/contenido', [ContenidoController::class, 'index']);
