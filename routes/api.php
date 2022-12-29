@@ -35,24 +35,24 @@ Route::post('/registerTutor', [AuthController::class, 'registerTutor']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/users', [AuthController::class, 'index']);
 Route::get('/user-hijos', [HijoController::class, 'index']);
-Route::post('/control',[HijoController::class,'controlImagen']);
+Route::post('/control', [HijoController::class, 'controlImagen']);
 
-Route::post('/storageDoc',[HijoController::class,'storageDocumento']);
-Route::post('/storageDescarga',[HijoController::class,'storageDescarga']);
-Route::post('/storageFacebook',[HijoController::class,'storageFacebook']);
-Route::post('/storageTelegram',[HijoController::class,'storageTelegram']);
-Route::post('/storageUCC',[HijoController::class,'storageUCC']);
-Route::post('/storageContacto',[HijoController::class,'storageContacto']);
-Route::post('/storageUbicacion',[HijoController::class,'storageUbicacion']);
-Route::post('/storageCaptura',[HijoController::class,'storageCaptura']);
+Route::post('/storageDoc', [HijoController::class, 'storageDocumento']);
+Route::post('/storageDescarga', [HijoController::class, 'storageDescarga']);
+Route::post('/storageFacebook', [HijoController::class, 'storageFacebook']);
+Route::post('/storageTelegram', [HijoController::class, 'storageTelegram']);
+Route::post('/storageUCC', [HijoController::class, 'storageUCC']);
+Route::post('/storageContacto', [HijoController::class, 'storageContacto']);
+Route::post('/storageUbicacion', [HijoController::class, 'storageUbicacion']);
+Route::post('/storageCaptura', [HijoController::class, 'storageCaptura']);
 
 Route::post('/register_token_boy', [ExpoTokenController::class, 'register_token']);
-Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);
+Route::post('/register-notification', [ExpoTokenController::class, 'registrarExpoToken']);
 Route::post('/contenido', [ContenidoController::class, 'store']);
-    // Route::get('/contenido', [ContenidoController::class, 'index']);
-     Route::post('/register-notification',[ExpoTokenController::class, 'registrarExpoToken']);//Registrar el expoToken al usuario
-     Route::get('/eliminar-token',[ExpoTokenController::class,'eliminarExpoToken']);
-     //Eliminar el expotoken al usuario
+// Route::get('/contenido', [ContenidoController::class, 'index']);
+Route::post('/register-notification', [ExpoTokenController::class, 'registrarExpoToken']); //Registrar el expoToken al usuario
+Route::get('/eliminar-token', [ExpoTokenController::class, 'eliminarExpoToken']);
+//Eliminar el expotoken al usuario
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/localizacion', [LocalizacionController::class, 'index']); //Para ver todas las localizaciones, sólo usuarios loggueados que sean administrador
@@ -81,7 +81,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::get('/contenido-hijos', [ContenidoController::class, 'contenidoHijos']); //Muestra el contenido de cada hijo
     //Crud Contacto
-    Route::post('/contacto-hijo', [ContactoController::class, 'hijoContactos']);//obtiene todos los contactos del hijo
+    Route::post('/contacto-hijo', [ContactoController::class, 'hijoContactos']); //obtiene todos los contactos del hijo
     Route::get('/contacto/{id}', [ContactoController::class, 'show']);
     Route::post('/contacto', [ContactoController::class, 'store']);
     Route::put('/contacto/{id}', [ContactoController::class, 'update']);
@@ -117,15 +117,14 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post('/tutor-hijo', [AuthController::class, 'tutorHijo']); //Para ver el tutor del hijo
     Route::post('/localizacion', [LocalizacionController::class, 'store']); //Para agregar localización al hijo
     //Registrar el expo-token al usuario
-    
+
     /****PLAN *****/
     Route::apiResource('plan', PlanController::class);
 
 
     Route::put('update_perfil', [TutorController::class, 'update_perfil']); //Para actualizar los datos del tutor loggueado
-    
+
     Route::post('/send_token', [ExpoTokenController::class, 'send_token']);
     Route::post('/store_boy', [HijoController::class, 'store_boy']);
     Route::post('/get_boy_not_register', [HijoController::class, 'get_boy_not_register']);
-
 });
