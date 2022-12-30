@@ -2,10 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Models\Hijo\Hijo;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class NotificationContenido extends Notification implements ShouldQueue
 {
@@ -17,7 +18,7 @@ class NotificationContenido extends Notification implements ShouldQueue
      * @return void
      */
     public function __construct($contenido)
-    { 
+    {
         $this->contenido = $contenido;
     }
 
@@ -57,6 +58,9 @@ class NotificationContenido extends Notification implements ShouldQueue
         return [
             'contenido' => $this->contenido->id,
             'nombre' => $this->contenido->contenido,
+            'tipo'=>$this->contenido->tipo_contenido,
+            'fecha'=>$this->contenido->fecha,
+            'hijo'=>Hijo::find($this->contenido->hijo_id)
         ];
     }
 }

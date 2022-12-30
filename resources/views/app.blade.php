@@ -8,8 +8,8 @@
     <title>PROTECTING YOU</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
-    integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../../img/logowhite.png" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -258,7 +258,7 @@
                                     <div class="lista-notification">
 
                                         @forelse (auth()->user()->unreadNotifications->take(3) as $notification)
-                                            <a href="#" class="dropdown-item border-bottom me-1 unotification"
+                                            <a href={{ route("notification.index") }} class="dropdown-item border-bottom me-1 unotification"
                                                 id="{{ $notification->created_at }}">
                                                 <div class="row">
                                                     <div class="col-12 title"><i class="fas fa-envelope mr-2"></i>
@@ -427,8 +427,8 @@
     </script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
-    integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
@@ -485,15 +485,20 @@
             console.log(JSON.stringify(data['contenido']));
 
             if ($('.unotification').length < 3) {
+                $('.unotification').each(function() {
+                    $(this).find('.time').text(moment($(this).attr('id'),
+                        "YYYY-MM-DD hh:mm:ss").fromNow())
+                });
                 $('.lista-notification').prepend(
-                    '<a href="#" class="dropdown-item border-bottom me-1 unotification" id="' + convertir(Date
+                    '<a href="{{ route("notification.index") }}" class="dropdown-item border-bottom me-1 unotification" id="' + convertir(Date
                         .parse(data['contenido']['created_at'])) + '">' +
                     '<div class="row">' +
                     '<div class="col-12 title"><i class="fas fa-envelope mr-2"></i>' +
                     data['contenido']['contenido'] + '</div>' +
                     '<div class="col-12">' +
                     '<small class="ml-2 float-end text-muted text-sm time" style="font-size: 0.6rem">' +
-                    convertir(Date.parse(data['contenido']['created_at'])) + '</small>' +
+                    moment(convertir(Date.parse(data['contenido']['created_at'])),
+                        "YYYY-MM-DD hh:mm:ss").fromNow() + '</small>' +
                     '</div>' +
                     '</div>' +
                     '</a>'
@@ -515,25 +520,26 @@
                     }
                     i++;
                 })
-                console.log('cantidad de notificaciones: ' + notificaciones.length);
-                console.log(notificaciones);
+                //console.log('cantidad de notificaciones: ' + notificaciones.length);
+                //console.log(notificaciones);
                 i = 0;
 
                 $('.unotification').each(function() {
-                    console.log('entra a mover notificaciones')
+                    //   console.log('entra a mover notificaciones')
                     if (i == 0) {
                         $(this).attr("id", convertir(Date.parse(data['contenido']['created_at'])));
                         $(this).find('.title').text(data['contenido']['contenido']);
                         relativo = moment(convertir(Date.parse(data['contenido']['created_at'])),
                             "YYYY-MM-DD hh:mm:ss").fromNow();
                         $(this).find('.time').text(relativo);
-                        console.log($(this).find('.title'));
+                        // console.log($(this).find('.title'));
                     } else {
                         $(this).find('.title').text(notificaciones[i - 1]['contenido']);
-                        $(this).find('.time').text(notificaciones[i - 1]['time']);
+                        $(this).find('.time').text(moment(notificaciones[i - 1]['time'],
+                            "YYYY-MM-DD hh:mm:ss").fromNow());
                         $(this).attr("id", notificaciones[i - 1]['time']);
 
-                        console.log($(this).find('.title'));
+                        //           console.log($(this).find('.title'));
                     }
                     i++;
                 });
@@ -548,7 +554,7 @@
                     //   console.log($('.unread-notification').find('#ver-mas').length);
                     if ($('.lista-notification').find('#ver-mas').length == 0) {
                         $('.lista-notification').append(
-                            '<a href="{{ route('notification.index') }}" class="dropdown-item border-bottom me-1" id="ver-mas">' +
+                            '<a href="{{ route("notification.index") }}" class="dropdown-item border-bottom me-1" id="ver-mas">' +
                             '<div class = "row">' +
                             '<div class = "col-12 bg-gray">' + 'Ver más Notificaciones... </div>' +
                             ' </div > ' + '</a>'
