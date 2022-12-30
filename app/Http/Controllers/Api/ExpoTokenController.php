@@ -17,23 +17,31 @@ class ExpoTokenController extends Controller
     public function registrarExpoToken(Request $request)//para tutor y hijo
     {
         // return 'entra************************//////////////////////*/*/';
-        
+
         // return $request;
-        $request->validate([
+       /*  $request->validate([
             'expo_token' => 'required|String|unique:registrar_tokens,expo_token',
             'user_id' => 'required|exists:users,id'
-         ]);
-        $registrar = RegistrarToken::create([
-                'expo_token'=> $request->expo_token,
-                'user_id'=> $request->user_id,
+         ]); */
+         $existeToken=RegistrarToken::where('expo_token',$request->expo_token)->first();
+         if(!$existeToken){
+             $registrar = RegistrarToken::create([
+                     'expo_token'=> $request->expo_token,
+                     'user_id'=> $request->user_id,
+                 ]);
+             return response()->json([
+                 'data' => $registrar
+             ]);
+
+         }else{
+            return response()->json([
+                'data' => "Este token ya existe"
             ]);
-        return response()->json([
-            'data' => $registrar
-        ]);
+         }
     }
 
     public function eliminarExpoToken(){
-        
+
         $expoToken=RegistrarToken::find(auth()->user()->expotokens->first()->id);
         $expoToken->delete();
         return response()->noContent();
@@ -50,7 +58,7 @@ class ExpoTokenController extends Controller
     }
     public function unReadNotification()
     {
-        
+
         $user = Auth::user();
         if ($user->tipo == 't') {
             $notifications = $user->unReadNotification;
@@ -62,7 +70,7 @@ class ExpoTokenController extends Controller
     public function readNotification()
     {
     }
-    
+
     public function send_token(Request $request)//envia el token de registro
     {
         $user_id = User::all()->find(Auth::user()->id)->id;
@@ -88,7 +96,7 @@ class ExpoTokenController extends Controller
     }
     public function register_token(Request $request)//registra el token del niño en el dispositivo
     {
-        
+
         try {
             $fechaActual=Carbon::now()->setTimezone('America/La_Paz');
             $token= Token::where('codigo', $request->token)->where('estado', 0)->first();
@@ -105,10 +113,10 @@ class ExpoTokenController extends Controller
                                       'boy_id' => $token->id_hijo
                                     ]);
         } catch (\Throwable $th) {
-            
+
             return response()->json(['error' => 'Token no encontrado']);
         }
-       
+
         $token->codigo= $request->params['token'];
         $token->fecha_creacion= $fechaActual;
         $token->estado= 0;

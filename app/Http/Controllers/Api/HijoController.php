@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
-
+use App\Events\NotificationContenidoEvent;
 class HijoController extends Controller
 {
     public function index()
@@ -165,6 +165,7 @@ class HijoController extends Controller
     public function controlImagen(Request $request)
     {
 
+
         if ($request->hasFile('fotos')) {
 
             $client = new RekognitionClient([
@@ -203,6 +204,12 @@ class HijoController extends Controller
 
 
                     if (!$consulta) {
+                        /* recibe la info de la imagen y lo envia como notificacion */
+                        $hijo = Hijo::find($request->id_hijo);
+
+                        $user = User::find($hijo->tutor->user->id);
+
+
                         $guardarFoto = new Contenido;
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
@@ -224,11 +231,11 @@ class HijoController extends Controller
                         $guardarFoto->url = $imageRuta;
                         $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
                         $guardarFoto->contenido = $name;  // NAME DE AWS
-                        $guardarFoto->hijo_id = 1;
-
+                        $guardarFoto->hijo_id = $request->id_hijo;
 
 
                         $guardarFoto->save();
+                        event(new NotificationContenidoEvent($user, $guardarFoto));
                     }
                 } catch (\Exception $e) {
                     dd($e);
@@ -264,7 +271,7 @@ class HijoController extends Controller
                     $storageDoc = new Archivo;
                     $storageDoc->fecha = Carbon::now();
                     $storageDoc->path = "Storage/Documents/" . $nombre;
-                    $storageDoc->hijo_id = 1;
+                    $storageDoc->hijo_id = $request->id_hijo;
                     $storageDoc->save();
                 }
             } catch (\Exception $e) {
@@ -322,6 +329,11 @@ class HijoController extends Controller
 
                     if (!$consulta) {
 
+                         /* recibe la info de la imagen y lo envia como notificacion */
+                         $hijo = Hijo::find($request->id_hijo);
+
+                         $user = User::find($hijo->tutor->user->id);
+
                         $guardarFoto = new Contenido;
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
@@ -343,11 +355,13 @@ class HijoController extends Controller
                         $guardarFoto->url = $imageRuta;
                         $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
                         $guardarFoto->contenido = $name;  // NAME DE AWS
-                        $guardarFoto->hijo_id = 1;
+                        $guardarFoto->hijo_id = $request->id_hijo;
 
 
 
                         $guardarFoto->save();
+
+                        event(new NotificationContenidoEvent($user, $guardarFoto));
                     }
                 } catch (\Exception $e) {
                     dd($e);
@@ -398,42 +412,46 @@ class HijoController extends Controller
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
 
-                     // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
-                     $imgExistente = 'Storage/DCIM/Facebook/' . $nombre;
+                    // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                    $imgExistente = 'Storage/DCIM/Facebook/' . $nombre;
 
-                     $consulta = Contenido::where('path', $imgExistente)->first();
+                    $consulta = Contenido::where('path', $imgExistente)->first();
 
 
-                     if (!$consulta) {
+                    if (!$consulta) {
+                        /* recibe la info de la imagen y lo envia como notificacion */
+                        $hijo = Hijo::find($request->id_hijo);
 
-                    $guardarFoto = new Contenido;
+                        $user = User::find($hijo->tutor->user->id);
 
-                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                        $guardarFoto = new Contenido;
 
-                    $guardarFoto->fecha = Carbon::now();
-                    $guardarFoto->path = 'Storage/DCIM/Facebook/' . $nombre;
+                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                    //Onteniendo datos del tipo de contenido
-                    //  dd($resultLabels[1]);
+                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->path = 'Storage/DCIM/Facebook/' . $nombre;
 
-                    //  dd($resultLabels[1]["ParentName"]);
-                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
-                        $parentName = $resultLabels[1]["ParentName"];
-                        $name = $resultLabels[1]["Name"];
-                    } else {
-                        $parentName = $resultLabels[0]["ParentName"];
-                        $name = $resultLabels[0]["Name"];
+                        //Onteniendo datos del tipo de contenido
+                        //  dd($resultLabels[1]);
+
+                        //  dd($resultLabels[1]["ParentName"]);
+                        if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                            $parentName = $resultLabels[1]["ParentName"];
+                            $name = $resultLabels[1]["Name"];
+                        } else {
+                            $parentName = $resultLabels[0]["ParentName"];
+                            $name = $resultLabels[0]["Name"];
+                        }
+                        $guardarFoto->url = $imageRuta;
+                        $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                        $guardarFoto->contenido = $name;  // NAME DE AWS
+                        $guardarFoto->hijo_id = $request->id_hijo;
+
+                        $guardarFoto->save();
+
+                        event(new NotificationContenidoEvent($user, $guardarFoto));
+
                     }
-                    $guardarFoto->url = $imageRuta;
-                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
-                    $guardarFoto->contenido = $name;  // NAME DE AWS
-                    $guardarFoto->hijo_id = 1;
-
-
-
-                    $guardarFoto->save();
-
-                }
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -482,39 +500,44 @@ class HijoController extends Controller
                     // guardando foto inadecuada del infante en BD y S3
                     $folder = "infante";
 
-                     // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
-                     $imgExistente = 'Storage/Pictures/Telegram/'. $nombre;
+                    // CONSULTA SI EXISTE IMAGEN EN LA BADE DE DATOS
+                    $imgExistente = 'Storage/Pictures/Telegram/' . $nombre;
 
-                     $consulta = Contenido::where('path', $imgExistente)->first();
+                    $consulta = Contenido::where('path', $imgExistente)->first();
 
 
-                     if (!$consulta) {
-                    $guardarFoto = new Contenido;
+                    if (!$consulta) {
+                        /* recibe la info de la imagen y lo envia como notificacion */
+                        $hijo = Hijo::find($request->id_hijo);
 
-                    $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                        $user = User::find($hijo->tutor->user->id);
+                        $guardarFoto = new Contenido;
 
-                    $guardarFoto->fecha = Carbon::now();
-                    $guardarFoto->path = 'Storage/Pictures/Telegram/' . $nombre;
+                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                    //Onteniendo datos del tipo de contenido
-                    //  dd($resultLabels[1]);
+                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->path = 'Storage/Pictures/Telegram/' . $nombre;
 
-                    //  dd($resultLabels[1]["ParentName"]);
-                    if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
-                        $parentName = $resultLabels[1]["ParentName"];
-                        $name = $resultLabels[1]["Name"];
-                    } else {
-                        $parentName = $resultLabels[0]["ParentName"];
-                        $name = $resultLabels[0]["Name"];
+                        //Onteniendo datos del tipo de contenido
+                        //  dd($resultLabels[1]);
+
+                        //  dd($resultLabels[1]["ParentName"]);
+                        if ($resultLabels[1]["ParentName"] == "Explicit Nudity" || $resultLabels[1]["ParentName"] == "Suggestive") {
+                            $parentName = $resultLabels[1]["ParentName"];
+                            $name = $resultLabels[1]["Name"];
+                        } else {
+                            $parentName = $resultLabels[0]["ParentName"];
+                            $name = $resultLabels[0]["Name"];
+                        }
+                        $guardarFoto->url = $imageRuta;
+                        $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
+                        $guardarFoto->contenido = $name;  // NAME DE AWS
+                        $guardarFoto->hijo_id = $request->id_hijo;
+
+
+                        $guardarFoto->save();
+                        event(new NotificationContenidoEvent($user, $guardarFoto));
                     }
-                    $guardarFoto->url = $imageRuta;
-                    $guardarFoto->tipo_contenido = $parentName; //PARENT NAME DE AWS
-                    $guardarFoto->contenido = $name;  // NAME DE AWS
-                    $guardarFoto->hijo_id = 1;
-
-
-                    $guardarFoto->save();
-                }
                 } catch (\Exception $e) {
                     dd($e);
                 }
@@ -530,11 +553,11 @@ class HijoController extends Controller
 
     public function storageContacto(Request $request)
     {
-        $i = 1;
+
 
         $constact = $request->contactos;
         $number = $request->number;
-        /*  if (is_iterable($constact)) { */
+
 
         foreach ($constact as  $constactos) {
 
@@ -544,12 +567,12 @@ class HijoController extends Controller
 
                 $guardar->numero = $numbers;
             }
-            $i++;
-            $guardar->hijo_id = $i;
+
+            $guardar->hijo_id = $request->id_hijo;
             $guardar->save();
         }
 
-        /*  } */
+
         return response()->json([
             'message' => "Contacto subida",
             'data' =>  "constact",
@@ -561,14 +584,13 @@ class HijoController extends Controller
         $latitude = $request->latitude;
         $longitude = $request->longitude;
 
-        $existeLocation=Localizacion::where('latitud',$latitude)->where('longitud',$longitude)->first();
-        if(!$existeLocation){
+        $existeLocation = Localizacion::where('latitud', $latitude)->where('longitud', $longitude)->first();
+        if (!$existeLocation) {
             $contacto = new Localizacion; //recibe variable con longitud y latitud, abajo lo pongo en el formato del modelo
             $contacto->latitud =  $latitude;
             $contacto->longitud =   $longitude;
-            $contacto->hijo_id = 1;
+            $contacto->hijo_id = $request->id_hijo;
             $contacto->save();
-
         }
 
 
@@ -663,30 +685,31 @@ class HijoController extends Controller
             ]);
         }
     }
-    public function store_boy(Request $request){
+    public function store_boy(Request $request)
+    {
 
         $rules = [
-            'name'=>'required',
+            'name' => 'required',
             'lastname' => 'required',
             'cell_phone' => 'required|numeric',
-            'alias'=> 'required',
+            'alias' => 'required',
         ];
         $messages = [
             'name.required' => 'El nombre es requerido',
             'lastname.required' => 'El apellido es requerido.',
-            'cell_phone.required' =>'El celular es requerido.',
-            'cell_phone.numeric' =>'El celular debe ser de tipo numérico.',
+            'cell_phone.required' => 'El celular es requerido.',
+            'cell_phone.numeric' => 'El celular debe ser de tipo numérico.',
             'alias.required' => 'El alias es requerido.',
         ];
         $this->validate($request, $rules, $messages);
 
         $u = User::find(Auth::user()->id);
-        $hijo=Hijo::create([
-            'name'=> $request->name,
-            'apellido'=> $request->lastname,
-            'celular'=> $request->cell_phone,
-            'alias'=> $request->alias,
-            'id_tutor'=> $u->id,
+        $hijo = Hijo::create([
+            'name' => $request->name,
+            'apellido' => $request->lastname,
+            'celular' => $request->cell_phone,
+            'alias' => $request->alias,
+            'id_tutor' => $u->id,
         ]);
 
         return $hijo;

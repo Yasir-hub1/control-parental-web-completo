@@ -90,34 +90,38 @@ class ContenidoController extends Controller
     }
     public function store(Request $request)
     {
-       //return $request;
-       $request->validate([
-        'hijo_id' => 'required|numeric|exists:hijos,id',
-        'fecha' => 'required|string',
-        'tipo_contenido' => 'required|string',
-        'contenido' => 'required|string',
-        'path' => 'required|string',
-        'url' => 'required|string',
-       // 'categoria_id' => 'required|numeric|exists:categorias,id',
-    ]);
-   // 
-    // return 'entra///////*/';
-    $contenido = Contenido::create($request->all());
+        //return $request;
+        $request->validate([
+            'hijo_id' => 'required|numeric|exists:hijos,id',
+            'fecha' => 'required|string',
+            'tipo_contenido' => 'required|string',
+            'contenido' => 'required|string',
+            'path' => 'required|string',
+            'url' => 'required|string',
+            // 'categoria_id' => 'required|numeric|exists:categorias,id',
+        ]);
+        //
+        // return 'entra///////*/';
 
-    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-    $hijo = Hijo::find($request->hijo_id);
-   
-    $user = User::find($hijo->tutor->user->id);
-    //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
-   
-    event(new NotificationContenidoEvent($contenido, $user));
-    event(new MyEvent($contenido));
+        //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+        $hijo = Hijo::find($request->hijo_id);
 
-    return response()->json([
-        'message' => '¡Contenido creado exitosamente!',
-        'data' => $contenido
-    ]);
+        $user = User::find($hijo->tutor->user->id);
+//return $user;
+        $contenido = Contenido::create($request->all());
+
+        //  Notification::sendNow(auth()->user, new NotificationContenido($contenido));
+        //event(new PruebaEchoEvent($user,"hola usuario "));
+        event(new NotificationContenidoEvent($user, $contenido));
+        //event(new MyEvent($contenido));
+
+        return response()->json([
+            'message' => '¡Contenido creado exitosamente!',
+            'data' => $contenido
+        ]);
+
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([

@@ -50,7 +50,7 @@ Route::post('/register_token_boy', [ExpoTokenController::class, 'register_token'
 Route::post('/register-notification', [ExpoTokenController::class, 'registrarExpoToken']);
 Route::post('/contenido', [ContenidoController::class, 'store']);
 // Route::get('/contenido', [ContenidoController::class, 'index']);
-Route::post('/register-notification', [ExpoTokenController::class, 'registrarExpoToken']); //Registrar el expoToken al usuario
+// Route::post('/register-notification', [ExpoTokenController::class, 'registrarExpoToken']); //Registrar el expoToken al usuario
 Route::get('/eliminar-token', [ExpoTokenController::class, 'eliminarExpoToken']);
 //Eliminar el expotoken al usuario
 Route::group(['middleware' => ["auth:sanctum"]], function () {

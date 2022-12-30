@@ -32,20 +32,20 @@ class NotificationContenidoListener implements ShouldQueue
     public function handle($event)
     {
         //para el tutor del hijo
-        $hijo = Hijo::find($event->contenido['hijo_id']);
-        $user = User::find($hijo->tutor->user['id']);
-        Notification::send($user, new NotificationContenido($event->contenido));
+       // $hijo = Hijo::find($event->contenido['hijo_id']);
+       $user = User::find($event->user['id']);
+       Notification::send($user, new NotificationContenido($event->contenido));
 
-         if (count($user->expotokens) > 0) {
-            $recipient = $user->expotokens[0]->expo_token;
-            // You can quickly bootup an expo instance
-            $expo = \ExponentPhpSDK\Expo::normalSetup();
-            // Subscribe the recipient to the server
-            $expo->subscribe('new', $recipient);
-            // Build the notification data
-            $notification = ['body' => $event->contenido->contenido, 'title' => 'AVISO IMPORTANTE', 'ttl' => 60, 'Sound' => 'Default'];
-            // Notify an interest with a notification
-            $expo->notify(['new'], $notification);
-        }
+        if (count($user->expotokens) > 0) {
+           $recipient = $user->expotokens[0]->expo_token;
+           // You can quickly bootup an expo instance
+           $expo = \ExponentPhpSDK\Expo::normalSetup();
+           // Subscribe the recipient to the server
+           $expo->subscribe('canal', $recipient);
+           // Build the notification data
+           $notification = ['body' => $event->contenido->contenido, 'title' => 'AVISO IMPORTANTE', 'ttl' => 60, 'Sound' => 'Default'];
+           // Notify an interest with a notification
+           $expo->notify(['canal'], $notification);
+       }
     }
 }

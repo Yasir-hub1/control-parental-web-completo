@@ -16,41 +16,29 @@ class NotificationContenidoEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $contenido;
-    public $read;
-    public $unread;
-    public $time;
-    public $timesur;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($contenido,$user)
+    public function __construct($user, $contenido)
     {
-       
+
         $this->contenido = $contenido;
-        $this->time=$contenido->created_at->diffForHumans();
-        $this->unread = $user->unreadNotifications->take(2)->pluck('data');
-        $this->read = $user->readNotifications->take(3)->pluck('data');
-        $times=$user->unreadNotifications->take(2)->pluck('created_at');
-        $tiemposur= [];
-        foreach ($times as $t) {
-            array_push($tiemposur,$t->diffForHumans());
-        }
-        $this->timesur=$tiemposur;
+        $this->user=$user;
     }
     /**
      * Get the channels the event should broadcast on.
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
-    {
-        return ['my-channel'];
-    }
-
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'event-' . $this->user->id;
+    }
+    public function broadcastOn()
+    {
+        return new Channel('channel' . $this->user->id);
     }
 }
