@@ -77,6 +77,7 @@ class ExpoTokenController extends Controller
         $tutor_id= Tutor::where('user_id', $user_id)->first()->id;
         // $fechaActual = date('d-m-Y H:i:s');
         // return $request;
+
         $fechaActual=Carbon::now()->setTimezone('America/La_Paz');
         $token= new token();
         $token->codigo= $request->params['token_register'];

@@ -216,7 +216,7 @@ class HijoController extends Controller
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                         $guardarFoto->path = 'DCIM/Camera/' . $nombre;
 
                         //Onteniendo datos del tipo de contenido
@@ -272,7 +272,7 @@ class HijoController extends Controller
                 if (!$consulta) {
 
                     $storageDoc = new Archivo;
-                    $storageDoc->fecha = Carbon::now();
+                    $storageDoc->fecha = Carbon::now()->setTimezone('America/La_Paz');
                     $storageDoc->path = "Storage/Documents/" . $nombre;
                     $storageDoc->hijo_id = $request->id_hijo;
                     $storageDoc->save();
@@ -341,7 +341,7 @@ class HijoController extends Controller
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                         $guardarFoto->path = 'Storage/Descarga/' . $nombre;
 
                         //Onteniendo datos del tipo de contenido
@@ -433,7 +433,7 @@ class HijoController extends Controller
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                         $guardarFoto->path = 'Storage/DCIM/Facebook/' . $nombre;
 
                         //Onteniendo datos del tipo de contenido
@@ -521,7 +521,7 @@ class HijoController extends Controller
 
                         $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                        $guardarFoto->fecha = Carbon::now();
+                        $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                         $guardarFoto->path = 'Storage/Pictures/Telegram/' . $nombre;
 
                         //Onteniendo datos del tipo de contenido
@@ -642,7 +642,7 @@ class HijoController extends Controller
 
                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                    $guardarFoto->fecha = Carbon::now();
+                    $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                     $guardarFoto->path = 'CapturarPantalla/' . $nombre;
 
                     //Onteniendo datos del tipo de contenido
@@ -672,7 +672,7 @@ class HijoController extends Controller
 
                     $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
 
-                    $guardarFoto->fecha = Carbon::now();
+                    $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                     $guardarFoto->path = 'CapturarPantalla/' . $nombre;
 
                     $guardarFoto->url = $imageRuta;
