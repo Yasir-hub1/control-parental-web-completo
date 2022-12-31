@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Token;
 use App\Models\Hijo\Hijo;
 use Illuminate\Http\Request;
-use App\Models\Contenido\Contenido;
-use App\Models\Contacto\Contacto;
-use App\Models\Localizacion\Localizacion;
-use App\Http\Controllers\Controller;
 use App\Models\Archivo\Archivo;
-use App\Models\Token;
+use App\Models\Contacto\Contacto;
+use App\Models\Contenido\Contenido;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Aws\Rekognition\RekognitionClient;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Localizacion\Localizacion;
 use App\Events\NotificationContenidoEvent;
+use App\Notifications\ActivateNotification;
+use Illuminate\Database\Eloquent\Collection;
+
 class HijoController extends Controller
 {
     public function index()
@@ -236,6 +238,7 @@ class HijoController extends Controller
 
                         $guardarFoto->save();
                         event(new NotificationContenidoEvent($user, $guardarFoto));
+                        event(new ActivateNotification());
                     }
                 } catch (\Exception $e) {
                     dd($e);
@@ -362,6 +365,8 @@ class HijoController extends Controller
                         $guardarFoto->save();
 
                         event(new NotificationContenidoEvent($user, $guardarFoto));
+                        event(new ActivateNotification());
+
                     }
                 } catch (\Exception $e) {
                     dd($e);
@@ -450,6 +455,7 @@ class HijoController extends Controller
                         $guardarFoto->save();
 
                         event(new NotificationContenidoEvent($user, $guardarFoto));
+                        event(new ActivateNotification());
 
                     }
                 } catch (\Exception $e) {
@@ -537,6 +543,8 @@ class HijoController extends Controller
 
                         $guardarFoto->save();
                         event(new NotificationContenidoEvent($user, $guardarFoto));
+                        event(new ActivateNotification());
+
                     }
                 } catch (\Exception $e) {
                     dd($e);
