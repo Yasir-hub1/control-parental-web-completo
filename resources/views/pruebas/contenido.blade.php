@@ -8,11 +8,11 @@
         </a>                                        
   </div>
   <span class="menu-arrow d-lg-none"></span>
-   <div class="menu-item">
+  <!-- <div class="menu-item">
         <a class="menu-link active py-3" href="{{route('hijoLlamadas', $info->id )}}">                                   
             <span class="text-muted">Llamada</span>
         </a>
-    </div>
+    </div>-->
     <span class="menu-arrow d-lg-none"></span>
    <div class="menu-item">
         <a class="menu-link active py-3" href="{{route('hijoContenido', $info->id )}}">                                   
@@ -58,6 +58,55 @@
                 </thead>
                 <tbody>
                       @php
+                      $nameData=array(
+                        'Nudity'=>'Desnudez',
+                        'Graphic Male Nudity'=>'Desnudez Masculina Gráfica',
+                        'Graphic Female Nudity'=>'Desnudez femenina gráfica',
+                        'Sexual Activity'=>'Actividad Sexual',
+                        'Illustrated Explicit Nudity'=>'Desnudez explícita ilustrada',
+                        'Adult Toys'=>'Juguetes para adultos',
+                        'Female Swimwear Or Underwear'=>'Ropa interior femenino',
+                        'Male Swimwear Or Underwear'=>'Ropa interior masculino',
+                        'Partial Nudity'=>'Desnudez parcial',
+                        'Barechested Male'=>'Hombre con el torso desnudo',
+                        'Revealing Clothes'=>'Atuendo revelador',
+                        'Sexual Situations'=>'Situaciones Sexuales',
+                        'Graphic Violence Or Gore'=>'Violencia Gráfica O Gore',
+                        'Physical Violence'=>'Violencia física',
+                        'Weapon Violence'=>'Violencia con armas',
+                        'Weapons'=>'armas',
+                        'Self Injury'=>'Auto lastimarse',
+                        'Emaciated Bodies'=>'Cuerpos demacrados',
+                        'Corpses'=>'Cuerpos',
+                        'Hanging'=>'Colgante',
+                        'Air Crash'=>'Accidente aéreo',
+                        'Explosions And Blasts'=>'Explosiones y explosiones',
+                        'Middle Finger'=>'Dedo del medio',
+                        'Drug Products'=>'Productos farmacéuticos',
+                        'Drug Use'=>'El consumo de drogas',
+                        'Pills'=>'Pastillas',
+                        'Drug Paraphernalia'=>'Parafernalia de drogas',
+                        'Tobacco Products'=>'Productos de tabaco',
+                        'Smoking'=>'Fumar',
+                        'Drinking'=>'Bebiendo',
+                        'Alcoholic Beverages'=>'Bebidas alcohólicas',
+                        'Gambling'=>'Juego',
+                        'Nazi Party'=>'Fiesta nazi',
+                        'White Supremacy'=>'La supremacía blanca',
+                        'Extremist'=>'Extremista',
+                        );
+                        $parentNameData=array(
+                        'Explicit Nudity'=>'Desnudez explícita',
+                        'Suggestive'=>'Sugestivo',
+                        'Violence'=>'Violencia',
+                        'Visually Disturbing'=>'Visualmente perturbador',
+                        'Rude Gestures'=>'gestos groseros',
+                        'Drugs'=>'drogas',
+                        'Tobacco'=>'Tabaco',
+                        'Alcohol'=>'Alcohol',
+                        'Gambling'=>'Juego',
+                        'Hate Symbols'=>'Símbolos de odio',
+                        );
                           $a=0;
                       @endphp
                       @foreach ($contenidos as $contenido)
@@ -69,7 +118,7 @@
                             <td>{{$contenido->fecha}}</td>
                             <td>{{$contenido->path}}</td>
                             <td>{{$contenido->url}}</td>
-                            <td>{{$contenido->tipo_contenido}}</td>
+                            <td>{{$nameData[$contenido->contenido]}}/{{$parentNameData[$contenido->tipo_contenido]}}</td>
                            {{--   <td class="d-flex justify-content-center">
                               <img id="myImg{{$contenido->id}}" class="myImg w-25 h-25" src="{{Storage::disk('s3')->url($contenido->url)}}"
                                alt="imagen" style="height:100 px;max-width:300px" onclick="getImage({{$contenido->id}})">
