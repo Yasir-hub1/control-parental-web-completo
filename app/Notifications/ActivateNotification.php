@@ -8,6 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\ExpoPushNotifications\ExpoChannel;
 use NotificationChannels\ExpoPushNotifications\ExpoMessage;
+
 class ActivateNotification extends Notification
 {
     use Queueable;
@@ -42,9 +43,9 @@ class ActivateNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -63,20 +64,20 @@ class ActivateNotification extends Notification
     {
         return [ExpoChannel::class];
     }
-/* public function toExpoPush($notifiable)
+    public function toExpoPush($notifiable)
     {
         return ExpoMessage::create()
-        ->badge(1)
-        ->enableSound()
-        ->title("Account activated")
-        ->body("Your account has been activated");
-    } */
-    public function toExpoPush($notifiable){
+            ->badge(1)
+            ->enableSound()
+            ->title("Account activated")
+            ->body("Your account has been activated");
+    }
+    /*     public function toExpoPush($notifiable){
         return ExpoMessage::create()
             ->badge(1)
             ->title("Hello World!")
             ->enableSound()
             ->body("Hello World!");
-          /*   ->setChannelId("chat-messages"); */
-}
+          /*   ->setChannelId("chat-messages");
+} */
 }

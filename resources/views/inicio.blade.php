@@ -22,7 +22,7 @@
 <div class="header-top">
     <div class="container d-flex justify-content-between">
         <div class="d-inline-flex ml-auto">
-            
+
         </div>
     </div>
 </div>
@@ -30,18 +30,19 @@
 @section('navbar')
     <header>
     <a href="#" class="logo">
-        
+
         <img  class="imgtamaño" src="{{ asset('img/lgoo.png')}}" alt="Protecting You">
     </a>
     <div class="menu-toggle" ></div>
         <nav>
             <ul>
                 <li><a href="" class="active">INICIO</a></li>
-                <li><a href="{{ url('/contact')}}">CONTÁCTENOS</a></li>
-                <li><a href="{{ url('/nosotros')}}">NOSOTROS</a></li>
+               {{--  <li><a href="{{ url('/contact')}}">CONTÁCTENOS</a></li>
+                <li><a href="{{asset('Android/ProtectingYou.apk')}}">NOSOTROS</a></li>--}}
 				<li><a href="{{route('login')}}">LOGIN</a></li>
 				<li><a href="{{route('register')}}">REGISTRATE</a></li>
             </ul>
+            {{-- <a href="http://127.0.0.1:8000/Android/protectingYou.apk">TURO</a> --}}
         </nav>
         <div class="clearfix"></div>
     </header>
@@ -58,14 +59,14 @@
                         <h1 class="tipeo1">PROTECTING YOU</h1>
                         <h1 class="tipeo2"><span class="type"></span></h1>
                         <div class="botonesinfo">
-                       
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection 
+@endsection
 @section('cards_service')
 <div class="container_cards">
     <div class="row_cards">
@@ -75,7 +76,7 @@
                     <i class="fas fa-map-marker-alt fa-4x"></i>
                     <h4 class="title_services">Localizador</h4>
                     <p class="description_services">Rastrea la ubicación en tiempo real del niño</p><br>
-                   
+
                 </div>
             </div>
         </div>
@@ -90,7 +91,7 @@
                     </i>
                     <h4 class="title_services">Actividad</h4>
                     <p class="description_services">Revisa la actividad de tu niño</p><br>
-                 
+
                 </div>
             </div>
         </div>
@@ -102,10 +103,10 @@
                             <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
                           </svg>
                     </i>
-                   
+
                     <h4 class="title_services">Contenido Inapropiado</h4>
                     <p class="description_services">Controla el contenido inapropiado de tu niño</p>
-                  
+
                 </div>
             </div>
         </div>
@@ -119,7 +120,7 @@
                     </i>
                     <h4 class="title_services">Múltiples Formas de Pago</h4>
                     <p class="description_services">Diferentes tipos de pago</p>
-                          
+
                 </div>
             </div>
         </div>
@@ -127,7 +128,7 @@
 </div>
 @endsection
 @section('cards')
-<div class="container_cards">    
+<div class="container_cards">
     <div class="row_cards">
         <div class="col-md-3 col-sm-6 mb-3">
             <div class="single-content">
@@ -157,7 +158,7 @@
 
 @section('products')
 <div class="producst_body autoplay ">
-     
+
 </div>
 @endsection
 
@@ -165,7 +166,7 @@
 <footer class="footer">
     <div class="l-footer">
         <img  class="footer_img" src="{{asset('img/logowhite.png')}}" alt="Protecting You">
-      
+
     <p>
     </p>
     </div>
@@ -198,9 +199,9 @@
                 <li><a href="#">Trabaja con nosotros</a></li>
             </ul>
             </li>
-           
+
         </ul>
-       
+
 </footer>
 @endsection
 @section('title')
@@ -222,9 +223,9 @@
 </div>
 @endsection
 @section('cards2')
-<div class="container_cards">    
+<div class="container_cards">
     <div class="row_cards">
-   
+
         <div class="col-md-3 col-sm-6 mb-3">
             <div class="single-content">
                 <img src="{{ asset('img/listpadre.png')}}" >

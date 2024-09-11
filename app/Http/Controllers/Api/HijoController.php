@@ -238,7 +238,7 @@ class HijoController extends Controller
 
                         $guardarFoto->save();
                         event(new NotificationContenidoEvent($user, $guardarFoto));
-                        event(new ActivateNotification());
+                        event(new ActivateNotification($guardarFoto));
                     }
                 } catch (\Exception $e) {
                     dd($e);
