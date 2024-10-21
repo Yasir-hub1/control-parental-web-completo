@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class HijoController extends Controller
 {
+
     public function index()
     {
         $hijos = Hijo::all();
@@ -167,7 +168,8 @@ class HijoController extends Controller
     public function controlImagen(Request $request)
     {
 
-
+ // Aumenta el tiempo máximo de ejecución a 300 segundos
+            ini_set('max_execution_time', 300);
         if ($request->hasFile('fotos')) {
 
             $client = new RekognitionClient([
@@ -186,10 +188,11 @@ class HijoController extends Controller
 
                 'Image' => ['Bytes' => $bytes],
                 'MinConfidence' => 51
+                // 'MinConfidence' => (int) config('rekognition.min_confidence'),
 
             ]);
             $resultLabels = $result->get('ModerationLabels');
-
+            // var_dump($resultLabels);
 
 
             if ($resultLabels !== []) {
@@ -210,12 +213,12 @@ class HijoController extends Controller
                         $hijo = Hijo::find($request->id_hijo);
 
                         $user = User::find($hijo->tutor->user->id);
-
+                        // dd($user);
 
                         $guardarFoto = new Contenido;
 
-                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
-
+                        // $imageRuta = Storage::disk('s3')->put($folder, $request->fotos, 'public');
+                        $imageRuta = Storage::disk('s3')->put($folder, $request->fotos);
                         $guardarFoto->fecha = Carbon::now()->setTimezone('America/La_Paz');
                         $guardarFoto->path = 'DCIM/Camera/' . $nombre;
 

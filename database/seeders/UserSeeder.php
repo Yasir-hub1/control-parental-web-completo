@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => "Christian",
-                'email' => "christian@gmail.com",
+                'name' => "karen",
+                'email' => "karen@gmail.com",
                 'apellido' => "Mamani",
                 'celular' => "77348732",
                 'fecha_nacimiento' => "2000/01/04",
@@ -30,8 +30,8 @@ class UserSeeder extends Seeder
                 'password' => bcrypt("12345678")
             ],
             [
-                'name' => "Rister",
-                'email' => "rister@gmail.com",
+                'name' => "gary",
+                'email' => "gary@gmail.com",
                 'apellido' => "Cuellar",
                 'celular' => "78237322",
                 'fecha_nacimiento' => "2000/08/01",

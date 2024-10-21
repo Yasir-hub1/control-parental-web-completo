@@ -6,6 +6,7 @@ use Exception;
 use App\Models\User;
 use App\Events\MyEvent;
 use App\Models\Hijo\Hijo;
+use App\Models\RegistrarToken;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -69,6 +70,9 @@ class NotificationContenidoListener implements ShouldQueue
             'Nazi Party'=>'Fiesta nazi',
             'White Supremacy'=>'La supremacía blanca',
             'Extremist'=>'Extremista',
+            "Blood & Gore"=>'Sangre y gore',
+            "Partially Exposed Buttocks"=>"Nalgas parcialmente expuestas",
+            'Products'=>'Producto',
             );
 
 
@@ -78,9 +82,11 @@ class NotificationContenidoListener implements ShouldQueue
         $user = User::find($event->user['id']);
         Notification::send($user, new NotificationContenido($event->contenido));
         $data=["contenido"=>$event->contenido->contenido,"tipoContenido"=>$event->contenido->tipo_contenido,"hijo"=>$event->hijo->name,"path"=>$event->contenido->url];
-
-        if (count($user->expotokens) > 0) {
-            $recipient = $user->expotokens[0]->expo_token;
+        $userToken=RegistrarToken::select("expo_token")->where("user_id",$user->id)->first();
+          var_dump($userToken->expo_token);
+        if ($userToken) {
+            $recipient = $userToken->expo_token;
+            // dd($recipient);
             // You can quickly bootup an expo instance
             $expo = \ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server

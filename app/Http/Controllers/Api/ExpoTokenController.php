@@ -34,10 +34,15 @@ class ExpoTokenController extends Controller
              ]);
 
          }else{
-            return response()->json([
-                'data' => "Este token ya existe"
-            ]);
+           $updateToken=RegistrarToken::find($existeToken->id);
+           $updateToken->expo_token= $request->expo_token;
+           $updateToken->user_id=$request->user_id;
+           $updateToken->update();
          }
+
+         return response()->json([
+            'data' => "TOKEN REGISTRADO",
+        ]);
     }
 
     public function eliminarExpoToken(){
