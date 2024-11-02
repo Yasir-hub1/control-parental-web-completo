@@ -83,7 +83,7 @@ class NotificationContenidoListener implements ShouldQueue
         Notification::send($user, new NotificationContenido($event->contenido));
         $data=["contenido"=>$event->contenido->contenido,"tipoContenido"=>$event->contenido->tipo_contenido,"hijo"=>$event->hijo->name,"path"=>$event->contenido->url];
         $userToken=RegistrarToken::select("expo_token")->where("user_id",$user->id)->first();
-          var_dump($userToken->expo_token);
+        //   var_dump($userToken->expo_token);
         if ($userToken) {
             $recipient = $userToken->expo_token;
             // dd($recipient);
@@ -95,6 +95,8 @@ class NotificationContenidoListener implements ShouldQueue
             $notification = ['body' =>"Tu hij@ está mirando ".$nameData[$event->contenido->contenido], 'title' => 'Protecting You', 'ttl' => 60, 'Sound' => 'Default','priority'=>'high','data'=>$data];
             // Notify an interest with a notification
             $expo->notify(['canal'], $notification);
+        }else{
+            return;
         }
     }
 }
